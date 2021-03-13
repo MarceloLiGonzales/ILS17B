@@ -25,6 +25,15 @@ Variable names shall start with "Main_" and be declared as static.
 ***********************************************************************************************************************/
 
 
+
+//BCD decoding data, note bit 7 is g, 5-0 bits are f,e,d,c,b, and a.
+//This is because my tired brain wired it backwards and for some reason LATA's 6th bit, 
+//2nd MSB, behaves like a nice little noise machine and doesn't work properly
+__EEPROM_DATA(0b00111111, 0b00000110, 0b10011011, 0b10001111, 0b10100110, 0b10101101, 0b10111101, 0b00000111);
+__EEPROM_DATA(0b10111111, 0b10101111, 0b10110111, 0b10111100, 0b10111100, 0b00111001, 0b10111001, 0b10110001);
+
+
+
 /*!**********************************************************************************************************************
 @fn void main(void)
 @brief Main program where all tasks are initialized and executed.
@@ -42,7 +51,8 @@ void main(void)
   GpioSetup();
   
   /* Driver initialization */
- 
+  //SegmentDecoderIntialize();
+  
   /* Application initialization */
   UserAppInitialize();
   
@@ -55,12 +65,36 @@ void main(void)
        
     /* Applications */
     UserAppRun();
-   
-     
+    
+    
+    
     /* System sleep */
-    HEARTBEAT_OFF();
+    //HEARTBEAT_OFF();
     SystemSleep();
-    HEARTBEAT_ON();
+    TimeXus(1); //Waiting 1 second
+    
+    u8 u8DigitCounter = 1;  //Setting digit display, digits 1-4
+    NVMADR = 0x380005;      //Setting NVM address to data state word address
+    NVMCON1bits.CMD = 0x00; //Setting NVM configuration bits to read word
+    NVMCON0bits.GO = 1;     //Read word
+    while (NVMCON0bits.GO); //Waiting until byte is read
+    u8 u8BCDecode = NVMDATL;    //reading every cycle might be better to store data and adjust if different
+    LATA = (LATA & 0x40) + u8BCDecode;
+    
+    while ( (PIR3 & 0x80) == 0x00)  //inside this loop since waiting anyways, terrible way to do this, actual V.I.C. usage would be x1000 better
+    {
+        if(u8DigitCounter == 5)
+        {
+            u8DigitCounter = 1;
+            LATB = 0x01;
+        }
+        else
+        {
+            LATB = LATB << 1;
+            u8DigitCounter++;
+        }
+    }
+    //HEARTBEAT_ON();
     
   } /* end while(1) main super loop */
   
