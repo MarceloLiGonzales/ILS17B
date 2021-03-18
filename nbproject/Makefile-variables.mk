@@ -6,8 +6,8 @@
 CND_BASEDIR=`pwd`
 # default configuration
 CND_ARTIFACT_DIR_default=dist/default/production
-CND_ARTIFACT_NAME_default=2021_ENCM369.production.hex
-CND_ARTIFACT_PATH_default=dist/default/production/2021_ENCM369.production.hex
+CND_ARTIFACT_NAME_default=ILS17B.production.hex
+CND_ARTIFACT_PATH_default=dist/default/production/ILS17B.production.hex
 CND_PACKAGE_DIR_default=${CND_DISTDIR}/default/package
-CND_PACKAGE_NAME_default=2021encm369.tar
-CND_PACKAGE_PATH_default=${CND_DISTDIR}/default/package/2021encm369.tar
+CND_PACKAGE_NAME_default=ils17b.tar
+CND_PACKAGE_PATH_default=${CND_DISTDIR}/default/package/ils17b.tar

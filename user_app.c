@@ -31,7 +31,9 @@ All Global variable names shall start with "G_<type>UserApp1"
 ***********************************************************************************************************************/
 /* New variables */
 volatile u8 G_u8UserAppFlags;                             /*!< @brief Global state flags */
-
+u8 u8Time[] = {0,0,0};
+u8 u8AlarmTime[] = {0,0,0};
+u8 u8AlarmFlag;
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 /* Existing variables (defined in other files -- should all contain the "extern" keyword) */
@@ -88,8 +90,18 @@ void UserAppInitialize(void)
     //LED initialization
     LATA = 0x80; //Setting RA7 latch to digital high, and RA0-6 latches low
     
-    T0CON1 = 0b11011101;    //Setting timer0 to asynchronous. mode with (SOSC) as the source with a pre-scaler of 1:8192, 0.25s
+    T0CON1 = 0b11010101;    //Setting timer0 to asynchronous. mode with (SOSC) as the source with a pre-scaler of 1:128, 0.25s
     T0CON0 = 0b11000000;    //Enabling timer0 in 16-bit mode with a post-scaler value of 1:1
+    
+    u8Time[0] = 0b00000000;
+    u8Time[1] = 0b00000000;
+    u8Time[2] = 0b00010000;
+    
+    u8AlarmTime[0] = 0b00101011;
+    u8AlarmTime[1] = 0b00000000;
+    u8AlarmTime[2] = 0b00000000;
+    
+    u8AlarmFlag = 0;
 
 
 } /* end UserAppInitialize() */
@@ -111,70 +123,81 @@ Promises:
 void UserAppRun(void)
 {
     /* time is setup up like this (Might not seem ideal but i think it works fine, small sizes are nice since only 1 extra bit present in the 10's of seconds): 
-       Time1: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
-       Time2: (4-bits) minutes | (4-bits) 10's of seconds
-       Time3: (4-bits) seconds | ((4-bits) NULL
+       Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
+       Time[1]: (4-bits) minutes | (4-bits) 10's of seconds
+       Time[2]: (4-bits) seconds | ((4-bits) NULL
         
      Each bit section is purely the value of the place so 53 minutes means 5 in the 10's of minutes and 3 in the minutes
     */
     //setting time to be 09:59.59
-    static u8 u8Time1 = 0b01001101;
-    static u8 u8Time2 = 0b10010101;
-    static u8 u8Time3 = 0b10010000;
+    static u32 u32TimeUpdateDelayer = 0;
     
     
-    if(u8Time3 == 0x90) //Is seconds = 9?
+    if(u32TimeUpdateDelayer > 510){
+    if(u8Time[2] == 0x90) //Is seconds = 9?
     {
-        if((u8Time2 & 0x0F) == 0x05) //Is seconds = 59?
+        if((u8Time[1] & 0x0F) == 0x05) //Is seconds = 59?
         {
-            if(u8Time2 == 0x95) //Is minutes 9.59?
+            if(u8Time[1] == 0x95) //Is minutes 9.59?
             {
-                if((u8Time1 & 0x07) == 0b00000101 ) //Is minutes 59.59?
+                if((u8Time[0] & 0x07) == 0b00000101 ) //Is minutes 59.59?
                 {
-                    if(u8Time1 > 0x80)  //is it (10-12):59.59?, (different cases of time switching)
+                    if(u8Time[0] > 0x80)  //is it (10-12):59.59?, (different cases of time switching)
                     {
-                        if(u8Time1 == 0b11001101)    //is it 12:59.59 ?
+                        if(u8Time[0] == 0b11001101)    //is it 12:59.59 ?
                         {
-                            u8Time1 = 0b00001000; //Setting time to 01:00.00
+                            u8Time[0] = 0b00001000; //Setting time to 01:00.00
                         }
                         else
                         {
-                            u8Time1 += 0x08; //incrementing hours
+                            u8Time[0] += 0x08; //incrementing hours
                         }
                     }
                     else
                     {
-                        if(u8Time1 == 0x4D) //is it 9:59.59?
+                        if(u8Time[0] == 0x4D) //is it 9:59.59?
                         {
-                            u8Time1 = 0x80; //Setting time to 10:00.00
+                            u8Time[0] = 0x80; //Setting time to 10:00.00
                         }
                         else
                         {
-                            u8Time1 += 0x08; //incrementing hours
+                            u8Time[0] += 0x08; //incrementing hours
                         }
                     }
                 }
                 else
                 {
-                    u8Time1 += 0x01;    //increment 10's of minutes
+                    u8Time[0] += 0x01;    //increment 10's of minutes
                 }
-                u8Time2 = 0x00;    //Set minutes and 10's seconds to zero
+                u8Time[1] = 0x00;    //Set minutes and 10's seconds to zero
             }
             else
             {
-                u8Time2 = (u8Time2 & 0xF0) + 0x10;  //increment minutes and set 10's seconds to 0
+                u8Time[1] = (u8Time[1] & 0xF0) + 0x10;  //increment minutes and set 10's seconds to 0
             }
         }
         else
         {
-            u8Time2 += 0x01;  //increment tens of seconds
+            u8Time[1] += 0x01;  //increment tens of seconds
         }
-        u8Time3 = 0x00;   //set seconds to zero
+        u8Time[2] = 0x00;   //set seconds to zero
     }
     else
     {
-        u8Time3 += 0x10; //increment seconds
+        u8Time[2] += 0x10; //increment seconds
     }
+    u32TimeUpdateDelayer = 0;
+    }
+    else
+    {
+    u32TimeUpdateDelayer++;
+    }
+    
+/*    if(u8Time[0] == u8AlarmTime[0] && u8Time[1] == u8AlarmTime[1] && u8Time[2] == u8AlarmTime[2])
+    {
+        u8AlarmFlag = 1;
+    }*/
+    
     
     LATA ^=0x40;    //blinky that doesn't work since LATA06 is dumb
 } /* end UserAppRun */
@@ -231,7 +254,7 @@ Promises:
 */
 void SegmentDecoderIntialize(void)
 {
-    NVMADR = 380010;        //Setting NVM address to data state word address
+    NVMADR = 380000;        //Setting NVM address to data state word address
     NVMCON1bits.CMD = 0x00; //Setting NVM configuration bits to read word
     NVMCON0bits.GO = 1;     //Read word
     while (NVMCON0bits.GO); //Waiting until byte is read
@@ -242,7 +265,7 @@ void SegmentDecoderIntialize(void)
         MUST erase words before modifying however, 
         can't erase 1 word must erase whole page*/
         uint16_t bufferRAM = 0x2500;  
-        uint16_t *bufferRamPtr = (uint16_t*) & bufferRAM; // Defining a pointer to the first location of the Buffer RAM
+        uint16_t *bufferRamPtr = (uint16_t*) bufferRAM; // Defining a pointer to the first location of the Buffer RAM
         
         //Reading existing EEPROM page
         NVMADR = 0x380000;            //Setting NVM address to start of EEPROM
@@ -263,7 +286,6 @@ void SegmentDecoderIntialize(void)
             //Erase was bad staying in loop
             //might have failsafe function at one point?
         }
-        
         //Editing PAGE in buffer ram
         u8 u8ArrayIndex = 0;
         //Array 2-bytes words contain the decoded segment bytes for each address offset and 
@@ -275,7 +297,7 @@ void SegmentDecoderIntialize(void)
         while (u8ArrayIndex < 0x09)
         {
             *bufferRamPtr = au16DecodingValues[u8ArrayIndex];
-            bufferRamPtr++; //might work??? I think it will??
+            bufferRamPtr += 1; //might work??? I think it will??
             //this does not work I cant figure out how to edit buffer ram data
             //it jumps all over the place and I cant find debugging location of 
             //buffer ram????
@@ -287,7 +309,7 @@ void SegmentDecoderIntialize(void)
         
         //Write EEPROM page
         NVMADR = 0x380000;
-        NVMCON1bits.CMD = 0b101;     //Configuration bits write page
+        NVMCON1bits.CMD = 0x05;     //Configuration bits write page
         NVMLOCK = 0x55;             //Unlock sequence to write data
         NVMLOCK = 0xAA;
         NVMCON0bits.GO = 1;         //Writing page
@@ -295,13 +317,12 @@ void SegmentDecoderIntialize(void)
         
         if(NVMCON1bits.WRERR)        //Checking if write was successful
         {
-            while(1){};
             //Write was bad staying in loop
             //might have failsafe function at one point?
         }
         
         INTCON0bits.GIE = 1;        //Disabling interrupts while reading since busy
-        NVMCON1bits.CMD = 0x00;     //Disabling writes to memory
+        NVMCON1bits.CMD = 0x00;     //Enabling writes to memory
     }
     
     
@@ -320,4 +341,4 @@ void SegmentDecoderIntialize(void)
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 /* End of File                                                                                                        */
-/*--------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------*/

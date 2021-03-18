@@ -27301,14 +27301,16 @@ void SegmentDecoderIntialize(void);
 
 
 volatile u8 G_u8UserAppFlags;
-
+u8 u8Time[] = {0,0,0};
+u8 u8AlarmTime[] = {0,0,0};
+u8 u8AlarmFlag;
 
 
 
 extern volatile u32 G_u32SystemTime1ms;
 extern volatile u32 G_u32SystemTime1s;
 extern volatile u32 G_u32SystemFlags;
-# 77 "user_app.c"
+# 79 "user_app.c"
 void UserAppInitialize(void)
 {
 
@@ -27323,76 +27325,97 @@ void UserAppInitialize(void)
 
     LATA = 0x80;
 
-    T0CON1 = 0b11011101;
+    T0CON1 = 0b11010101;
     T0CON0 = 0b11000000;
+
+    u8Time[0] = 0b00000000;
+    u8Time[1] = 0b00000000;
+    u8Time[2] = 0b00010000;
+
+    u8AlarmTime[0] = 0b00101011;
+    u8AlarmTime[1] = 0b00000000;
+    u8AlarmTime[2] = 0b00000000;
+
+    u8AlarmFlag = 0;
 
 
 }
-# 111 "user_app.c"
+# 123 "user_app.c"
 void UserAppRun(void)
 {
-# 121 "user_app.c"
-    static u8 u8Time1 = 0b01001101;
-    static u8 u8Time2 = 0b10010101;
-    static u8 u8Time3 = 0b10010000;
+# 133 "user_app.c"
+    static u32 u32TimeUpdateDelayer = 0;
 
 
-    if(u8Time3 == 0x90)
+    if(u32TimeUpdateDelayer > 510){
+    if(u8Time[2] == 0x90)
     {
-        if((u8Time2 & 0x0F) == 0x05)
+        if((u8Time[1] & 0x0F) == 0x05)
         {
-            if(u8Time2 == 0x95)
+            if(u8Time[1] == 0x95)
             {
-                if((u8Time1 & 0x07) == 0b00000101 )
+                if((u8Time[0] & 0x07) == 0b00000101 )
                 {
-                    if(u8Time1 > 0x80)
+                    if(u8Time[0] > 0x80)
                     {
-                        if(u8Time1 == 0b11001101)
+                        if(u8Time[0] == 0b11001101)
                         {
-                            u8Time1 = 0b00001000;
+                            u8Time[0] = 0b00001000;
                         }
                         else
                         {
-                            u8Time1 += 0x08;
+                            u8Time[0] += 0x08;
                         }
                     }
                     else
                     {
-                        if(u8Time1 == 0x4D)
+                        if(u8Time[0] == 0x4D)
                         {
-                            u8Time1 = 0x80;
+                            u8Time[0] = 0x80;
                         }
                         else
                         {
-                            u8Time1 += 0x08;
+                            u8Time[0] += 0x08;
                         }
                     }
                 }
                 else
                 {
-                    u8Time1 += 0x01;
+                    u8Time[0] += 0x01;
                 }
-                u8Time2 = 0x00;
+                u8Time[1] = 0x00;
             }
             else
             {
-                u8Time2 = (u8Time2 & 0xF0) + 0x10;
+                u8Time[1] = (u8Time[1] & 0xF0) + 0x10;
             }
         }
         else
         {
-            u8Time2 += 0x01;
+            u8Time[1] += 0x01;
         }
-        u8Time3 = 0x00;
+        u8Time[2] = 0x00;
     }
     else
     {
-        u8Time3 += 0x10;
+        u8Time[2] += 0x10;
     }
+    u32TimeUpdateDelayer = 0;
+    }
+    else
+    {
+    u32TimeUpdateDelayer++;
+    }
+
+
+
+
+
+
 
     LATA ^=0x40;
 }
-# 198 "user_app.c"
+# 221 "user_app.c"
 void TimeXus(u16 u16TimerTime)
 {
     T0CON0 &= 0x7F;
@@ -27409,10 +27432,10 @@ void TimeXus(u16 u16TimerTime)
 
 
 }
-# 232 "user_app.c"
+# 255 "user_app.c"
 void SegmentDecoderIntialize(void)
 {
-    NVMADR = 380010;
+    NVMADR = 380000;
     NVMCON1bits.CMD = 0x00;
     NVMCON0bits.GO = 1;
     while (NVMCON0bits.GO);
@@ -27423,7 +27446,7 @@ void SegmentDecoderIntialize(void)
 
 
         uint16_t bufferRAM = 0x2500;
-        uint16_t *bufferRamPtr = (uint16_t*) & bufferRAM;
+        uint16_t *bufferRamPtr = (uint16_t*) bufferRAM;
 
 
         NVMADR = 0x380000;
@@ -27445,7 +27468,6 @@ void SegmentDecoderIntialize(void)
 
         }
 
-
         u8 u8ArrayIndex = 0;
 
         u16 au16DecodingValues[] = {0x3F06, 0x5B4F, 0x666D, 0x7D07,
@@ -27456,7 +27478,7 @@ void SegmentDecoderIntialize(void)
         while (u8ArrayIndex < 0x09)
         {
             *bufferRamPtr = au16DecodingValues[u8ArrayIndex];
-            bufferRamPtr++;
+            bufferRamPtr += 1;
 
 
 
@@ -27468,7 +27490,7 @@ void SegmentDecoderIntialize(void)
 
 
         NVMADR = 0x380000;
-        NVMCON1bits.CMD = 0b101;
+        NVMCON1bits.CMD = 0x05;
         NVMLOCK = 0x55;
         NVMLOCK = 0xAA;
         NVMCON0bits.GO = 1;
@@ -27476,7 +27498,6 @@ void SegmentDecoderIntialize(void)
 
         if(NVMCON1bits.WRERR)
         {
-            while(1){};
 
 
         }

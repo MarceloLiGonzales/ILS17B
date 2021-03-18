@@ -27308,13 +27308,20 @@ void SegmentDecoderIntialize(void);
 volatile u32 G_u32SystemTime1ms = 0;
 volatile u32 G_u32SystemTime1s = 0;
 volatile u32 G_u32SystemFlags = 0;
-# 32 "main.c"
+# 26 "main.c"
+extern u8 u8Time[];
+extern u8 u8AlarmTime[];
+
+
+
+
+
 __asm("\tpsect eeprom_data,class=EEDATA,noexec"); __asm("\tdb\t" "0b00111111" "," "0b00000110" "," "0b10011011" "," "0b10001111" "," "0b10100110" "," "0b10101101" "," "0b10111101" "," "0b00000111");
 __asm("\tpsect eeprom_data,class=EEDATA,noexec"); __asm("\tdb\t" "0b10111111" "," "0b10101111" "," "0b10110111" "," "0b10111100" "," "0b10111100" "," "0b00111001" "," "0b10111001" "," "0b10110001");
-# 44 "main.c"
+# 45 "main.c"
 void main(void)
 {
-  G_u32SystemFlags |= (u32)0x80000000;
+    G_u32SystemFlags |= (u32)0x80000000;
 
 
   ClockSetup();
@@ -27343,30 +27350,42 @@ void main(void)
 
     SystemSleep();
     TimeXus(1);
+    while((PIR3 & 0x80) == 0x00);
 
-    u8 u8DigitCounter = 1;
-    NVMADR = 0x380005;
+    static u8 u8DigitCounter = 0;
+    static u8 u8TimeCounter = 0;
+
+    if(u8DigitCounter == 0)
+    {
+        NVMADR = 0x380000 + ((u8Time[2] >> 4) & 0x0F);
+        LATB = 0x01;
+        u8DigitCounter++;
+    }
+    else if(u8DigitCounter == 1)
+    {
+        NVMADR = 0x380000 + ((u8Time[1] >> 0) & 0x0F);
+        LATB = 0x02;
+        u8DigitCounter++;
+    }
+    else if(u8DigitCounter == 2)
+    {
+        NVMADR = 0x380000 + ((u8Time[1] >> 4) & 0x0F);
+        LATB = 0x04;
+        u8DigitCounter++;
+    }
+    else if(u8DigitCounter == 3)
+    {
+        NVMADR = 0x380000 + ((u8Time[0] >> 0) & 0x07);
+        LATB = 0x08;
+        u8DigitCounter = 0;
+    }
+
     NVMCON1bits.CMD = 0x00;
     NVMCON0bits.GO = 1;
     while (NVMCON0bits.GO);
     u8 u8BCDecode = NVMDATL;
     LATA = (LATA & 0x40) + u8BCDecode;
 
-    while ( (PIR3 & 0x80) == 0x00)
-    {
-        if(u8DigitCounter == 5)
-        {
-            u8DigitCounter = 1;
-            LATB = 0x01;
-        }
-        else
-        {
-            LATB = LATB << 1;
-            u8DigitCounter++;
-        }
-    }
-
 
   }
-
 }

@@ -23,7 +23,8 @@ volatile u32 G_u32SystemFlags   = 0;     /*!< @brief Global system flags */
 Global variable definitions with scope limited to this local application.
 Variable names shall start with "Main_" and be declared as static.
 ***********************************************************************************************************************/
-
+extern u8 u8Time[];
+extern u8 u8AlarmTime[];
 
 
 //BCD decoding data, note bit 7 is g, 5-0 bits are f,e,d,c,b, and a.
@@ -42,8 +43,8 @@ __EEPROM_DATA(0b10111111, 0b10101111, 0b10110111, 0b10111100, 0b10111100, 0b0011
 ***********************************************************************************************************************/
 
 void main(void)
-{
-  G_u32SystemFlags |= _SYSTEM_INITIALIZING;
+{ 
+    G_u32SystemFlags |= _SYSTEM_INITIALIZING;
 
   /* Low level initialization */
   ClockSetup();
@@ -71,33 +72,45 @@ void main(void)
     /* System sleep */
     //HEARTBEAT_OFF();
     SystemSleep();
-    TimeXus(1); //Waiting 1 second
+    TimeXus(1); //Waiting some seconds
+    while((PIR3 & 0x80) == 0x00);
     
-    u8 u8DigitCounter = 1;  //Setting digit display, digits 1-4
-    NVMADR = 0x380005;      //Setting NVM address to data state word address
+    static u8 u8DigitCounter = 0;  //Setting digit display, digits 1-4
+    static u8 u8TimeCounter = 0;  //Setting time array focus
+    
+    if(u8DigitCounter == 0)
+    {
+        NVMADR = 0x380000 + ((u8Time[2] >> 4) & 0x0F);      //Setting NVM address to data state word address
+        LATB = 0x01;
+        u8DigitCounter++;
+    } 
+    else if(u8DigitCounter == 1)
+    {
+        NVMADR = 0x380000 + ((u8Time[1] >> 0) & 0x0F);      //Setting NVM address to data state word address
+        LATB = 0x02;
+        u8DigitCounter++;
+    }
+    else if(u8DigitCounter == 2)
+    {
+        NVMADR = 0x380000 + ((u8Time[1] >> 4) & 0x0F);      //Setting NVM address to data state word address
+        LATB = 0x04;
+        u8DigitCounter++;
+    }
+    else if(u8DigitCounter == 3)
+    {
+        NVMADR = 0x380000 + ((u8Time[0] >> 0) & 0x07);      //Setting NVM address to data state word address
+        LATB = 0x08;
+        u8DigitCounter = 0;
+    }
+    
     NVMCON1bits.CMD = 0x00; //Setting NVM configuration bits to read word
     NVMCON0bits.GO = 1;     //Read word
     while (NVMCON0bits.GO); //Waiting until byte is read
     u8 u8BCDecode = NVMDATL;    //reading every cycle might be better to store data and adjust if different
     LATA = (LATA & 0x40) + u8BCDecode;
     
-    while ( (PIR3 & 0x80) == 0x00)  //inside this loop since waiting anyways, terrible way to do this, actual V.I.C. usage would be x1000 better
-    {
-        if(u8DigitCounter == 5)
-        {
-            u8DigitCounter = 1;
-            LATB = 0x01;
-        }
-        else
-        {
-            LATB = LATB << 1;
-            u8DigitCounter++;
-        }
-    }
     //HEARTBEAT_ON();
-    
-  } /* end while(1) main super loop */
-  
+  }
 } /* end main() */
 
 
@@ -106,3 +119,4 @@ void main(void)
 /*--------------------------------------------------------------------------------------------------------------------*/
 /* End of File */
 /*--------------------------------------------------------------------------------------------------------------------*/
+

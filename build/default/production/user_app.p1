@@ -2633,378 +2633,434 @@ Version 4.0 HI-TECH Software Intermediate Code
 "33 user_app.c
 [; ;user_app.c: 33: volatile u8 G_u8UserAppFlags;
 [v _G_u8UserAppFlags `Vuc ~T0 @X0 1 e ]
-"77
-[; ;user_app.c: 77: void UserAppInitialize(void)
+"34
+[; ;user_app.c: 34: u8 u8Time[] = {0,0,0};
+[v _u8Time `uc ~T0 @X0 -> 3 `i e ]
+[i _u8Time
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+]
+"35
+[; ;user_app.c: 35: u8 u8AlarmTime[] = {0,0,0};
+[v _u8AlarmTime `uc ~T0 @X0 -> 3 `i e ]
+[i _u8AlarmTime
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+]
+"36
+[; ;user_app.c: 36: u8 u8AlarmFlag;
+[v _u8AlarmFlag `uc ~T0 @X0 1 e ]
+"79
+[; ;user_app.c: 79: void UserAppInitialize(void)
 [v _UserAppInitialize `(v ~T0 @X0 1 ef ]
-"78
-[; ;user_app.c: 78: {
+"80
+[; ;user_app.c: 80: {
 {
 [e :U _UserAppInitialize ]
 [f ]
-"80
-[; ;user_app.c: 80:     OSCCON3bits.SOSCPWR = 0;
+"82
+[; ;user_app.c: 82:     OSCCON3bits.SOSCPWR = 0;
 [e = . . _OSCCON3bits 0 4 -> -> 0 `i `uc ]
-"81
-[; ;user_app.c: 81:     OSCENbits.SOSCEN = 1;
+"83
+[; ;user_app.c: 83:     OSCENbits.SOSCEN = 1;
 [e = . . _OSCENbits 0 3 -> -> 1 `i `uc ]
-"84
-[; ;user_app.c: 84:     while(OSCSTATbits.SOR != 1)
+"86
+[; ;user_app.c: 86:     while(OSCSTATbits.SOR != 1)
 [e $U 2273  ]
 [e :U 2274 ]
-"85
-[; ;user_app.c: 85:     {
+"87
+[; ;user_app.c: 87:     {
 {
-"86
-[; ;user_app.c: 86:     }
+"88
+[; ;user_app.c: 88:     }
 }
 [e :U 2273 ]
-"84
-[; ;user_app.c: 84:     while(OSCSTATbits.SOR != 1)
+"86
+[; ;user_app.c: 86:     while(OSCSTATbits.SOR != 1)
 [e $ != -> . . _OSCSTATbits 0 3 `i -> 1 `i 2274  ]
 [e :U 2275 ]
-"89
-[; ;user_app.c: 89:     LATA = 0x80;
-[e = _LATA -> -> 128 `i `uc ]
 "91
-[; ;user_app.c: 91:     T0CON1 = 0b11011101;
-[e = _T0CON1 -> -> 221 `i `uc ]
-"92
-[; ;user_app.c: 92:     T0CON0 = 0b11000000;
+[; ;user_app.c: 91:     LATA = 0x80;
+[e = _LATA -> -> 128 `i `uc ]
+"93
+[; ;user_app.c: 93:     T0CON1 = 0b11010101;
+[e = _T0CON1 -> -> 213 `i `uc ]
+"94
+[; ;user_app.c: 94:     T0CON0 = 0b11000000;
 [e = _T0CON0 -> -> 192 `i `uc ]
-"95
-[; ;user_app.c: 95: }
+"96
+[; ;user_app.c: 96:     u8Time[0] = 0b00000000;
+[e = *U + &U _u8Time * -> -> -> 0 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 0 `i `uc ]
+"97
+[; ;user_app.c: 97:     u8Time[1] = 0b00000000;
+[e = *U + &U _u8Time * -> -> -> 1 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 0 `i `uc ]
+"98
+[; ;user_app.c: 98:     u8Time[2] = 0b00010000;
+[e = *U + &U _u8Time * -> -> -> 2 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 16 `i `uc ]
+"100
+[; ;user_app.c: 100:     u8AlarmTime[0] = 0b00101011;
+[e = *U + &U _u8AlarmTime * -> -> -> 0 `i `ui `ux -> -> # *U &U _u8AlarmTime `ui `ux -> -> 43 `i `uc ]
+"101
+[; ;user_app.c: 101:     u8AlarmTime[1] = 0b00000000;
+[e = *U + &U _u8AlarmTime * -> -> -> 1 `i `ui `ux -> -> # *U &U _u8AlarmTime `ui `ux -> -> 0 `i `uc ]
+"102
+[; ;user_app.c: 102:     u8AlarmTime[2] = 0b00000000;
+[e = *U + &U _u8AlarmTime * -> -> -> 2 `i `ui `ux -> -> # *U &U _u8AlarmTime `ui `ux -> -> 0 `i `uc ]
+"104
+[; ;user_app.c: 104:     u8AlarmFlag = 0;
+[e = _u8AlarmFlag -> -> 0 `i `uc ]
+"107
+[; ;user_app.c: 107: }
 [e :UE 2272 ]
 }
-"111
-[; ;user_app.c: 111: void UserAppRun(void)
+"123
+[; ;user_app.c: 123: void UserAppRun(void)
 [v _UserAppRun `(v ~T0 @X0 1 ef ]
-"112
-[; ;user_app.c: 112: {
+"124
+[; ;user_app.c: 124: {
 {
 [e :U _UserAppRun ]
 [f ]
-"121
-[; ;user_app.c: 121:     static u8 u8Time1 = 0b01001101;
-[v F15923 `uc ~T0 @X0 1 s u8Time1 ]
-[i F15923
--> -> 77 `i `uc
-]
-"122
-[; ;user_app.c: 122:     static u8 u8Time2 = 0b10010101;
-[v F15924 `uc ~T0 @X0 1 s u8Time2 ]
-[i F15924
--> -> 149 `i `uc
-]
-"123
-[; ;user_app.c: 123:     static u8 u8Time3 = 0b10010000;
-[v F15925 `uc ~T0 @X0 1 s u8Time3 ]
-[i F15925
--> -> 144 `i `uc
-]
-"126
-[; ;user_app.c: 126:     if(u8Time3 == 0x90)
-[e $ ! == -> F15925 `i -> 144 `i 2277  ]
-"127
-[; ;user_app.c: 127:     {
-{
-"128
-[; ;user_app.c: 128:         if((u8Time2 & 0x0F) == 0x05)
-[e $ ! == & -> F15924 `i -> 15 `i -> 5 `i 2278  ]
-"129
-[; ;user_app.c: 129:         {
-{
-"130
-[; ;user_app.c: 130:             if(u8Time2 == 0x95)
-[e $ ! == -> F15924 `i -> 149 `i 2279  ]
-"131
-[; ;user_app.c: 131:             {
-{
-"132
-[; ;user_app.c: 132:                 if((u8Time1 & 0x07) == 0b00000101 )
-[e $ ! == & -> F15923 `i -> 7 `i -> 5 `i 2280  ]
 "133
-[; ;user_app.c: 133:                 {
-{
-"134
-[; ;user_app.c: 134:                     if(u8Time1 > 0x80)
-[e $ ! > -> F15923 `i -> 128 `i 2281  ]
-"135
-[; ;user_app.c: 135:                     {
-{
+[; ;user_app.c: 133:     static u32 u32TimeUpdateDelayer = 0;
+[v F15926 `ul ~T0 @X0 1 s u32TimeUpdateDelayer ]
+[i F15926
+-> -> -> 0 `i `l `ul
+]
 "136
-[; ;user_app.c: 136:                         if(u8Time1 == 0b11001101)
-[e $ ! == -> F15923 `i -> 205 `i 2282  ]
+[; ;user_app.c: 136:     if(u32TimeUpdateDelayer > 510){
+[e $ ! > F15926 -> -> -> 510 `i `l `ul 2277  ]
+{
 "137
-[; ;user_app.c: 137:                         {
-{
+[; ;user_app.c: 137:     if(u8Time[2] == 0x90)
+[e $ ! == -> *U + &U _u8Time * -> -> -> 2 `i `ui `ux -> -> # *U &U _u8Time `ui `ux `i -> 144 `i 2278  ]
 "138
-[; ;user_app.c: 138:                             u8Time1 = 0b00001000;
-[e = F15923 -> -> 8 `i `uc ]
-"139
-[; ;user_app.c: 139:                         }
-}
-[e $U 2283  ]
-"140
-[; ;user_app.c: 140:                         else
-[e :U 2282 ]
-"141
-[; ;user_app.c: 141:                         {
+[; ;user_app.c: 138:     {
 {
+"139
+[; ;user_app.c: 139:         if((u8Time[1] & 0x0F) == 0x05)
+[e $ ! == & -> *U + &U _u8Time * -> -> -> 1 `i `ui `ux -> -> # *U &U _u8Time `ui `ux `i -> 15 `i -> 5 `i 2279  ]
+"140
+[; ;user_app.c: 140:         {
+{
+"141
+[; ;user_app.c: 141:             if(u8Time[1] == 0x95)
+[e $ ! == -> *U + &U _u8Time * -> -> -> 1 `i `ui `ux -> -> # *U &U _u8Time `ui `ux `i -> 149 `i 2280  ]
 "142
-[; ;user_app.c: 142:                             u8Time1 += 0x08;
-[e =+ F15923 -> -> 8 `i `uc ]
+[; ;user_app.c: 142:             {
+{
 "143
-[; ;user_app.c: 143:                         }
-}
-[e :U 2283 ]
+[; ;user_app.c: 143:                 if((u8Time[0] & 0x07) == 0b00000101 )
+[e $ ! == & -> *U + &U _u8Time * -> -> -> 0 `i `ui `ux -> -> # *U &U _u8Time `ui `ux `i -> 7 `i -> 5 `i 2281  ]
 "144
-[; ;user_app.c: 144:                     }
-}
-[e $U 2284  ]
+[; ;user_app.c: 144:                 {
+{
 "145
-[; ;user_app.c: 145:                     else
-[e :U 2281 ]
+[; ;user_app.c: 145:                     if(u8Time[0] > 0x80)
+[e $ ! > -> *U + &U _u8Time * -> -> -> 0 `i `ui `ux -> -> # *U &U _u8Time `ui `ux `i -> 128 `i 2282  ]
 "146
 [; ;user_app.c: 146:                     {
 {
 "147
-[; ;user_app.c: 147:                         if(u8Time1 == 0x4D)
-[e $ ! == -> F15923 `i -> 77 `i 2285  ]
+[; ;user_app.c: 147:                         if(u8Time[0] == 0b11001101)
+[e $ ! == -> *U + &U _u8Time * -> -> -> 0 `i `ui `ux -> -> # *U &U _u8Time `ui `ux `i -> 205 `i 2283  ]
 "148
 [; ;user_app.c: 148:                         {
 {
 "149
-[; ;user_app.c: 149:                             u8Time1 = 0x80;
-[e = F15923 -> -> 128 `i `uc ]
+[; ;user_app.c: 149:                             u8Time[0] = 0b00001000;
+[e = *U + &U _u8Time * -> -> -> 0 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 8 `i `uc ]
 "150
 [; ;user_app.c: 150:                         }
 }
-[e $U 2286  ]
+[e $U 2284  ]
 "151
 [; ;user_app.c: 151:                         else
-[e :U 2285 ]
+[e :U 2283 ]
 "152
 [; ;user_app.c: 152:                         {
 {
 "153
-[; ;user_app.c: 153:                             u8Time1 += 0x08;
-[e =+ F15923 -> -> 8 `i `uc ]
+[; ;user_app.c: 153:                             u8Time[0] += 0x08;
+[e =+ *U + &U _u8Time * -> -> -> 0 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 8 `i `uc ]
 "154
 [; ;user_app.c: 154:                         }
 }
-[e :U 2286 ]
+[e :U 2284 ]
 "155
 [; ;user_app.c: 155:                     }
 }
-[e :U 2284 ]
+[e $U 2285  ]
 "156
-[; ;user_app.c: 156:                 }
+[; ;user_app.c: 156:                     else
+[e :U 2282 ]
+"157
+[; ;user_app.c: 157:                     {
+{
+"158
+[; ;user_app.c: 158:                         if(u8Time[0] == 0x4D)
+[e $ ! == -> *U + &U _u8Time * -> -> -> 0 `i `ui `ux -> -> # *U &U _u8Time `ui `ux `i -> 77 `i 2286  ]
+"159
+[; ;user_app.c: 159:                         {
+{
+"160
+[; ;user_app.c: 160:                             u8Time[0] = 0x80;
+[e = *U + &U _u8Time * -> -> -> 0 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 128 `i `uc ]
+"161
+[; ;user_app.c: 161:                         }
 }
 [e $U 2287  ]
-"157
-[; ;user_app.c: 157:                 else
-[e :U 2280 ]
-"158
-[; ;user_app.c: 158:                 {
+"162
+[; ;user_app.c: 162:                         else
+[e :U 2286 ]
+"163
+[; ;user_app.c: 163:                         {
 {
-"159
-[; ;user_app.c: 159:                     u8Time1 += 0x01;
-[e =+ F15923 -> -> 1 `i `uc ]
-"160
-[; ;user_app.c: 160:                 }
+"164
+[; ;user_app.c: 164:                             u8Time[0] += 0x08;
+[e =+ *U + &U _u8Time * -> -> -> 0 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 8 `i `uc ]
+"165
+[; ;user_app.c: 165:                         }
 }
 [e :U 2287 ]
-"161
-[; ;user_app.c: 161:                 u8Time2 = 0x00;
-[e = F15924 -> -> 0 `i `uc ]
-"162
-[; ;user_app.c: 162:             }
+"166
+[; ;user_app.c: 166:                     }
+}
+[e :U 2285 ]
+"167
+[; ;user_app.c: 167:                 }
 }
 [e $U 2288  ]
-"163
-[; ;user_app.c: 163:             else
-[e :U 2279 ]
-"164
-[; ;user_app.c: 164:             {
-{
-"165
-[; ;user_app.c: 165:                 u8Time2 = (u8Time2 & 0xF0) + 0x10;
-[e = F15924 -> + & -> F15924 `i -> 240 `i -> 16 `i `uc ]
-"166
-[; ;user_app.c: 166:             }
-}
-[e :U 2288 ]
-"167
-[; ;user_app.c: 167:         }
-}
-[e $U 2289  ]
 "168
-[; ;user_app.c: 168:         else
-[e :U 2278 ]
+[; ;user_app.c: 168:                 else
+[e :U 2281 ]
 "169
-[; ;user_app.c: 169:         {
+[; ;user_app.c: 169:                 {
 {
 "170
-[; ;user_app.c: 170:             u8Time2 += 0x01;
-[e =+ F15924 -> -> 1 `i `uc ]
+[; ;user_app.c: 170:                     u8Time[0] += 0x01;
+[e =+ *U + &U _u8Time * -> -> -> 0 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 1 `i `uc ]
 "171
-[; ;user_app.c: 171:         }
+[; ;user_app.c: 171:                 }
 }
-[e :U 2289 ]
+[e :U 2288 ]
 "172
-[; ;user_app.c: 172:         u8Time3 = 0x00;
-[e = F15925 -> -> 0 `i `uc ]
+[; ;user_app.c: 172:                 u8Time[1] = 0x00;
+[e = *U + &U _u8Time * -> -> -> 1 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 0 `i `uc ]
 "173
-[; ;user_app.c: 173:     }
+[; ;user_app.c: 173:             }
 }
-[e $U 2290  ]
+[e $U 2289  ]
 "174
-[; ;user_app.c: 174:     else
-[e :U 2277 ]
+[; ;user_app.c: 174:             else
+[e :U 2280 ]
 "175
-[; ;user_app.c: 175:     {
+[; ;user_app.c: 175:             {
 {
 "176
-[; ;user_app.c: 176:         u8Time3 += 0x10;
-[e =+ F15925 -> -> 16 `i `uc ]
+[; ;user_app.c: 176:                 u8Time[1] = (u8Time[1] & 0xF0) + 0x10;
+[e = *U + &U _u8Time * -> -> -> 1 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> + & -> *U + &U _u8Time * -> -> -> 1 `i `ui `ux -> -> # *U &U _u8Time `ui `ux `i -> 240 `i -> 16 `i `uc ]
 "177
-[; ;user_app.c: 177:     }
+[; ;user_app.c: 177:             }
+}
+[e :U 2289 ]
+"178
+[; ;user_app.c: 178:         }
+}
+[e $U 2290  ]
+"179
+[; ;user_app.c: 179:         else
+[e :U 2279 ]
+"180
+[; ;user_app.c: 180:         {
+{
+"181
+[; ;user_app.c: 181:             u8Time[1] += 0x01;
+[e =+ *U + &U _u8Time * -> -> -> 1 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 1 `i `uc ]
+"182
+[; ;user_app.c: 182:         }
 }
 [e :U 2290 ]
-"179
-[; ;user_app.c: 179:     LATA ^=0x40;
+"183
+[; ;user_app.c: 183:         u8Time[2] = 0x00;
+[e = *U + &U _u8Time * -> -> -> 2 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 0 `i `uc ]
+"184
+[; ;user_app.c: 184:     }
+}
+[e $U 2291  ]
+"185
+[; ;user_app.c: 185:     else
+[e :U 2278 ]
+"186
+[; ;user_app.c: 186:     {
+{
+"187
+[; ;user_app.c: 187:         u8Time[2] += 0x10;
+[e =+ *U + &U _u8Time * -> -> -> 2 `i `ui `ux -> -> # *U &U _u8Time `ui `ux -> -> 16 `i `uc ]
+"188
+[; ;user_app.c: 188:     }
+}
+[e :U 2291 ]
+"189
+[; ;user_app.c: 189:     u32TimeUpdateDelayer = 0;
+[e = F15926 -> -> -> 0 `i `l `ul ]
+"190
+[; ;user_app.c: 190:     }
+}
+[e $U 2292  ]
+"191
+[; ;user_app.c: 191:     else
+[e :U 2277 ]
+"192
+[; ;user_app.c: 192:     {
+{
+"193
+[; ;user_app.c: 193:     u32TimeUpdateDelayer++;
+[e ++ F15926 -> -> -> 1 `i `l `ul ]
+"194
+[; ;user_app.c: 194:     }
+}
+[e :U 2292 ]
+"202
+[; ;user_app.c: 202:     LATA ^=0x40;
 [e =^ _LATA -> -> 64 `i `Vuc ]
-"180
-[; ;user_app.c: 180: }
+"203
+[; ;user_app.c: 203: }
 [e :UE 2276 ]
 }
-"198
-[; ;user_app.c: 198: void TimeXus(u16 u16TimerTime)
+"221
+[; ;user_app.c: 221: void TimeXus(u16 u16TimerTime)
 [v _TimeXus `(v ~T0 @X0 1 ef1`us ]
-"199
-[; ;user_app.c: 199: {
+"222
+[; ;user_app.c: 222: {
 {
 [e :U _TimeXus ]
-"198
-[; ;user_app.c: 198: void TimeXus(u16 u16TimerTime)
+"221
+[; ;user_app.c: 221: void TimeXus(u16 u16TimerTime)
 [v _u16TimerTime `us ~T0 @X0 1 r1 ]
-"199
-[; ;user_app.c: 199: {
+"222
+[; ;user_app.c: 222: {
 [f ]
-"200
-[; ;user_app.c: 200:     T0CON0 &= 0x7F;
+"223
+[; ;user_app.c: 223:     T0CON0 &= 0x7F;
 [e =& _T0CON0 -> -> 127 `i `Vuc ]
-"202
-[; ;user_app.c: 202:     TMR0H = (0xFFFF - u16TimerTime) >> 8;
+"225
+[; ;user_app.c: 225:     TMR0H = (0xFFFF - u16TimerTime) >> 8;
 [e = _TMR0H -> >> - -> 65535 `ui -> _u16TimerTime `ui -> 8 `i `uc ]
-"206
-[; ;user_app.c: 206:     TMR0L = (0xFFFF - u16TimerTime) & 0x00FF;
+"229
+[; ;user_app.c: 229:     TMR0L = (0xFFFF - u16TimerTime) & 0x00FF;
 [e = _TMR0L -> & - -> 65535 `ui -> _u16TimerTime `ui -> -> 255 `i `ui `uc ]
-"209
-[; ;user_app.c: 209:     PIR3 &= 0x7F;
-[e =& _PIR3 -> -> 127 `i `Vuc ]
-"210
-[; ;user_app.c: 210:     T0CON0 |= 0x80;
-[e =| _T0CON0 -> -> 128 `i `Vuc ]
-"213
-[; ;user_app.c: 213: }
-[e :UE 2291 ]
-}
 "232
-[; ;user_app.c: 232: void SegmentDecoderIntialize(void)
-[v _SegmentDecoderIntialize `(v ~T0 @X0 1 ef ]
+[; ;user_app.c: 232:     PIR3 &= 0x7F;
+[e =& _PIR3 -> -> 127 `i `Vuc ]
 "233
-[; ;user_app.c: 233: {
+[; ;user_app.c: 233:     T0CON0 |= 0x80;
+[e =| _T0CON0 -> -> 128 `i `Vuc ]
+"236
+[; ;user_app.c: 236: }
+[e :UE 2293 ]
+}
+"255
+[; ;user_app.c: 255: void SegmentDecoderIntialize(void)
+[v _SegmentDecoderIntialize `(v ~T0 @X0 1 ef ]
+"256
+[; ;user_app.c: 256: {
 {
 [e :U _SegmentDecoderIntialize ]
 [f ]
-"234
-[; ;user_app.c: 234:     NVMADR = 380010;
-[e = _NVMADR -> -> 380010 `l `um ]
-"235
-[; ;user_app.c: 235:     NVMCON1bits.CMD = 0x00;
+"257
+[; ;user_app.c: 257:     NVMADR = 380000;
+[e = _NVMADR -> -> 380000 `l `um ]
+"258
+[; ;user_app.c: 258:     NVMCON1bits.CMD = 0x00;
 [e = . . _NVMCON1bits 0 0 -> -> 0 `i `uc ]
-"236
-[; ;user_app.c: 236:     NVMCON0bits.GO = 1;
+"259
+[; ;user_app.c: 259:     NVMCON0bits.GO = 1;
 [e = . . _NVMCON0bits 0 0 -> -> 1 `i `uc ]
-"237
-[; ;user_app.c: 237:     while (NVMCON0bits.GO);
-[e $U 2293  ]
-[e :U 2294 ]
-[e :U 2293 ]
-[e $ != -> . . _NVMCON0bits 0 0 `i -> 0 `i 2294  ]
+"260
+[; ;user_app.c: 260:     while (NVMCON0bits.GO);
+[e $U 2295  ]
+[e :U 2296 ]
 [e :U 2295 ]
-"239
-[; ;user_app.c: 239:     if(1)
-[e $ ! != -> 1 `i -> 0 `i 2296  ]
-"240
-[; ;user_app.c: 240:     {
+[e $ != -> . . _NVMCON0bits 0 0 `i -> 0 `i 2296  ]
+[e :U 2297 ]
+"262
+[; ;user_app.c: 262:     if(1)
+[e $ ! != -> 1 `i -> 0 `i 2298  ]
+"263
+[; ;user_app.c: 263:     {
 {
-"244
-[; ;user_app.c: 244:         uint16_t bufferRAM = 0x2500;
+"267
+[; ;user_app.c: 267:         uint16_t bufferRAM = 0x2500;
 [v _bufferRAM `us ~T0 @X0 1 a ]
 [e = _bufferRAM -> -> 9472 `i `us ]
-"245
-[; ;user_app.c: 245:         uint16_t *bufferRamPtr = (uint16_t*) & bufferRAM;
-[v _bufferRamPtr `*us ~T0 @X0 1 a ]
-[e = _bufferRamPtr &U _bufferRAM ]
-"248
-[; ;user_app.c: 248:         NVMADR = 0x380000;
-[e = _NVMADR -> -> 3670016 `l `um ]
-"249
-[; ;user_app.c: 249:         NVMCON1bits.CMD = 0x02;
-[e = . . _NVMCON1bits 0 0 -> -> 2 `i `uc ]
-"250
-[; ;user_app.c: 250:         INTCON0bits.GIE = 0;
-[e = . . _INTCON0bits 0 6 -> -> 0 `i `uc ]
-"251
-[; ;user_app.c: 251:         NVMCON0bits.GO = 1;
-[e = . . _NVMCON0bits 0 0 -> -> 1 `i `uc ]
-"252
-[; ;user_app.c: 252:         while (NVMCON0bits.GO);
-[e $U 2297  ]
-[e :U 2298 ]
-[e :U 2297 ]
-[e $ != -> . . _NVMCON0bits 0 0 `i -> 0 `i 2298  ]
-[e :U 2299 ]
-"255
-[; ;user_app.c: 255:         NVMCON1bits.CMD = 0x06;
-[e = . . _NVMCON1bits 0 0 -> -> 6 `i `uc ]
-"256
-[; ;user_app.c: 256:         NVMLOCK = 0x55;
-[e = _NVMLOCK -> -> 85 `i `uc ]
-"257
-[; ;user_app.c: 257:         NVMLOCK = 0xAA;
-[e = _NVMLOCK -> -> 170 `i `uc ]
-"258
-[; ;user_app.c: 258:         NVMCON0bits.GO = 1;
-[e = . . _NVMCON0bits 0 0 -> -> 1 `i `uc ]
-"259
-[; ;user_app.c: 259:         while (NVMCON0bits.GO);
-[e $U 2300  ]
-[e :U 2301 ]
-[e :U 2300 ]
-[e $ != -> . . _NVMCON0bits 0 0 `i -> 0 `i 2301  ]
-[e :U 2302 ]
-"261
-[; ;user_app.c: 261:         if(NVMCON1bits.WRERR)
-[e $ ! != -> . . _NVMCON1bits 0 2 `i -> 0 `i 2303  ]
-"262
-[; ;user_app.c: 262:         {
-{
-"265
-[; ;user_app.c: 265:         }
-}
-[e :U 2303 ]
 "268
-[; ;user_app.c: 268:         u8 u8ArrayIndex = 0;
+[; ;user_app.c: 268:         uint16_t *bufferRamPtr = (uint16_t*) bufferRAM;
+[v _bufferRamPtr `*us ~T0 @X0 1 a ]
+[e = _bufferRamPtr -> _bufferRAM `*us ]
+"271
+[; ;user_app.c: 271:         NVMADR = 0x380000;
+[e = _NVMADR -> -> 3670016 `l `um ]
+"272
+[; ;user_app.c: 272:         NVMCON1bits.CMD = 0x02;
+[e = . . _NVMCON1bits 0 0 -> -> 2 `i `uc ]
+"273
+[; ;user_app.c: 273:         INTCON0bits.GIE = 0;
+[e = . . _INTCON0bits 0 6 -> -> 0 `i `uc ]
+"274
+[; ;user_app.c: 274:         NVMCON0bits.GO = 1;
+[e = . . _NVMCON0bits 0 0 -> -> 1 `i `uc ]
+"275
+[; ;user_app.c: 275:         while (NVMCON0bits.GO);
+[e $U 2299  ]
+[e :U 2300 ]
+[e :U 2299 ]
+[e $ != -> . . _NVMCON0bits 0 0 `i -> 0 `i 2300  ]
+[e :U 2301 ]
+"278
+[; ;user_app.c: 278:         NVMCON1bits.CMD = 0x06;
+[e = . . _NVMCON1bits 0 0 -> -> 6 `i `uc ]
+"279
+[; ;user_app.c: 279:         NVMLOCK = 0x55;
+[e = _NVMLOCK -> -> 85 `i `uc ]
+"280
+[; ;user_app.c: 280:         NVMLOCK = 0xAA;
+[e = _NVMLOCK -> -> 170 `i `uc ]
+"281
+[; ;user_app.c: 281:         NVMCON0bits.GO = 1;
+[e = . . _NVMCON0bits 0 0 -> -> 1 `i `uc ]
+"282
+[; ;user_app.c: 282:         while (NVMCON0bits.GO);
+[e $U 2302  ]
+[e :U 2303 ]
+[e :U 2302 ]
+[e $ != -> . . _NVMCON0bits 0 0 `i -> 0 `i 2303  ]
+[e :U 2304 ]
+"284
+[; ;user_app.c: 284:         if(NVMCON1bits.WRERR)
+[e $ ! != -> . . _NVMCON1bits 0 2 `i -> 0 `i 2305  ]
+"285
+[; ;user_app.c: 285:         {
+{
+"288
+[; ;user_app.c: 288:         }
+}
+[e :U 2305 ]
+"290
+[; ;user_app.c: 290:         u8 u8ArrayIndex = 0;
 [v _u8ArrayIndex `uc ~T0 @X0 1 a ]
 [e = _u8ArrayIndex -> -> 0 `i `uc ]
-[v F15932 `us ~T0 @X0 -> 9 `i s ]
-[i F15932
+[v F15933 `us ~T0 @X0 -> 9 `i s ]
+[i F15933
 :U ..
-"270
-[; ;user_app.c: 270:         u16 au16DecodingValues[] = {0x3F06, 0x5B4F, 0x666D, 0x7D07,
+"292
+[; ;user_app.c: 292:         u16 au16DecodingValues[] = {0x3F06, 0x5B4F, 0x666D, 0x7D07,
 -> -> 16134 `i `us
 -> -> 23375 `i `us
 -> -> 26221 `i `us
@@ -3017,89 +3073,81 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _au16DecodingValues `us ~T0 @X0 -> 9 `i a ]
-[e = _au16DecodingValues F15932 ]
-"274
-[; ;user_app.c: 274:         u8 u8Offset = (u8) ((0x380000 & ((128 * 2) - 1)) / 2);
+[e = _au16DecodingValues F15933 ]
+"296
+[; ;user_app.c: 296:         u8 u8Offset = (u8) ((0x380000 & ((128 * 2) - 1)) / 2);
 [v _u8Offset `uc ~T0 @X0 1 a ]
 [e = _u8Offset -> / & -> 3670016 `l -> - * -> 128 `i -> 2 `i -> 1 `i `l -> -> 2 `i `l `uc ]
-"275
-[; ;user_app.c: 275:         while (u8ArrayIndex < 0x09)
-[e $U 2304  ]
-[e :U 2305 ]
-"276
-[; ;user_app.c: 276:         {
-{
-"277
-[; ;user_app.c: 277:             *bufferRamPtr = au16DecodingValues[u8ArrayIndex];
-[e = *U _bufferRamPtr *U + &U _au16DecodingValues * -> _u8ArrayIndex `ux -> -> # *U &U _au16DecodingValues `ui `ux ]
-"278
-[; ;user_app.c: 278:             bufferRamPtr++;
-[e ++ _bufferRamPtr * -> -> 1 `i `x -> -> # *U _bufferRamPtr `i `x ]
-"284
-[; ;user_app.c: 284:             u8ArrayIndex++;
-[e ++ _u8ArrayIndex -> -> 1 `i `uc ]
-"285
-[; ;user_app.c: 285:         }
-}
-[e :U 2304 ]
-"275
-[; ;user_app.c: 275:         while (u8ArrayIndex < 0x09)
-[e $ < -> _u8ArrayIndex `i -> 9 `i 2305  ]
-[e :U 2306 ]
-"286
-[; ;user_app.c: 286:         *bufferRamPtr = 0x0000;
-[e = *U _bufferRamPtr -> -> 0 `i `us ]
-"289
-[; ;user_app.c: 289:         NVMADR = 0x380000;
-[e = _NVMADR -> -> 3670016 `l `um ]
-"290
-[; ;user_app.c: 290:         NVMCON1bits.CMD = 0b101;
-[e = . . _NVMCON1bits 0 0 -> -> 5 `i `uc ]
-"291
-[; ;user_app.c: 291:         NVMLOCK = 0x55;
-[e = _NVMLOCK -> -> 85 `i `uc ]
-"292
-[; ;user_app.c: 292:         NVMLOCK = 0xAA;
-[e = _NVMLOCK -> -> 170 `i `uc ]
-"293
-[; ;user_app.c: 293:         NVMCON0bits.GO = 1;
-[e = . . _NVMCON0bits 0 0 -> -> 1 `i `uc ]
-"294
-[; ;user_app.c: 294:         while (NVMCON0bits.GO);
-[e $U 2307  ]
-[e :U 2308 ]
-[e :U 2307 ]
-[e $ != -> . . _NVMCON0bits 0 0 `i -> 0 `i 2308  ]
-[e :U 2309 ]
-"296
-[; ;user_app.c: 296:         if(NVMCON1bits.WRERR)
-[e $ ! != -> . . _NVMCON1bits 0 2 `i -> 0 `i 2310  ]
 "297
-[; ;user_app.c: 297:         {
-{
+[; ;user_app.c: 297:         while (u8ArrayIndex < 0x09)
+[e $U 2306  ]
+[e :U 2307 ]
 "298
-[; ;user_app.c: 298:             while(1){};
-[e :U 2312 ]
+[; ;user_app.c: 298:         {
 {
+"299
+[; ;user_app.c: 299:             *bufferRamPtr = au16DecodingValues[u8ArrayIndex];
+[e = *U _bufferRamPtr *U + &U _au16DecodingValues * -> _u8ArrayIndex `ux -> -> # *U &U _au16DecodingValues `ui `ux ]
+"300
+[; ;user_app.c: 300:             bufferRamPtr += 1;
+[e =+ _bufferRamPtr * -> -> 1 `i `x -> -> # *U _bufferRamPtr `i `x ]
+"306
+[; ;user_app.c: 306:             u8ArrayIndex++;
+[e ++ _u8ArrayIndex -> -> 1 `i `uc ]
+"307
+[; ;user_app.c: 307:         }
 }
-[e :U 2311 ]
-[e $U 2312  ]
-[e :U 2313 ]
-"301
-[; ;user_app.c: 301:         }
-}
-[e :U 2310 ]
-"303
-[; ;user_app.c: 303:         INTCON0bits.GIE = 1;
-[e = . . _INTCON0bits 0 6 -> -> 1 `i `uc ]
-"304
-[; ;user_app.c: 304:         NVMCON1bits.CMD = 0x00;
-[e = . . _NVMCON1bits 0 0 -> -> 0 `i `uc ]
-"305
-[; ;user_app.c: 305:     }
-}
-[e :U 2296 ]
+[e :U 2306 ]
+"297
+[; ;user_app.c: 297:         while (u8ArrayIndex < 0x09)
+[e $ < -> _u8ArrayIndex `i -> 9 `i 2307  ]
+[e :U 2308 ]
+"308
+[; ;user_app.c: 308:         *bufferRamPtr = 0x0000;
+[e = *U _bufferRamPtr -> -> 0 `i `us ]
 "311
-[; ;user_app.c: 311: }
-[e :UE 2292 ]
+[; ;user_app.c: 311:         NVMADR = 0x380000;
+[e = _NVMADR -> -> 3670016 `l `um ]
+"312
+[; ;user_app.c: 312:         NVMCON1bits.CMD = 0x05;
+[e = . . _NVMCON1bits 0 0 -> -> 5 `i `uc ]
+"313
+[; ;user_app.c: 313:         NVMLOCK = 0x55;
+[e = _NVMLOCK -> -> 85 `i `uc ]
+"314
+[; ;user_app.c: 314:         NVMLOCK = 0xAA;
+[e = _NVMLOCK -> -> 170 `i `uc ]
+"315
+[; ;user_app.c: 315:         NVMCON0bits.GO = 1;
+[e = . . _NVMCON0bits 0 0 -> -> 1 `i `uc ]
+"316
+[; ;user_app.c: 316:         while (NVMCON0bits.GO);
+[e $U 2309  ]
+[e :U 2310 ]
+[e :U 2309 ]
+[e $ != -> . . _NVMCON0bits 0 0 `i -> 0 `i 2310  ]
+[e :U 2311 ]
+"318
+[; ;user_app.c: 318:         if(NVMCON1bits.WRERR)
+[e $ ! != -> . . _NVMCON1bits 0 2 `i -> 0 `i 2312  ]
+"319
+[; ;user_app.c: 319:         {
+{
+"322
+[; ;user_app.c: 322:         }
+}
+[e :U 2312 ]
+"324
+[; ;user_app.c: 324:         INTCON0bits.GIE = 1;
+[e = . . _INTCON0bits 0 6 -> -> 1 `i `uc ]
+"325
+[; ;user_app.c: 325:         NVMCON1bits.CMD = 0x00;
+[e = . . _NVMCON1bits 0 0 -> -> 0 `i `uc ]
+"326
+[; ;user_app.c: 326:     }
+}
+[e :U 2298 ]
+"332
+[; ;user_app.c: 332: }
+[e :UE 2294 ]
 }
