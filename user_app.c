@@ -90,14 +90,14 @@ void UserAppInitialize(void)
     //LED initialization
     LATA = 0x80; //Setting RA7 latch to digital high, and RA0-6 latches low
     
-    T0CON1 = 0b11010101;    //Setting timer0 to asynchronous. mode with (SOSC) as the source with a pre-scaler of 1:128, 0.25s
+    T0CON1 = 0b11010101;    //Setting timer0 to asynchronous. mode with (SOSC) as the source with a pre-scaler of 1:128
     T0CON0 = 0b11000000;    //Enabling timer0 in 16-bit mode with a post-scaler value of 1:1
     
-    u8Time[0] = 0b00000000;
+    u8Time[0] = 0b00000000;  //Set up initial time here
     u8Time[1] = 0b00000000;
     u8Time[2] = 0b00010000;
     
-    u8AlarmTime[0] = 0b00101011;
+    u8AlarmTime[0] = 0b00101011; //set up alarm time here
     u8AlarmTime[1] = 0b00000000;
     u8AlarmTime[2] = 0b00000000;
     
@@ -133,64 +133,66 @@ void UserAppRun(void)
     static u32 u32TimeUpdateDelayer = 0;
     
     
-    if(u32TimeUpdateDelayer > 510){
-    if(u8Time[2] == 0x90) //Is seconds = 9?
+    if(u32TimeUpdateDelayer > 510) //offset to make time update correctly
     {
-        if((u8Time[1] & 0x0F) == 0x05) //Is seconds = 59?
+        if(u8Time[2] == 0x90) //Is seconds = 9?
         {
-            if(u8Time[1] == 0x95) //Is minutes 9.59?
+            if((u8Time[1] & 0x0F) == 0x05) //Is seconds = 59?
             {
-                if((u8Time[0] & 0x07) == 0b00000101 ) //Is minutes 59.59?
-                {
-                    if(u8Time[0] > 0x80)  //is it (10-12):59.59?, (different cases of time switching)
-                    {
-                        if(u8Time[0] == 0b11001101)    //is it 12:59.59 ?
+               if(u8Time[1] == 0x95) //Is minutes 9.59?
+               {
+                   if((u8Time[0] & 0x07) == 0b00000101 ) //Is minutes 59.59?
+                   {
+                      if(u8Time[0] > 0x80)  //is it (10-12):59.59?, (different cases of time switching)
                         {
-                            u8Time[0] = 0b00001000; //Setting time to 01:00.00
+                          if(u8Time[0] == 0b11001101)    //is it 12:59.59 ?
+                            {
+                                u8Time[0] = 0b00001000; //Setting time to 01:00.00
+                            }
+                            else
+                            {
+                                u8Time[0] += 0x08; //incrementing hours
+                            }
                         }
                         else
                         {
-                            u8Time[0] += 0x08; //incrementing hours
+                            if(u8Time[0] == 0x4D) //is it 9:59.59?
+                            {
+                                u8Time[0] = 0x80; //Setting time to 10:00.00
+                            }
+                            else
+                            {
+                                u8Time[0] += 0x08; //incrementing hours
+                            }
                         }
                     }
                     else
                     {
-                        if(u8Time[0] == 0x4D) //is it 9:59.59?
-                        {
-                            u8Time[0] = 0x80; //Setting time to 10:00.00
-                        }
-                        else
-                        {
-                            u8Time[0] += 0x08; //incrementing hours
-                        }
+                        u8Time[0] += 0x01;    //increment 10's of minutes
                     }
+                    u8Time[1] = 0x00;    //Set minutes and 10's seconds to zero
                 }
                 else
                 {
-                    u8Time[0] += 0x01;    //increment 10's of minutes
+                    u8Time[1] = (u8Time[1] & 0xF0) + 0x10;  //increment minutes and set 10's seconds to 0
                 }
-                u8Time[1] = 0x00;    //Set minutes and 10's seconds to zero
             }
             else
             {
-                u8Time[1] = (u8Time[1] & 0xF0) + 0x10;  //increment minutes and set 10's seconds to 0
+                u8Time[1] += 0x01;  //increment tens of seconds
             }
+            u8Time[2] = 0x00;   //set seconds to zero
         }
         else
         {
-            u8Time[1] += 0x01;  //increment tens of seconds
+            u8Time[2] += 0x10; //increment seconds
         }
-        u8Time[2] = 0x00;   //set seconds to zero
+        
+        u32TimeUpdateDelayer = 0;
     }
     else
     {
-        u8Time[2] += 0x10; //increment seconds
-    }
-    u32TimeUpdateDelayer = 0;
-    }
-    else
-    {
-    u32TimeUpdateDelayer++;
+        u32TimeUpdateDelayer++;
     }
     
 /*    if(u8Time[0] == u8AlarmTime[0] && u8Time[1] == u8AlarmTime[1] && u8Time[2] == u8AlarmTime[2])

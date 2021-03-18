@@ -72,33 +72,33 @@ void main(void)
     /* System sleep */
     //HEARTBEAT_OFF();
     SystemSleep();
-    TimeXus(1); //Waiting some seconds
-    while((PIR3 & 0x80) == 0x00);
+    TimeXus(1); //Update every ~3ms 
+    while((PIR3 & 0x80) == 0x00); 
     
     static u8 u8DigitCounter = 0;  //Setting digit display, digits 1-4
     static u8 u8TimeCounter = 0;  //Setting time array focus
     
-    if(u8DigitCounter == 0)
+    if(u8DigitCounter == 0) // Time storing conventions are hard and obtuse to reach with a single loop, could have reworked but brain too small
     {
-        NVMADR = 0x380000 + ((u8Time[2] >> 4) & 0x0F);      //Setting NVM address to data state word address
+        NVMADR = 0x380000 + ((u8Time[2] >> 4) & 0x0F);   //Print seconds 
         LATB = 0x01;
         u8DigitCounter++;
     } 
     else if(u8DigitCounter == 1)
     {
-        NVMADR = 0x380000 + ((u8Time[1] >> 0) & 0x0F);      //Setting NVM address to data state word address
+        NVMADR = 0x380000 + ((u8Time[1] >> 0) & 0x0F);   //Print 10s of seconds
         LATB = 0x02;
         u8DigitCounter++;
     }
     else if(u8DigitCounter == 2)
     {
-        NVMADR = 0x380000 + ((u8Time[1] >> 4) & 0x0F);      //Setting NVM address to data state word address
+        NVMADR = 0x380000 + ((u8Time[1] >> 4) & 0x0F);    //Print mins
         LATB = 0x04;
         u8DigitCounter++;
     }
     else if(u8DigitCounter == 3)
     {
-        NVMADR = 0x380000 + ((u8Time[0] >> 0) & 0x07);      //Setting NVM address to data state word address
+        NVMADR = 0x380000 + ((u8Time[0] >> 0) & 0x07);    //Print 10s of mins
         LATB = 0x08;
         u8DigitCounter = 0;
     }
@@ -107,7 +107,7 @@ void main(void)
     NVMCON0bits.GO = 1;     //Read word
     while (NVMCON0bits.GO); //Waiting until byte is read
     u8 u8BCDecode = NVMDATL;    //reading every cycle might be better to store data and adjust if different
-    LATA = (LATA & 0x40) + u8BCDecode;
+    LATA = (LATA & 0x40) + u8BCDecode; 
     
     //HEARTBEAT_ON();
   }
