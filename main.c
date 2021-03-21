@@ -85,8 +85,9 @@ void main(void)
     /* System sleep */
     //HEARTBEAT_OFF();
     //SystemSleep();
-    if(u8TimeCounter == 150)//need this otherwise switching is too fast
+    if(u8TimeCounter == 150)//increase value to increase brightness (to an extent) and decrease/remove to decrease (since it updates really fast think PWM)
     {
+        PORTA &= 0x40;
         u8TimeCounter = 0;
         if(u8DigitCounter == 0) // Time storing conventions are hard and obtuse to reach with a single loop, could have reworked but brain too small
         {
@@ -112,7 +113,7 @@ void main(void)
             u8PORTADisplayValue = au8DisplayCode[(G_au8Time[0] >> 0) & 0x07];    //Print 10s of mins
             u8DigitCounter = 0;
         }
-        PORTA = (PORTA & 0x40) + u8PORTADisplayValue;
+        PORTA = (PORTA & 0x40) + u8PORTADisplayValue;   //Setting PORTA based 
     }
     else
     {

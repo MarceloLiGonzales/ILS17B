@@ -27365,6 +27365,7 @@ void main(void)
 
     if(u8TimeCounter == 150)
     {
+        PORTA &= 0x40;
         u8TimeCounter = 0;
         if(u8DigitCounter == 0)
         {
