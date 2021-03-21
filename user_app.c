@@ -73,24 +73,12 @@ Requires:
 
 Promises:
 - For RA6 to be high
-- For timer0 to be enabled in async. 16-bit mode with a prescaler of 1:128 for the (Fosc/4) source.
 */
 void UserAppInitialize(void)
 {
 
-    OSCCON3bits.SOSCPWR = 0;     //Setting power mode to Low Power for 32.768Hz Quartz Crystals
-    OSCENbits.SOSCEN = 1;       //Enabling secondary oscillator
-    
-    //Waiting until secondary oscillator is setup since sometimes failure can happen if crystal is bad.
-    while(OSCSTATbits.SOR != 1)
-    {
-    }
-    
     //LED initialization
     LATA = 0x40; //Setting RA6 latch to digital high, and RA0-5,7 latches low
-    
-    T0CON1 = 0b11010101;    //Setting timer0 to asynchronous mode with (SOSC) as the source with a pre-scaler of 1:128
-    T0CON0 = 0b11000000;    //Enabling timer0 in 16-bit mode with a post-scaler value of 1:1
     
     //Set up initial time here 1:59:53
     G_au8Time[0] = 0b00001101; //Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
@@ -121,9 +109,9 @@ Promises:
 
 void UserAppRun(void)
 {
-    static u32 u32TimeUpdateDelayer = 0;    //need this so the clock display counts minutes/seconds not hours minutes
+    //static u32 u32TimeUpdateDelayer = 0;    //need this so the clock display counts minutes/seconds not hours minutes
    
-    if(u32TimeUpdateDelayer > 510) //offset to make time update correctly
+    //if(u32TimeUpdateDelayer > 510) //offset to make time update correctly
     {
         if(G_au8Time[2] == 0x90) //Is seconds = 9?
         {
@@ -179,12 +167,12 @@ void UserAppRun(void)
             G_au8Time[2] += 0x10; //increment seconds
         }
         
-        u32TimeUpdateDelayer = 0;
+        //u32TimeUpdateDelayer = 0;
     }
-    else
-    {
-        u32TimeUpdateDelayer++;
-    }
+    //else
+    //{
+    //    u32TimeUpdateDelayer++;
+    //}
     
     /*if(G_au8Time[0] == G_au8AlarmTime[0] && G_au8Time[1] == G_au8AlarmTime[1] && G_au8Time[2] == G_au8AlarmTime[2])
     {
@@ -195,36 +183,63 @@ void UserAppRun(void)
     LATA ^=0x40; //blinking light that doesn't work since LATA06 is dumb
 } /* end UserAppRun */
 
-/*!--------------------------------------------------------------------------------------------------------------------
-@fn void TimeXus(u16 u16TimeXus)
 
-@brief Sets Timer0 to count u16TimeXus
+/*!--------------------------------------------------------------------------------------------------------------------
+@fn void TimeXusInitialize(void)
+
+@brief
+Initializes the application's variables.
+
+Should only be called once in main init section.
+
+Requires:
+
+Promises:
+- For timer0 to be enabled in async. 16-bit mode with a prescaler of 1:1 for the (Fosc/4) source.
+*/
+void TimeXusInitialize(void)
+{
+    OSCCON3bits.SOSCPWR = 0;     //Setting power mode to Low Power for 32.768Hz Quartz Crystals
+    OSCENbits.SOSCEN = 1;       //Enabling secondary oscillator
+    
+    //Waiting until secondary oscillator is setup since sometimes failure can happen if crystal is bad.
+    while(OSCSTATbits.SOR != 1)
+    {
+    }
+    T0CON1 = 0b11011111;    //Setting timer0 to asynchronous mode with (SOSC) as the source with a pre-scaler of 1:32768
+    T0CON0 = 0b10010000;    //Enabling timer0 in 16-bit mode with a post-scaler value of 1:1
+
+    
+    //setting up timer to count for 1 second so that TimeXus doesn't have to be called else where except the __interrupt handler in encm369_pic18.c
+    T0CON0 &= 0x7F; //Disabling timer0
+    
+    TMR0H = (0xFFFF - 0x0001) >> 8; 
+    
+    //Pre-loading TMR0L/H 
+    TMR0L = (0xFFFF - 0x0001) & 0x00FF;  
+    
+    T0CON0 |= 0x80; //Enabling timer0
+    
+} /* end TimerXusInitialize() */
+
+
+/*!--------------------------------------------------------------------------------------------------------------------
+@fn void TimeXus(void)
+
+@brief Sets Timer0 to count 1 second called from the TMR0 interrupt handle, runs forever unless the timer is disabled in some other function
 
 Requires:
 - Timer0 configured
-- u16 u16TimeXus is the time of (oscillator period/pre-scaler*post-scaler)seconds  
 
 Promises:
 - Pre-loads TMR0H:L to clock out desired period
-- TMR0IF cleared
 - Timer0 enabled
 
 */
 
-void TimeXus(u16 u16TimerTime)
+void TimeXus(void)
 {
-    T0CON0 &= 0x7F; //Disabling timer0
-    
-    TMR0H = (0xFFFF - u16TimerTime) >> 8; /*Right shifting upper 8 bits of u16TimerTime 
-                               to fit in 8-bit TMR0H*/ 
-    
-    //Pre-loading TMR0L/H based on passed u16TimerTime
-    TMR0L = (0xFFFF - u16TimerTime) & 0x00FF; /*Taking only the lower 8 bits of u16TimerTime
-                                               for TMR0L*/  
-    
-    PIR3 &= 0x7F; //Clearing the TMR0IF flag
-    T0CON0 |= 0x80; //Enabling timer0
-    
+    //moved this shit to the interrupt service for TMR0 in encm369_pic.c
     
 }  /* end TimeXus () */
 

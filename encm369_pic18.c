@@ -38,6 +38,7 @@ extern volatile u32 G_u32SystemTime1ms;        /*!< @brief From main.c */
 extern volatile u32 G_u32SystemTime1s;         /*!< @brief From main.c */
 extern volatile u32 G_u32SystemFlags;          /*!< @brief From main.c */
 
+extern u8 G_u8TimeFlag;
 /***********************************************************************************************************************
 Global variable definitions with scope limited to this local application.
 Variable names shall start with "Bsp_" and be declared as static.
@@ -51,6 +52,59 @@ Function Definitions
 /*--------------------------------------------------------------------------------------------------------------------*/
 /*! @protectedsection */                                                                                            
 /*--------------------------------------------------------------------------------------------------------------------*/
+
+/*!---------------------------------------------------------------------------------------------------------------------
+@fn void INTERRUPTInitialize(void)
+
+@brief Setups interrupts and interrupt priority
+
+Requires:
+- NONE
+
+Promises:
+- TMR0 interrupt is enabled as a low priority interrupt
+
+*/
+void INTERRUPTInitialize(void)
+{
+    INTCON0bits.IPEN = 1;   //Enabling interrupts
+    IPR3bits.TMR0IP = 0;    //Setting TMR0 interrupt priority to low default high
+    
+    PIR3bits.TMR0IF = 0;    //Clearing the TMR0IF flag
+    
+    PIE3bits.TMR0IE = 1;    //Enabling TMR0 interrupt ability
+    
+    INTCON0bits.GIEH = 1;   //Enabling high-priority unmasked interrupts
+    INTCON0bits.GIEL = 1;   //Enabling low-priority unmasked interrupts
+    
+}/* end INTERRUPTInitialize */
+
+
+/*!---------------------------------------------------------------------------------------------------------------------
+@fn void __interrupt(irq(IRQ_TMR0), low_priority) TMR0_ISR(void)
+
+@brief Setups interrupts and interrupt priority
+
+Requires:
+- To be called via Vector Table from an interrupt event
+
+Promises:
+- To respond to the interrupt
+
+*/
+void __interrupt(irq(IRQ_TMR0), low_priority) TMR0_ISR(void)
+{
+    PIR3bits.TMR0IF = 0;    //Clearing the TMR0IF flag
+    T0CON0 &= 0x7F; //Disabling timer0
+    
+    TMR0H = (0xFFFF - 0x0001) >> 8; 
+    
+    //Pre-loading TMR0L/H 
+    TMR0L = (0xFFFF - 0x0001) & 0x00FF;  
+    
+    T0CON0 |= 0x80; //Enabling timer
+    G_u8TimeFlag = 0xFF;
+}/* end __interrupt */
 
 
 /*!---------------------------------------------------------------------------------------------------------------------
@@ -69,7 +123,6 @@ Promises:
 void ClockSetup(void)
 {
  
-  
 } /* end ClockSetup */
 
 

@@ -27274,6 +27274,9 @@ typedef enum {ACTIVE_LOW = 0, ACTIVE_HIGH = 1} GpioActiveType;
 
 # 1 "./encm369_pic18.h" 1
 # 60 "./encm369_pic18.h"
+void INTERRUPTInitialize(void);
+void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void);
+
 void ClockSetup(void);
 void GpioSetup(void);
 
@@ -27289,7 +27292,8 @@ void SystemSleep(void);
 # 27 "./user_app.h"
 void UserAppInitialize(void);
 void UserAppRun(void);
-void TimeXus(u16 u16TimerTime);
+void TimeXusInitialize(void);
+void TimeXus(void);
 void SegmentDecoderIntialize(void);
 # 106 "./configuration.h" 2
 # 26 "user_app.c" 2
@@ -27310,23 +27314,12 @@ u8 G_u8AlarmFlag;
 extern volatile u32 G_u32SystemTime1ms;
 extern volatile u32 G_u32SystemTime1s;
 extern volatile u32 G_u32SystemFlags;
-# 78 "user_app.c"
+# 77 "user_app.c"
 void UserAppInitialize(void)
 {
 
-    OSCCON3bits.SOSCPWR = 0;
-    OSCENbits.SOSCEN = 1;
-
-
-    while(OSCSTATbits.SOR != 1)
-    {
-    }
-
 
     LATA = 0x40;
-
-    T0CON1 = 0b11010101;
-    T0CON0 = 0b11000000;
 
 
     G_au8Time[0] = 0b00001101;
@@ -27341,12 +27334,12 @@ void UserAppInitialize(void)
 
 
 }
-# 122 "user_app.c"
+# 110 "user_app.c"
 void UserAppRun(void)
 {
-    static u32 u32TimeUpdateDelayer = 0;
 
-    if(u32TimeUpdateDelayer > 510)
+
+
     {
         if(G_au8Time[2] == 0x90)
         {
@@ -27402,39 +27395,50 @@ void UserAppRun(void)
             G_au8Time[2] += 0x10;
         }
 
-        u32TimeUpdateDelayer = 0;
+
     }
-    else
-    {
-        u32TimeUpdateDelayer++;
-    }
-
-
-
-
-
-
-
+# 183 "user_app.c"
     LATA ^=0x40;
 }
-# 214 "user_app.c"
-void TimeXus(u16 u16TimerTime)
+# 200 "user_app.c"
+void TimeXusInitialize(void)
+{
+    OSCCON3bits.SOSCPWR = 0;
+    OSCENbits.SOSCEN = 1;
+
+
+    while(OSCSTATbits.SOR != 1)
+    {
+    }
+    T0CON1 = 0b11011111;
+    T0CON0 = 0b10010000;
+
+
+
+    T0CON0 &= 0x7F;
+
+    TMR0H = (0xFFFF - 0x0001) >> 8;
+
+
+    TMR0L = (0xFFFF - 0x0001) & 0x00FF;
+
+    T0CON0 |= 0x80;
+
+}
+# 240 "user_app.c"
+void TimeXus(void)
 {
     T0CON0 &= 0x7F;
 
-    TMR0H = (0xFFFF - u16TimerTime) >> 8;
+    TMR0H = (0xFFFF - 0x0001) >> 8;
 
 
+    TMR0L = (0xFFFF - 0x0001) & 0x00FF;
 
-    TMR0L = (0xFFFF - u16TimerTime) & 0x00FF;
-
-
-    PIR3 &= 0x7F;
     T0CON0 |= 0x80;
 
-
 }
-# 248 "user_app.c"
+# 270 "user_app.c"
 void SegmentDecoderIntialize(void)
 {
     NVMADR = 380000;

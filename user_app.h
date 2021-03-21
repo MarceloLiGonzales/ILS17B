@@ -26,7 +26,8 @@ Function Declarations
 /*--------------------------------------------------------------------------------------------------------------------*/
 void UserAppInitialize(void);
 void UserAppRun(void);
-void TimeXus(u16 u16TimerTime);
+void TimeXusInitialize(void);
+void TimeXus(void);
 void SegmentDecoderIntialize(void);
 
 

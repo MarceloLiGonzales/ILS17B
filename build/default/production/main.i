@@ -27278,6 +27278,9 @@ typedef enum {ACTIVE_LOW = 0, ACTIVE_HIGH = 1} GpioActiveType;
 
 # 1 "./encm369_pic18.h" 1
 # 60 "./encm369_pic18.h"
+void INTERRUPTInitialize(void);
+void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void);
+
 void ClockSetup(void);
 void GpioSetup(void);
 
@@ -27293,7 +27296,8 @@ void SystemSleep(void);
 # 27 "./user_app.h"
 void UserAppInitialize(void);
 void UserAppRun(void);
-void TimeXus(u16 u16TimerTime);
+void TimeXusInitialize(void);
+void TimeXus(void);
 void SegmentDecoderIntialize(void);
 # 106 "./configuration.h" 2
 # 6 "main.c" 2
@@ -27309,15 +27313,18 @@ volatile u32 G_u32SystemTime1ms = 0;
 volatile u32 G_u32SystemTime1s = 0;
 volatile u32 G_u32SystemFlags = 0;
 
+u8 G_u8TimeFlag = 0x00;
+
 
 
 
 extern u8 G_au8Time[];
 extern u8 G_au8AlarmTime[];
-# 33 "main.c"
+extern u8 G_u8AlarmFlag;
+# 36 "main.c"
 __asm("\tpsect eeprom_data,class=EEDATA,noexec"); __asm("\tdb\t" "0b00111111" "," "0b00000110" "," "0b10011011" "," "0b10001111" "," "0b10100110" "," "0b10101101" "," "0b10111101" "," "0b00000111");
 __asm("\tpsect eeprom_data,class=EEDATA,noexec"); __asm("\tdb\t" "0b10111111" "," "0b10101111" "," "0b10110111" "," "0b10111100" "," "0b10111100" "," "0b00111001" "," "0b10111001" "," "0b10110001");
-# 44 "main.c"
+# 47 "main.c"
 void main(void)
 {
     G_u32SystemFlags |= (u32)0x80000000;
@@ -27326,14 +27333,19 @@ void main(void)
   ClockSetup();
   SysTickSetup();
   GpioSetup();
+  INTERRUPTInitialize();
+
+
+  static u8 u8DigitCounter = 0;
+  static u8 u8TimeCounter = 0;
+
 
 
 
 
 
   UserAppInitialize();
-
-
+  TimeXusInitialize();
 
 
   while(1)
@@ -27341,49 +27353,54 @@ void main(void)
 
 
 
-    UserAppRun();
-
-
-
-
-
-    SystemSleep();
-    TimeXus(1);
-    while((PIR3 & 0x80) == 0x00);
-
-    static u8 u8DigitCounter = 0;
-    static u8 u8TimeCounter = 0;
-
-    if(u8DigitCounter == 0)
+    if(G_u8TimeFlag == 0xFF)
     {
-        NVMADR = 0x380000 + ((G_au8Time[2] >> 4) & 0x0F);
-        LATB = 0x01;
-        u8DigitCounter++;
-    }
-    else if(u8DigitCounter == 1)
-    {
-        NVMADR = 0x380000 + ((G_au8Time[1] >> 0) & 0x0F);
-        LATB = 0x02;
-        u8DigitCounter++;
-    }
-    else if(u8DigitCounter == 2)
-    {
-        NVMADR = 0x380000 + ((G_au8Time[1] >> 4) & 0x0F);
-        LATB = 0x04;
-        u8DigitCounter++;
-    }
-    else if(u8DigitCounter == 3)
-    {
-        NVMADR = 0x380000 + ((G_au8Time[0] >> 0) & 0x07);
-        LATB = 0x08;
-        u8DigitCounter = 0;
+        G_u8TimeFlag = 0x00;
+        UserAppRun();
     }
 
-    NVMCON1bits.CMD = 0x00;
-    NVMCON0bits.GO = 1;
-    while (NVMCON0bits.GO);
-    u8 u8BCDecode = NVMDATL;
-    LATA = (LATA & 0x40) + u8BCDecode;
+
+
+
+    if(u8TimeCounter == 100)
+    {
+        u8TimeCounter = 0;
+        if(u8DigitCounter == 0)
+        {
+            NVMADR = 0x380000 + ((G_au8Time[2] >> 4) & 0x0F);
+            LATB = 0x01;
+            u8DigitCounter++;
+        }
+        else if(u8DigitCounter == 1)
+        {
+            NVMADR = 0x380000 + ((G_au8Time[1] >> 0) & 0x0F);
+            LATB = 0x02;
+            u8DigitCounter++;
+        }
+        else if(u8DigitCounter == 2)
+        {
+            NVMADR = 0x380000 + ((G_au8Time[1] >> 4) & 0x0F);
+            LATB = 0x04;
+            u8DigitCounter++;
+        }
+        else if(u8DigitCounter == 3)
+        {
+            NVMADR = 0x380000 + ((G_au8Time[0] >> 0) & 0x07);
+            LATB = 0x08;
+            u8DigitCounter = 0;
+        }
+
+
+        NVMCON1bits.CMD = 0x00;
+        NVMCON0bits.GO = 1;
+        while (NVMCON0bits.GO);
+        u8 u8BCDecode = NVMDATL;
+        LATA = (LATA & 0x40) + u8BCDecode;
+    }
+    else
+    {
+        u8TimeCounter++;
+    }
 
 
   }

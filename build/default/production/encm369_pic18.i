@@ -27274,6 +27274,9 @@ typedef enum {ACTIVE_LOW = 0, ACTIVE_HIGH = 1} GpioActiveType;
 
 # 1 "./encm369_pic18.h" 1
 # 60 "./encm369_pic18.h"
+void INTERRUPTInitialize(void);
+void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void);
+
 void ClockSetup(void);
 void GpioSetup(void);
 
@@ -27289,7 +27292,8 @@ void SystemSleep(void);
 # 27 "./user_app.h"
 void UserAppInitialize(void);
 void UserAppRun(void);
-void TimeXus(u16 u16TimerTime);
+void TimeXusInitialize(void);
+void TimeXus(void);
 void SegmentDecoderIntialize(void);
 # 106 "./configuration.h" 2
 # 24 "encm369_pic18.c" 2
@@ -27297,13 +27301,42 @@ void SegmentDecoderIntialize(void);
 extern volatile u32 G_u32SystemTime1ms;
 extern volatile u32 G_u32SystemTime1s;
 extern volatile u32 G_u32SystemFlags;
-# 69 "encm369_pic18.c"
+
+extern u8 G_u8TimeFlag;
+# 68 "encm369_pic18.c"
+void INTERRUPTInitialize(void)
+{
+    INTCON0bits.IPEN = 1;
+    IPR3bits.TMR0IP = 0;
+
+    PIR3bits.TMR0IF = 0;
+
+    PIE3bits.TMR0IE = 1;
+
+    INTCON0bits.GIEH = 1;
+    INTCON0bits.GIEL = 1;
+
+}
+# 95 "encm369_pic18.c"
+void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void)
+{
+    PIR3bits.TMR0IF = 0;
+    T0CON0 &= 0x7F;
+
+    TMR0H = (0xFFFF - 0x0001) >> 8;
+
+
+    TMR0L = (0xFFFF - 0x0001) & 0x00FF;
+
+    T0CON0 |= 0x80;
+    G_u8TimeFlag = 0xFF;
+}
+# 123 "encm369_pic18.c"
 void ClockSetup(void)
 {
 
-
 }
-# 89 "encm369_pic18.c"
+# 142 "encm369_pic18.c"
 void GpioSetup(void)
 {
     ANSELA = 0x00;
@@ -27314,14 +27347,14 @@ void GpioSetup(void)
     TRISB = 0x00;
     LATB = 0x00;
 }
-# 113 "encm369_pic18.c"
+# 166 "encm369_pic18.c"
 void SysTickSetup(void)
 {
   G_u32SystemTime1ms = 0;
   G_u32SystemTime1s = 0;
 
 }
-# 135 "encm369_pic18.c"
+# 188 "encm369_pic18.c"
 void SystemSleep(void)
 {
 
