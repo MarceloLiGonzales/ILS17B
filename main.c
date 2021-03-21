@@ -33,8 +33,8 @@ Variable names shall start with "Main_" and be declared as static.
 //BCD decoding data, note bit 7 is g, 5-0 bits are f,e,d,c,b, and a.
 //This is because my tired brain wired it backwards and for some reason LATA's 6th bit, 
 //2nd MSB,doesn't work properly
-__EEPROM_DATA(0b00111111, 0b00000110, 0b10011011, 0b10001111, 0b10100110, 0b10101101, 0b10111101, 0b00000111);
-__EEPROM_DATA(0b10111111, 0b10101111, 0b10110111, 0b10111100, 0b10111100, 0b00111001, 0b10111001, 0b10110001);
+//__EEPROM_DATA(0b00111111, 0b00000110, 0b10011011, 0b10001111, 0b10100110, 0b10101101, 0b10111101, 0b00000111);
+//__EEPROM_DATA(0b10111111, 0b10101111, 0b10110111, 0b10111100, 0b10111100, 0b00111001, 0b10111001, 0b10110001);
 
 
 /*!**********************************************************************************************************************
@@ -57,7 +57,11 @@ void main(void)
       
   static u8 u8DigitCounter = 0;  //Setting digit display, digits 1-4
   static u8 u8TimeCounter = 0;  //Setting time array focus
-    
+  
+  //BCD decoding values like seen in EEPROM statement commented out above
+  u8 au8DisplayCode [16] = {0b00111111, 0b00000110, 0b10011011, 0b10001111, 0b10100110, 0b10101101, 0b10111101, 0b00000111,
+                            0b10111111, 0b10101111, 0b10110111, 0b10111100, 0b10111100, 0b00111001, 0b10111001, 0b10110001};
+  u8 u8PORTADisplayValue = 0x00;    //Display value used to set port 
   
   /* Driver initialization */
   //SegmentDecoderIntialize();
@@ -81,40 +85,34 @@ void main(void)
     /* System sleep */
     //HEARTBEAT_OFF();
     //SystemSleep();
-    if(u8TimeCounter == 100)//need this otherwise switching is too fast
+    if(u8TimeCounter == 150)//need this otherwise switching is too fast
     {
         u8TimeCounter = 0;
         if(u8DigitCounter == 0) // Time storing conventions are hard and obtuse to reach with a single loop, could have reworked but brain too small
         {
-            NVMADR = 0x380000 + ((G_au8Time[2] >> 4) & 0x0F);   //Print seconds 
             LATB = 0x01;
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[2] >> 4) & 0x0F];   //Print seconds 
             u8DigitCounter++;
         } 
         else if(u8DigitCounter == 1)
         {
-            NVMADR = 0x380000 + ((G_au8Time[1] >> 0) & 0x0F);   //Print 10s of seconds
             LATB = 0x02;
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[1] >> 0) & 0x0F];   //Print 10s of seconds
             u8DigitCounter++;
         }
         else if(u8DigitCounter == 2)
         {
-            NVMADR = 0x380000 + ((G_au8Time[1] >> 4) & 0x0F);    //Print mins
             LATB = 0x04;
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[1] >> 4) & 0x0F];    //Print mins
             u8DigitCounter++;
         }
-        else if(u8DigitCounter == 3)
+        else
         {
-            NVMADR = 0x380000 + ((G_au8Time[0] >> 0) & 0x07);    //Print 10s of mins
             LATB = 0x08;
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[0] >> 0) & 0x07];    //Print 10s of mins
             u8DigitCounter = 0;
         }
-
-
-        NVMCON1bits.CMD = 0x00; //Setting NVM configuration bits to read word
-        NVMCON0bits.GO = 1;     //Read word
-        while (NVMCON0bits.GO); //Waiting until byte is read
-        u8 u8BCDecode = NVMDATL;    //reading every cycle might be better to store data and adjust if different
-        LATA = (LATA & 0x40) + u8BCDecode; 
+        PORTA = (PORTA & 0x40) + u8PORTADisplayValue;
     }
     else
     {

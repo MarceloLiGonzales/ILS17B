@@ -109,74 +109,63 @@ Promises:
 
 void UserAppRun(void)
 {
-    //static u32 u32TimeUpdateDelayer = 0;    //need this so the clock display counts minutes/seconds not hours minutes
-   
-    //if(u32TimeUpdateDelayer > 510) //offset to make time update correctly
+    if(G_au8Time[2] == 0x90) //Is seconds = 9?
     {
-        if(G_au8Time[2] == 0x90) //Is seconds = 9?
+        if((G_au8Time[1] & 0x0F) == 0x05) //Is seconds = 59?
         {
-            if((G_au8Time[1] & 0x0F) == 0x05) //Is seconds = 59?
+            if(G_au8Time[1] == 0x95) //Is minutes 9.59?
             {
-               if(G_au8Time[1] == 0x95) //Is minutes 9.59?
-               {
-                   if((G_au8Time[0] & 0x07) == 0b00000101 ) //Is minutes 59.59?
-                   {
-                      if(G_au8Time[0] > 0x80)  //is it (10-12):59.59?, (different cases of time switching)
+                if((G_au8Time[0] & 0x07) == 0b00000101 ) //Is minutes 59.59?
+                {
+                    if(G_au8Time[0] > 0x80)  //is it (10-12):59.59?, (different cases of time switching)
+                    {
+                        if(G_au8Time[0] == 0b11001101)    //is it 12:59.59 ?
                         {
-                          if(G_au8Time[0] == 0b11001101)    //is it 12:59.59 ?
-                            {
-                                G_au8Time[0] = 0b00001000; //Setting time to 01:00.00
-                            }
-                            else
-                            {
-                                G_au8Time[0] += 0x08; //incrementing hours
-                            }
+                            G_au8Time[0] = 0b00001000; //Setting time to 01:00.00
                         }
                         else
                         {
-                            if(G_au8Time[0] == 0x4D) //is it 9:59.59?
-                            {
-                                G_au8Time[0] = 0x80; //Setting time to 10:00.00
-                            }
-                            else
-                            {
-                                G_au8Time[0] += 0x08; //incrementing hours
-                            }
+                            G_au8Time[0] += 0x08; //incrementing hours
                         }
-                      G_au8Time[0] &= 0xF8;    //setting 10's of minutes to 00
                     }
                     else
                     {
-                        G_au8Time[0] += 0x01;    //increment 10's of minutes
+                        if(G_au8Time[0] == 0x4D) //is it 9:59.59?
+                        {
+                            G_au8Time[0] = 0x80; //Setting time to 10:00.00
+                        }
+                        else
+                        {
+                            G_au8Time[0] += 0x08; //incrementing hours
+                        }
                     }
-                    G_au8Time[1] = 0x00;    //Set minutes and 10's seconds to zero
+                    G_au8Time[0] &= 0xF8;    //setting 10's of minutes to 00
                 }
                 else
                 {
-                    G_au8Time[1] = (G_au8Time[1] & 0xF0) + 0x10;  //increment minutes and set 10's seconds to 0
+                    G_au8Time[0] += 0x01;    //increment 10's of minutes
                 }
+                G_au8Time[1] = 0x00;    //Set minutes and 10's seconds to zero
             }
             else
             {
-                G_au8Time[1] += 0x01;  //increment tens of seconds
+                G_au8Time[1] = (G_au8Time[1] & 0xF0) + 0x10;  //increment minutes and set 10's seconds to 0
             }
-            G_au8Time[2] = 0x00;   //set seconds to zero
         }
         else
         {
-            G_au8Time[2] += 0x10; //increment seconds
+            G_au8Time[1] += 0x01;  //increment tens of seconds
         }
-        
-        //u32TimeUpdateDelayer = 0;
+        G_au8Time[2] = 0x00;   //set seconds to zero
     }
-    //else
-    //{
-    //    u32TimeUpdateDelayer++;
-    //}
-    
-    /*if(G_au8Time[0] == G_au8AlarmTime[0] && G_au8Time[1] == G_au8AlarmTime[1] && G_au8Time[2] == G_au8AlarmTime[2])
+    else
     {
-        G_u8AlarmFlag = 1;
+        G_au8Time[2] += 0x10; //increment seconds
+    }
+    
+    /*if(((G_au8Time[0] == G_au8AlarmTime[0]) && (G_au8Time[1] == G_au8AlarmTime[1])) && (G_au8Time[2] == G_au8AlarmTime[2]))
+    {
+        G_u8AlarmFlag = 1;  //used for possible alarm system
     }*/
     
     
@@ -196,6 +185,7 @@ Requires:
 
 Promises:
 - For timer0 to be enabled in async. 16-bit mode with a prescaler of 1:1 for the (Fosc/4) source.
+- For timer0 to run for 1 second 
 */
 void TimeXusInitialize(void)
 {
@@ -206,7 +196,7 @@ void TimeXusInitialize(void)
     while(OSCSTATbits.SOR != 1)
     {
     }
-    T0CON1 = 0b11011111;    //Setting timer0 to asynchronous mode with (SOSC) as the source with a pre-scaler of 1:32768
+    T0CON1 = 0b11011110;    //Setting timer0 to asynchronous mode with (SOSC) as the source with a pre-scaler of 1:32768
     T0CON0 = 0b10010000;    //Enabling timer0 in 16-bit mode with a post-scaler value of 1:1
 
     
@@ -226,7 +216,8 @@ void TimeXusInitialize(void)
 /*!--------------------------------------------------------------------------------------------------------------------
 @fn void TimeXus(void)
 
-@brief Sets Timer0 to count 1 second called from the TMR0 interrupt handle, runs forever unless the timer is disabled in some other function
+@brief doesnt do anything
+ * 
 
 Requires:
 - Timer0 configured

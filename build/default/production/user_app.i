@@ -27337,70 +27337,69 @@ void UserAppInitialize(void)
 # 110 "user_app.c"
 void UserAppRun(void)
 {
-
-
-
+    if(G_au8Time[2] == 0x90)
     {
-        if(G_au8Time[2] == 0x90)
+        if((G_au8Time[1] & 0x0F) == 0x05)
         {
-            if((G_au8Time[1] & 0x0F) == 0x05)
+            if(G_au8Time[1] == 0x95)
             {
-               if(G_au8Time[1] == 0x95)
-               {
-                   if((G_au8Time[0] & 0x07) == 0b00000101 )
-                   {
-                      if(G_au8Time[0] > 0x80)
+                if((G_au8Time[0] & 0x07) == 0b00000101 )
+                {
+                    if(G_au8Time[0] > 0x80)
+                    {
+                        if(G_au8Time[0] == 0b11001101)
                         {
-                          if(G_au8Time[0] == 0b11001101)
-                            {
-                                G_au8Time[0] = 0b00001000;
-                            }
-                            else
-                            {
-                                G_au8Time[0] += 0x08;
-                            }
+                            G_au8Time[0] = 0b00001000;
                         }
                         else
                         {
-                            if(G_au8Time[0] == 0x4D)
-                            {
-                                G_au8Time[0] = 0x80;
-                            }
-                            else
-                            {
-                                G_au8Time[0] += 0x08;
-                            }
+                            G_au8Time[0] += 0x08;
                         }
-                      G_au8Time[0] &= 0xF8;
                     }
                     else
                     {
-                        G_au8Time[0] += 0x01;
+                        if(G_au8Time[0] == 0x4D)
+                        {
+                            G_au8Time[0] = 0x80;
+                        }
+                        else
+                        {
+                            G_au8Time[0] += 0x08;
+                        }
                     }
-                    G_au8Time[1] = 0x00;
+                    G_au8Time[0] &= 0xF8;
                 }
                 else
                 {
-                    G_au8Time[1] = (G_au8Time[1] & 0xF0) + 0x10;
+                    G_au8Time[0] += 0x01;
                 }
+                G_au8Time[1] = 0x00;
             }
             else
             {
-                G_au8Time[1] += 0x01;
+                G_au8Time[1] = (G_au8Time[1] & 0xF0) + 0x10;
             }
-            G_au8Time[2] = 0x00;
         }
         else
         {
-            G_au8Time[2] += 0x10;
+            G_au8Time[1] += 0x01;
         }
-
-
+        G_au8Time[2] = 0x00;
     }
-# 183 "user_app.c"
+    else
+    {
+        G_au8Time[2] += 0x10;
+    }
+
+
+
+
+
+
+
     LATA ^=0x40;
 }
-# 200 "user_app.c"
+# 190 "user_app.c"
 void TimeXusInitialize(void)
 {
     OSCCON3bits.SOSCPWR = 0;
@@ -27410,7 +27409,7 @@ void TimeXusInitialize(void)
     while(OSCSTATbits.SOR != 1)
     {
     }
-    T0CON1 = 0b11011111;
+    T0CON1 = 0b11011110;
     T0CON0 = 0b10010000;
 
 
@@ -27425,20 +27424,13 @@ void TimeXusInitialize(void)
     T0CON0 |= 0x80;
 
 }
-# 240 "user_app.c"
+# 231 "user_app.c"
 void TimeXus(void)
 {
-    T0CON0 &= 0x7F;
 
-    TMR0H = (0xFFFF - 0x0001) >> 8;
-
-
-    TMR0L = (0xFFFF - 0x0001) & 0x00FF;
-
-    T0CON0 |= 0x80;
 
 }
-# 270 "user_app.c"
+# 254 "user_app.c"
 void SegmentDecoderIntialize(void)
 {
     NVMADR = 380000;

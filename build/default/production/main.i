@@ -27321,9 +27321,6 @@ u8 G_u8TimeFlag = 0x00;
 extern u8 G_au8Time[];
 extern u8 G_au8AlarmTime[];
 extern u8 G_u8AlarmFlag;
-# 36 "main.c"
-__asm("\tpsect eeprom_data,class=EEDATA,noexec"); __asm("\tdb\t" "0b00111111" "," "0b00000110" "," "0b10011011" "," "0b10001111" "," "0b10100110" "," "0b10101101" "," "0b10111101" "," "0b00000111");
-__asm("\tpsect eeprom_data,class=EEDATA,noexec"); __asm("\tdb\t" "0b10111111" "," "0b10101111" "," "0b10110111" "," "0b10111100" "," "0b10111100" "," "0b00111001" "," "0b10111001" "," "0b10110001");
 # 47 "main.c"
 void main(void)
 {
@@ -27339,6 +27336,10 @@ void main(void)
   static u8 u8DigitCounter = 0;
   static u8 u8TimeCounter = 0;
 
+
+  u8 au8DisplayCode [16] = {0b00111111, 0b00000110, 0b10011011, 0b10001111, 0b10100110, 0b10101101, 0b10111101, 0b00000111,
+                            0b10111111, 0b10101111, 0b10110111, 0b10111100, 0b10111100, 0b00111001, 0b10111001, 0b10110001};
+  u8 u8PORTADisplayValue = 0x00;
 
 
 
@@ -27362,40 +27363,34 @@ void main(void)
 
 
 
-    if(u8TimeCounter == 100)
+    if(u8TimeCounter == 150)
     {
         u8TimeCounter = 0;
         if(u8DigitCounter == 0)
         {
-            NVMADR = 0x380000 + ((G_au8Time[2] >> 4) & 0x0F);
             LATB = 0x01;
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[2] >> 4) & 0x0F];
             u8DigitCounter++;
         }
         else if(u8DigitCounter == 1)
         {
-            NVMADR = 0x380000 + ((G_au8Time[1] >> 0) & 0x0F);
             LATB = 0x02;
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[1] >> 0) & 0x0F];
             u8DigitCounter++;
         }
         else if(u8DigitCounter == 2)
         {
-            NVMADR = 0x380000 + ((G_au8Time[1] >> 4) & 0x0F);
             LATB = 0x04;
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[1] >> 4) & 0x0F];
             u8DigitCounter++;
         }
-        else if(u8DigitCounter == 3)
+        else
         {
-            NVMADR = 0x380000 + ((G_au8Time[0] >> 0) & 0x07);
             LATB = 0x08;
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[0] >> 0) & 0x07];
             u8DigitCounter = 0;
         }
-
-
-        NVMCON1bits.CMD = 0x00;
-        NVMCON0bits.GO = 1;
-        while (NVMCON0bits.GO);
-        u8 u8BCDecode = NVMDATL;
-        LATA = (LATA & 0x40) + u8BCDecode;
+        PORTA = (PORTA & 0x40) + u8PORTADisplayValue;
     }
     else
     {
