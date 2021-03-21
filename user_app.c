@@ -31,9 +31,9 @@ All Global variable names shall start with "G_<type>UserApp1"
 ***********************************************************************************************************************/
 /* New variables */
 volatile u8 G_u8UserAppFlags;                             /*!< @brief Global state flags */
-u8 u8Time[] = {0,0,0};
-u8 u8AlarmTime[] = {0,0,0};
-u8 u8AlarmFlag;
+u8 G_au8Time[] = {0,0,0};
+u8 G_au8AlarmTime[] = {0,0,0};
+u8 G_u8AlarmFlag;
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 /* Existing variables (defined in other files -- should all contain the "extern" keyword) */
@@ -72,9 +72,8 @@ Requires:
 - RA0-7 setup as digital output
 
 Promises:
-- For RA7 to be high
-- For timer0 to be enabled in async. 16-bit mode with a prescaler of 1:16 for the (Fosc/4) source.
-
+- For RA6 to be high
+- For timer0 to be enabled in async. 16-bit mode with a prescaler of 1:128 for the (Fosc/4) source.
 */
 void UserAppInitialize(void)
 {
@@ -88,20 +87,21 @@ void UserAppInitialize(void)
     }
     
     //LED initialization
-    LATA = 0x80; //Setting RA7 latch to digital high, and RA0-6 latches low
+    LATA = 0x40; //Setting RA6 latch to digital high, and RA0-5,7 latches low
     
-    T0CON1 = 0b11010101;    //Setting timer0 to asynchronous. mode with (SOSC) as the source with a pre-scaler of 1:128
+    T0CON1 = 0b11010101;    //Setting timer0 to asynchronous mode with (SOSC) as the source with a pre-scaler of 1:128
     T0CON0 = 0b11000000;    //Enabling timer0 in 16-bit mode with a post-scaler value of 1:1
     
-    u8Time[0] = 0b00000000;  //Set up initial time here
-    u8Time[1] = 0b00000000;
-    u8Time[2] = 0b00010000;
+    //Set up initial time here 1:59:53
+    G_au8Time[0] = 0b00001101; //Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
+    G_au8Time[1] = 0b10010101; //Time[1]: (4-bits) minutes | (4-bits) 10's of seconds
+    G_au8Time[2] = 0b00110000; //Time[2]: (4-bits) seconds | (4-bits) NULL
     
-    u8AlarmTime[0] = 0b00101011; //set up alarm time here
-    u8AlarmTime[1] = 0b00000000;
-    u8AlarmTime[2] = 0b00000000;
+    G_au8AlarmTime[0] = 0b00101011; //set up alarm time here
+    G_au8AlarmTime[1] = 0b00000000;
+    G_au8AlarmTime[2] = 0b00000000;
     
-    u8AlarmFlag = 0;
+    G_u8AlarmFlag = 0;
 
 
 } /* end UserAppInitialize() */
@@ -113,79 +113,70 @@ void UserAppInitialize(void)
 @brief Application code that runs once per system loop
 
 Requires:+
-- Time to pass normally
+- Time to pass normally, so can't be near black hole
 
 Promises:
-- RA06
-- Time keeping, should actually use global variables that are indexable outside of here
-- ...so that time display can occur
+- depression
 */
+
 void UserAppRun(void)
 {
-    /* time is setup up like this (Might not seem ideal but i think it works fine, small sizes are nice since only 1 extra bit present in the 10's of seconds): 
-       Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
-       Time[1]: (4-bits) minutes | (4-bits) 10's of seconds
-       Time[2]: (4-bits) seconds | ((4-bits) NULL
-        
-     Each bit section is purely the value of the place so 53 minutes means 5 in the 10's of minutes and 3 in the minutes
-    */
-    //setting time to be 09:59.59
-    static u32 u32TimeUpdateDelayer = 0;
-    
-    
+    static u32 u32TimeUpdateDelayer = 0;    //need this so the clock display counts minutes/seconds not hours minutes
+   
     if(u32TimeUpdateDelayer > 510) //offset to make time update correctly
     {
-        if(u8Time[2] == 0x90) //Is seconds = 9?
+        if(G_au8Time[2] == 0x90) //Is seconds = 9?
         {
-            if((u8Time[1] & 0x0F) == 0x05) //Is seconds = 59?
+            if((G_au8Time[1] & 0x0F) == 0x05) //Is seconds = 59?
             {
-               if(u8Time[1] == 0x95) //Is minutes 9.59?
+               if(G_au8Time[1] == 0x95) //Is minutes 9.59?
                {
-                   if((u8Time[0] & 0x07) == 0b00000101 ) //Is minutes 59.59?
+                   if((G_au8Time[0] & 0x07) == 0b00000101 ) //Is minutes 59.59?
                    {
-                      if(u8Time[0] > 0x80)  //is it (10-12):59.59?, (different cases of time switching)
+                      if(G_au8Time[0] > 0x80)  //is it (10-12):59.59?, (different cases of time switching)
                         {
-                          if(u8Time[0] == 0b11001101)    //is it 12:59.59 ?
+                          if(G_au8Time[0] == 0b11001101)    //is it 12:59.59 ?
                             {
-                                u8Time[0] = 0b00001000; //Setting time to 01:00.00
+                                G_au8Time[0] = 0b00001000; //Setting time to 01:00.00
                             }
                             else
                             {
-                                u8Time[0] += 0x08; //incrementing hours
+                                G_au8Time[0] += 0x08; //incrementing hours
                             }
                         }
                         else
                         {
-                            if(u8Time[0] == 0x4D) //is it 9:59.59?
+                            if(G_au8Time[0] == 0x4D) //is it 9:59.59?
                             {
-                                u8Time[0] = 0x80; //Setting time to 10:00.00
+                                G_au8Time[0] = 0x80; //Setting time to 10:00.00
                             }
                             else
                             {
-                                u8Time[0] += 0x08; //incrementing hours
+                                G_au8Time[0] += 0x08; //incrementing hours
                             }
                         }
+                      G_au8Time[0] &= 0xF8;    //setting 10's of minutes to 00
                     }
                     else
                     {
-                        u8Time[0] += 0x01;    //increment 10's of minutes
+                        G_au8Time[0] += 0x01;    //increment 10's of minutes
                     }
-                    u8Time[1] = 0x00;    //Set minutes and 10's seconds to zero
+                    G_au8Time[1] = 0x00;    //Set minutes and 10's seconds to zero
                 }
                 else
                 {
-                    u8Time[1] = (u8Time[1] & 0xF0) + 0x10;  //increment minutes and set 10's seconds to 0
+                    G_au8Time[1] = (G_au8Time[1] & 0xF0) + 0x10;  //increment minutes and set 10's seconds to 0
                 }
             }
             else
             {
-                u8Time[1] += 0x01;  //increment tens of seconds
+                G_au8Time[1] += 0x01;  //increment tens of seconds
             }
-            u8Time[2] = 0x00;   //set seconds to zero
+            G_au8Time[2] = 0x00;   //set seconds to zero
         }
         else
         {
-            u8Time[2] += 0x10; //increment seconds
+            G_au8Time[2] += 0x10; //increment seconds
         }
         
         u32TimeUpdateDelayer = 0;
@@ -195,23 +186,23 @@ void UserAppRun(void)
         u32TimeUpdateDelayer++;
     }
     
-/*    if(u8Time[0] == u8AlarmTime[0] && u8Time[1] == u8AlarmTime[1] && u8Time[2] == u8AlarmTime[2])
+    /*if(G_au8Time[0] == G_au8AlarmTime[0] && G_au8Time[1] == G_au8AlarmTime[1] && G_au8Time[2] == G_au8AlarmTime[2])
     {
-        u8AlarmFlag = 1;
+        G_u8AlarmFlag = 1;
     }*/
     
     
-    LATA ^=0x40;    //blinky that doesn't work since LATA06 is dumb
+    LATA ^=0x40; //blinking light that doesn't work since LATA06 is dumb
 } /* end UserAppRun */
 
 /*!--------------------------------------------------------------------------------------------------------------------
 @fn void TimeXus(u16 u16TimeXus)
 
-@brief Sets Timer0 to count u16Microseconds_
+@brief Sets Timer0 to count u16TimeXus
 
 Requires:
 - Timer0 configured
-- u16 u16TimeXus is the time of (osc. period/pre-scaler*post-scaler)seconds  
+- u16 u16TimeXus is the time of (oscillator period/pre-scaler*post-scaler)seconds  
 
 Promises:
 - Pre-loads TMR0H:L to clock out desired period

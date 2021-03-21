@@ -27308,17 +27308,16 @@ void SegmentDecoderIntialize(void);
 volatile u32 G_u32SystemTime1ms = 0;
 volatile u32 G_u32SystemTime1s = 0;
 volatile u32 G_u32SystemFlags = 0;
-# 26 "main.c"
-extern u8 u8Time[];
-extern u8 u8AlarmTime[];
 
 
 
 
-
+extern u8 G_au8Time[];
+extern u8 G_au8AlarmTime[];
+# 33 "main.c"
 __asm("\tpsect eeprom_data,class=EEDATA,noexec"); __asm("\tdb\t" "0b00111111" "," "0b00000110" "," "0b10011011" "," "0b10001111" "," "0b10100110" "," "0b10101101" "," "0b10111101" "," "0b00000111");
 __asm("\tpsect eeprom_data,class=EEDATA,noexec"); __asm("\tdb\t" "0b10111111" "," "0b10101111" "," "0b10110111" "," "0b10111100" "," "0b10111100" "," "0b00111001" "," "0b10111001" "," "0b10110001");
-# 45 "main.c"
+# 44 "main.c"
 void main(void)
 {
     G_u32SystemFlags |= (u32)0x80000000;
@@ -27357,25 +27356,25 @@ void main(void)
 
     if(u8DigitCounter == 0)
     {
-        NVMADR = 0x380000 + ((u8Time[2] >> 4) & 0x0F);
+        NVMADR = 0x380000 + ((G_au8Time[2] >> 4) & 0x0F);
         LATB = 0x01;
         u8DigitCounter++;
     }
     else if(u8DigitCounter == 1)
     {
-        NVMADR = 0x380000 + ((u8Time[1] >> 0) & 0x0F);
+        NVMADR = 0x380000 + ((G_au8Time[1] >> 0) & 0x0F);
         LATB = 0x02;
         u8DigitCounter++;
     }
     else if(u8DigitCounter == 2)
     {
-        NVMADR = 0x380000 + ((u8Time[1] >> 4) & 0x0F);
+        NVMADR = 0x380000 + ((G_au8Time[1] >> 4) & 0x0F);
         LATB = 0x04;
         u8DigitCounter++;
     }
     else if(u8DigitCounter == 3)
     {
-        NVMADR = 0x380000 + ((u8Time[0] >> 0) & 0x07);
+        NVMADR = 0x380000 + ((G_au8Time[0] >> 0) & 0x07);
         LATB = 0x08;
         u8DigitCounter = 0;
     }

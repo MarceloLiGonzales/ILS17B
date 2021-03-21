@@ -27,7 +27,7 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v2_31\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"69 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+"69 C:\GitHub\MARS\ILS17B\encm369_pic18.c
 [v _ClockSetup ClockSetup `(v  1 e 1 0 ]
 "89
 [v _GpioSetup GpioSetup `(v  1 e 1 0 ]
@@ -35,13 +35,13 @@
 [v _SysTickSetup SysTickSetup `(v  1 e 1 0 ]
 "135
 [v _SystemSleep SystemSleep `(v  1 e 1 0 ]
-"45 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
+"44 C:\GitHub\MARS\ILS17B\main.c
 [v _main main `(v  1 e 1 0 ]
-"79 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+"78 C:\GitHub\MARS\ILS17B\user_app.c
 [v _UserAppInitialize UserAppInitialize `(v  1 e 1 0 ]
-"123
+"122
 [v _UserAppRun UserAppRun `(v  1 e 1 0 ]
-"221
+"214
 [v _TimeXus TimeXus `(v  1 e 1 0 ]
 [s S73 . 1 `uc 1 GO 1 0 :1:0 
 ]
@@ -142,48 +142,48 @@
 "46384
 "46384
 [v _INTCON0bits INTCON0bits `VES217  1 e 1 @1238 ]
-"14 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
+"14 C:\GitHub\MARS\ILS17B\main.c
 [v _G_u32SystemTime1ms G_u32SystemTime1ms `VEul  1 e 4 0 ]
 "15
 [v _G_u32SystemTime1s G_u32SystemTime1s `VEul  1 e 4 0 ]
 "16
 [v _G_u32SystemFlags G_u32SystemFlags `VEul  1 e 4 0 ]
-"33 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+"33 C:\GitHub\MARS\ILS17B\user_app.c
 [v _G_u8UserAppFlags G_u8UserAppFlags `VEuc  1 e 1 0 ]
 "34
-[v _u8Time u8Time `[3]uc  1 e 3 0 ]
+[v _G_au8Time G_au8Time `[3]uc  1 e 3 0 ]
 "35
-[v _u8AlarmTime u8AlarmTime `[3]uc  1 e 3 0 ]
+[v _G_au8AlarmTime G_au8AlarmTime `[3]uc  1 e 3 0 ]
 "36
-[v _u8AlarmFlag u8AlarmFlag `uc  1 e 1 0 ]
-"45 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
+[v _G_u8AlarmFlag G_u8AlarmFlag `uc  1 e 1 0 ]
+"44 C:\GitHub\MARS\ILS17B\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"109
+"108
 [v main@u8BCDecode u8BCDecode `uc  1 a 1 7 ]
-"78
+"77
 [v main@u8DigitCounter u8DigitCounter `uc  1 s 1 u8DigitCounter ]
-"114
+"113
 } 0
-"123 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+"122 C:\GitHub\MARS\ILS17B\user_app.c
 [v _UserAppRun UserAppRun `(v  1 e 1 0 ]
 {
-"133
+"124
 [v UserAppRun@u32TimeUpdateDelayer u32TimeUpdateDelayer `ul  1 s 4 u32TimeUpdateDelayer ]
-"203
+"196
 } 0
-"79
+"78
 [v _UserAppInitialize UserAppInitialize `(v  1 e 1 0 ]
 {
 "107
 } 0
-"221
+"214
 [v _TimeXus TimeXus `(v  1 e 1 0 ]
 {
 [v TimeXus@u16TimerTime u16TimerTime `us  1 p 2 0 ]
-"236
+"229
 } 0
-"135 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+"135 C:\GitHub\MARS\ILS17B\encm369_pic18.c
 [v _SystemSleep SystemSleep `(v  1 e 1 0 ]
 {
 "138

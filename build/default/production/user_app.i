@@ -27301,16 +27301,16 @@ void SegmentDecoderIntialize(void);
 
 
 volatile u8 G_u8UserAppFlags;
-u8 u8Time[] = {0,0,0};
-u8 u8AlarmTime[] = {0,0,0};
-u8 u8AlarmFlag;
+u8 G_au8Time[] = {0,0,0};
+u8 G_au8AlarmTime[] = {0,0,0};
+u8 G_u8AlarmFlag;
 
 
 
 extern volatile u32 G_u32SystemTime1ms;
 extern volatile u32 G_u32SystemTime1s;
 extern volatile u32 G_u32SystemFlags;
-# 79 "user_app.c"
+# 78 "user_app.c"
 void UserAppInitialize(void)
 {
 
@@ -27323,88 +27323,90 @@ void UserAppInitialize(void)
     }
 
 
-    LATA = 0x80;
+    LATA = 0x40;
 
     T0CON1 = 0b11010101;
     T0CON0 = 0b11000000;
 
-    u8Time[0] = 0b00000000;
-    u8Time[1] = 0b00000000;
-    u8Time[2] = 0b00010000;
 
-    u8AlarmTime[0] = 0b00101011;
-    u8AlarmTime[1] = 0b00000000;
-    u8AlarmTime[2] = 0b00000000;
+    G_au8Time[0] = 0b00001101;
+    G_au8Time[1] = 0b10010101;
+    G_au8Time[2] = 0b00110000;
 
-    u8AlarmFlag = 0;
+    G_au8AlarmTime[0] = 0b00101011;
+    G_au8AlarmTime[1] = 0b00000000;
+    G_au8AlarmTime[2] = 0b00000000;
+
+    G_u8AlarmFlag = 0;
 
 
 }
-# 123 "user_app.c"
+# 122 "user_app.c"
 void UserAppRun(void)
 {
-# 133 "user_app.c"
     static u32 u32TimeUpdateDelayer = 0;
 
-
-    if(u32TimeUpdateDelayer > 510){
-    if(u8Time[2] == 0x90)
+    if(u32TimeUpdateDelayer > 510)
     {
-        if((u8Time[1] & 0x0F) == 0x05)
+        if(G_au8Time[2] == 0x90)
         {
-            if(u8Time[1] == 0x95)
+            if((G_au8Time[1] & 0x0F) == 0x05)
             {
-                if((u8Time[0] & 0x07) == 0b00000101 )
-                {
-                    if(u8Time[0] > 0x80)
-                    {
-                        if(u8Time[0] == 0b11001101)
+               if(G_au8Time[1] == 0x95)
+               {
+                   if((G_au8Time[0] & 0x07) == 0b00000101 )
+                   {
+                      if(G_au8Time[0] > 0x80)
                         {
-                            u8Time[0] = 0b00001000;
+                          if(G_au8Time[0] == 0b11001101)
+                            {
+                                G_au8Time[0] = 0b00001000;
+                            }
+                            else
+                            {
+                                G_au8Time[0] += 0x08;
+                            }
                         }
                         else
                         {
-                            u8Time[0] += 0x08;
+                            if(G_au8Time[0] == 0x4D)
+                            {
+                                G_au8Time[0] = 0x80;
+                            }
+                            else
+                            {
+                                G_au8Time[0] += 0x08;
+                            }
                         }
+                      G_au8Time[0] &= 0xF8;
                     }
                     else
                     {
-                        if(u8Time[0] == 0x4D)
-                        {
-                            u8Time[0] = 0x80;
-                        }
-                        else
-                        {
-                            u8Time[0] += 0x08;
-                        }
+                        G_au8Time[0] += 0x01;
                     }
+                    G_au8Time[1] = 0x00;
                 }
                 else
                 {
-                    u8Time[0] += 0x01;
+                    G_au8Time[1] = (G_au8Time[1] & 0xF0) + 0x10;
                 }
-                u8Time[1] = 0x00;
             }
             else
             {
-                u8Time[1] = (u8Time[1] & 0xF0) + 0x10;
+                G_au8Time[1] += 0x01;
             }
+            G_au8Time[2] = 0x00;
         }
         else
         {
-            u8Time[1] += 0x01;
+            G_au8Time[2] += 0x10;
         }
-        u8Time[2] = 0x00;
+
+        u32TimeUpdateDelayer = 0;
     }
     else
     {
-        u8Time[2] += 0x10;
-    }
-    u32TimeUpdateDelayer = 0;
-    }
-    else
-    {
-    u32TimeUpdateDelayer++;
+        u32TimeUpdateDelayer++;
     }
 
 
@@ -27415,7 +27417,7 @@ void UserAppRun(void)
 
     LATA ^=0x40;
 }
-# 221 "user_app.c"
+# 214 "user_app.c"
 void TimeXus(u16 u16TimerTime)
 {
     T0CON0 &= 0x7F;
@@ -27432,7 +27434,7 @@ void TimeXus(u16 u16TimerTime)
 
 
 }
-# 255 "user_app.c"
+# 248 "user_app.c"
 void SegmentDecoderIntialize(void)
 {
     NVMADR = 380000;
