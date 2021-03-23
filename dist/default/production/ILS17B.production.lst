@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
-                                                                                               Mon Mar 22 21:02:41 2021
+                                                                                               Mon Mar 22 21:16:04 2021
 
 Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
      1                           	processor	18F27Q43
@@ -367,7 +367,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    341  000146  EC1A  F001         	call	_UserAppRun	;wreg free
    342  00014A                     l1143:
    343                           
-   344                           ;main.c: 92:     if(u8TimeCounter == 150)
+   344                           ;main.c: 93:     if(u8TimeCounter == 150)
    345  00014A  0E96               	movlw	150
    346  00014C  1847               	xorwf	main@u8TimeCounter^(0+1280),w,c
    347  00014E  A4D8               	btfss	status,2,c
@@ -377,15 +377,15 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    351  000158  EF15  F001         	goto	l1181
    352  00015C                     u310:
    353  00015C                     
-   354                           ;main.c: 93:     {;main.c: 94:         PORTA &= 0x40;
+   354                           ;main.c: 94:     {;main.c: 95:         PORTA &= 0x40;
    355  00015C  0E40               	movlw	64
    356  00015E  16CE               	andwf	206,f,c	;volatile
    357  000160                     
-   358                           ;main.c: 95:         u8TimeCounter = 0;
+   358                           ;main.c: 96:         u8TimeCounter = 0;
    359  000160  0E00               	movlw	0
    360  000162  6E47               	movwf	main@u8TimeCounter^(0+1280),c
    361  000164                     
-   362                           ;main.c: 96:         if(u8DigitCounter == 0)
+   362                           ;main.c: 97:         if(u8DigitCounter == 0)
    363  000164  5048               	movf	main@u8DigitCounter^(0+1280),w,c
    364  000166  A4D8               	btfss	status,2,c
    365  000168  EFB8  F000         	goto	u321
@@ -394,11 +394,12 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    368  000170  EFCC  F000         	goto	l1157
    369  000174                     u320:
    370  000174                     
-   371                           ;main.c: 97:         {;main.c: 98:             LATB = 0x01;
+   371                           ;main.c: 98:         {;main.c: 99:             LATB = 0x01;
    372  000174  0E01               	movlw	1
    373  000176  6EBF               	movwf	191,c	;volatile
    374  000178                     
-   375                           ;main.c: 99:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time1 >> 4) & 0x0F];
+   375                           ;main.c: 100:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time1 >> 4) & 0x0F]
+      +                          ;
    376  000178  384D               	swapf	_G_au8Time1^(0+1280),w,c
    377  00017A  0B0F               	andlw	15
    378  00017C  0B0F               	andlw	15
@@ -414,10 +415,10 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    388  000190  6E36               	movwf	main@u8PORTADisplayValue^(0+1280),c
    389  000192                     l1155:
    390                           
-   391                           ;main.c: 100:             u8DigitCounter++;
+   391                           ;main.c: 101:             u8DigitCounter++;
    392  000192  2A48               	incf	main@u8DigitCounter^(0+1280),f,c
    393                           
-   394                           ;main.c: 101:         }
+   394                           ;main.c: 102:         }
    395  000194  EF0F  F001         	goto	l1179
    396  000198                     l1157:
    397  000198  0448               	decf	main@u8DigitCounter^(0+1280),w,c
@@ -428,11 +429,11 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    402  0001A4  EFE4  F000         	goto	l1165
    403  0001A8                     u330:
    404  0001A8                     
-   405                           ;main.c: 103:         {;main.c: 104:             LATB = 0x02;
+   405                           ;main.c: 104:         {;main.c: 105:             LATB = 0x02;
    406  0001A8  0E02               	movlw	2
    407  0001AA  6EBF               	movwf	191,c	;volatile
    408  0001AC                     
-   409                           ;main.c: 105:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 0) & 0x07]
+   409                           ;main.c: 106:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 0) & 0x07]
       +                          ;
    410  0001AC  504C               	movf	_G_au8Time0^(0+1280),w,c
    411  0001AE  0B07               	andlw	7
@@ -457,11 +458,11 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    430  0001D6  EFFF  F000         	goto	l1173
    431  0001DA                     u340:
    432  0001DA                     
-   433                           ;main.c: 109:         {;main.c: 110:             LATB = 0x04;
+   433                           ;main.c: 110:         {;main.c: 111:             LATB = 0x04;
    434  0001DA  0E04               	movlw	4
    435  0001DC  6EBF               	movwf	191,c	;volatile
    436  0001DE                     
-   437                           ;main.c: 111:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 3) & 0x0F]
+   437                           ;main.c: 112:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 3) & 0x0F]
       +                          ;
    438  0001DE  384C               	swapf	_G_au8Time0^(0+1280),w,c
    439  0001E0  46E8               	rlncf	wreg,f,c
@@ -480,11 +481,11 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    452  0001FA  EFC9  F000         	goto	l1155
    453  0001FE                     l1173:
    454                           
-   455                           ;main.c: 115:         {;main.c: 116:             LATB = 0x08;
+   455                           ;main.c: 116:         {;main.c: 117:             LATB = 0x08;
    456  0001FE  0E08               	movlw	8
    457  000200  6EBF               	movwf	191,c	;volatile
    458  000202                     
-   459                           ;main.c: 117:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 7) & 0x01]
+   459                           ;main.c: 118:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 7) & 0x01]
       +                          ;
    460  000202  444C               	rlncf	_G_au8Time0^(0+1280),w,c
    461  000204  0B01               	andlw	1
@@ -499,22 +500,22 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    470  000216  50DF               	movf	indf2,w,c
    471  000218  6E36               	movwf	main@u8PORTADisplayValue^(0+1280),c
    472  00021A                     
-   473                           ;main.c: 118:             u8DigitCounter = 0;
+   473                           ;main.c: 119:             u8DigitCounter = 0;
    474  00021A  0E00               	movlw	0
    475  00021C  6E48               	movwf	main@u8DigitCounter^(0+1280),c
    476  00021E                     l1179:
    477                           
-   478                           ;main.c: 120:         PORTA = (PORTA & 0x40) + u8PORTADisplayValue;
+   478                           ;main.c: 121:         PORTA = (PORTA & 0x40) + u8PORTADisplayValue;
    479  00021E  50CE               	movf	206,w,c	;volatile
    480  000220  0B40               	andlw	64
    481  000222  2436               	addwf	main@u8PORTADisplayValue^(0+1280),w,c
    482  000224  6ECE               	movwf	206,c	;volatile
    483                           
-   484                           ;main.c: 121:     }
+   484                           ;main.c: 122:     }
    485  000226  EF99  F000         	goto	l1137
    486  00022A                     l1181:
    487                           
-   488                           ;main.c: 123:     {;main.c: 124:         u8TimeCounter++;
+   488                           ;main.c: 124:     {;main.c: 125:         u8TimeCounter++;
    489  00022A  2A47               	incf	main@u8TimeCounter^(0+1280),f,c
    490  00022C  EF99  F000         	goto	l1137
    491  000230  EF81  F000         	goto	start
@@ -2316,7 +2317,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.31 build 20201012212115 
-Symbol Table                                                                                   Mon Mar 22 21:02:41 2021
+Symbol Table                                                                                   Mon Mar 22 21:16:04 2021
 
         __size_of_SysTickSetup 0022                             l43 0416                             l35 0414  
                            l46 0404                             l49 03C8                     _G_au8Time0 054C  

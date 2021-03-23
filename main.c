@@ -89,6 +89,7 @@ void main(void)
     /* System sleep */
     //HEARTBEAT_OFF();
     //SystemSleep();
+    //PORTA &= 0; //you get to pay with a much wider, though dimmer, range of brightnesses
     if(u8TimeCounter == 150)//increase value to increase brightness (to an extent) and decrease/remove to decrease (since it updates really fast think PWM)
     {
         PORTA &= 0x40;

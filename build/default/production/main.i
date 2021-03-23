@@ -27367,6 +27367,7 @@ void main(void)
 
 
 
+
     if(u8TimeCounter == 150)
     {
         PORTA &= 0x40;

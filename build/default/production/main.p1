@@ -2671,125 +2671,125 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 87:     }
 }
 [e :U 2276 ]
-"92
-[; ;main.c: 92:     if(u8TimeCounter == 150)
-[e $ ! == -> F15932 `i -> 150 `i 2277  ]
 "93
-[; ;main.c: 93:     {
-{
+[; ;main.c: 93:     if(u8TimeCounter == 150)
+[e $ ! == -> F15932 `i -> 150 `i 2277  ]
 "94
-[; ;main.c: 94:         PORTA &= 0x40;
-[e =& _PORTA -> -> 64 `i `Vuc ]
-"95
-[; ;main.c: 95:         u8TimeCounter = 0;
-[e = F15932 -> -> 0 `i `uc ]
-"96
-[; ;main.c: 96:         if(u8DigitCounter == 0)
-[e $ ! == -> F15931 `i -> 0 `i 2278  ]
-"97
-[; ;main.c: 97:         {
+[; ;main.c: 94:     {
 {
+"95
+[; ;main.c: 95:         PORTA &= 0x40;
+[e =& _PORTA -> -> 64 `i `Vuc ]
+"96
+[; ;main.c: 96:         u8TimeCounter = 0;
+[e = F15932 -> -> 0 `i `uc ]
+"97
+[; ;main.c: 97:         if(u8DigitCounter == 0)
+[e $ ! == -> F15931 `i -> 0 `i 2278  ]
 "98
-[; ;main.c: 98:             LATB = 0x01;
-[e = _LATB -> -> 1 `i `uc ]
+[; ;main.c: 98:         {
+{
 "99
-[; ;main.c: 99:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time1 >> 4) & 0x0F];
-[e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time1 `i -> 4 `i -> 15 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
+[; ;main.c: 99:             LATB = 0x01;
+[e = _LATB -> -> 1 `i `uc ]
 "100
-[; ;main.c: 100:             u8DigitCounter++;
-[e ++ F15931 -> -> 1 `i `uc ]
+[; ;main.c: 100:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time1 >> 4) & 0x0F];
+[e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time1 `i -> 4 `i -> 15 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
 "101
-[; ;main.c: 101:         }
+[; ;main.c: 101:             u8DigitCounter++;
+[e ++ F15931 -> -> 1 `i `uc ]
+"102
+[; ;main.c: 102:         }
 }
 [e $U 2279  ]
-"102
-[; ;main.c: 102:         else if(u8DigitCounter == 1)
+"103
+[; ;main.c: 103:         else if(u8DigitCounter == 1)
 [e :U 2278 ]
 [e $ ! == -> F15931 `i -> 1 `i 2280  ]
-"103
-[; ;main.c: 103:         {
-{
 "104
-[; ;main.c: 104:             LATB = 0x02;
-[e = _LATB -> -> 2 `i `uc ]
+[; ;main.c: 104:         {
+{
 "105
-[; ;main.c: 105:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 0) & 0x07];
-[e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time0 `i -> 0 `i -> 7 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
+[; ;main.c: 105:             LATB = 0x02;
+[e = _LATB -> -> 2 `i `uc ]
 "106
-[; ;main.c: 106:             u8DigitCounter++;
-[e ++ F15931 -> -> 1 `i `uc ]
+[; ;main.c: 106:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 0) & 0x07];
+[e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time0 `i -> 0 `i -> 7 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
 "107
-[; ;main.c: 107:         }
+[; ;main.c: 107:             u8DigitCounter++;
+[e ++ F15931 -> -> 1 `i `uc ]
+"108
+[; ;main.c: 108:         }
 }
 [e $U 2281  ]
-"108
-[; ;main.c: 108:         else if(u8DigitCounter == 2)
+"109
+[; ;main.c: 109:         else if(u8DigitCounter == 2)
 [e :U 2280 ]
 [e $ ! == -> F15931 `i -> 2 `i 2282  ]
-"109
-[; ;main.c: 109:         {
-{
 "110
-[; ;main.c: 110:             LATB = 0x04;
-[e = _LATB -> -> 4 `i `uc ]
+[; ;main.c: 110:         {
+{
 "111
-[; ;main.c: 111:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 3) & 0x0F];
-[e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time0 `i -> 3 `i -> 15 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
+[; ;main.c: 111:             LATB = 0x04;
+[e = _LATB -> -> 4 `i `uc ]
 "112
-[; ;main.c: 112:             u8DigitCounter++;
-[e ++ F15931 -> -> 1 `i `uc ]
+[; ;main.c: 112:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 3) & 0x0F];
+[e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time0 `i -> 3 `i -> 15 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
 "113
-[; ;main.c: 113:         }
+[; ;main.c: 113:             u8DigitCounter++;
+[e ++ F15931 -> -> 1 `i `uc ]
+"114
+[; ;main.c: 114:         }
 }
 [e $U 2283  ]
-"114
-[; ;main.c: 114:         else
-[e :U 2282 ]
 "115
-[; ;main.c: 115:         {
-{
+[; ;main.c: 115:         else
+[e :U 2282 ]
 "116
-[; ;main.c: 116:             LATB = 0x08;
-[e = _LATB -> -> 8 `i `uc ]
+[; ;main.c: 116:         {
+{
 "117
-[; ;main.c: 117:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 7) & 0x01];
-[e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time0 `i -> 7 `i -> 1 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
+[; ;main.c: 117:             LATB = 0x08;
+[e = _LATB -> -> 8 `i `uc ]
 "118
-[; ;main.c: 118:             u8DigitCounter = 0;
-[e = F15931 -> -> 0 `i `uc ]
+[; ;main.c: 118:             u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 7) & 0x01];
+[e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time0 `i -> 7 `i -> 1 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
 "119
-[; ;main.c: 119:         }
+[; ;main.c: 119:             u8DigitCounter = 0;
+[e = F15931 -> -> 0 `i `uc ]
+"120
+[; ;main.c: 120:         }
 }
 [e :U 2283 ]
 [e :U 2281 ]
 [e :U 2279 ]
-"120
-[; ;main.c: 120:         PORTA = (PORTA & 0x40) + u8PORTADisplayValue;
-[e = _PORTA -> + & -> _PORTA `i -> 64 `i -> _u8PORTADisplayValue `i `uc ]
 "121
-[; ;main.c: 121:     }
+[; ;main.c: 121:         PORTA = (PORTA & 0x40) + u8PORTADisplayValue;
+[e = _PORTA -> + & -> _PORTA `i -> 64 `i -> _u8PORTADisplayValue `i `uc ]
+"122
+[; ;main.c: 122:     }
 }
 [e $U 2284  ]
-"122
-[; ;main.c: 122:     else
-[e :U 2277 ]
 "123
-[; ;main.c: 123:     {
-{
+[; ;main.c: 123:     else
+[e :U 2277 ]
 "124
-[; ;main.c: 124:         u8TimeCounter++;
-[e ++ F15932 -> -> 1 `i `uc ]
+[; ;main.c: 124:     {
+{
 "125
-[; ;main.c: 125:     }
+[; ;main.c: 125:         u8TimeCounter++;
+[e ++ F15932 -> -> 1 `i `uc ]
+"126
+[; ;main.c: 126:     }
 }
 [e :U 2284 ]
-"128
-[; ;main.c: 128:   }
+"129
+[; ;main.c: 129:   }
 }
 [e :U 2273 ]
 [e $U 2274  ]
 [e :U 2275 ]
-"129
-[; ;main.c: 129: }
+"130
+[; ;main.c: 130: }
 [e :UE 2272 ]
 }
