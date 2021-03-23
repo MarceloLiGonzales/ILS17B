@@ -27305,8 +27305,12 @@ void SegmentDecoderIntialize(void);
 
 
 volatile u8 G_u8UserAppFlags;
-u8 G_au8Time[] = {0,0,0};
-u8 G_au8AlarmTime[] = {0,0,0};
+u8 G_au8Time0;
+u8 G_au8Time1;
+u8 G_au8Time2;
+u8 G_au8AlarmTime0;
+u8 G_au8AlarmTime1;
+u8 G_au8AlarmTime2;
 u8 G_u8AlarmFlag;
 
 
@@ -27314,7 +27318,7 @@ u8 G_u8AlarmFlag;
 extern volatile u32 G_u32SystemTime1ms;
 extern volatile u32 G_u32SystemTime1s;
 extern volatile u32 G_u32SystemFlags;
-# 77 "user_app.c"
+# 81 "user_app.c"
 void UserAppInitialize(void)
 {
 
@@ -27322,73 +27326,73 @@ void UserAppInitialize(void)
     LATA = 0x40;
 
 
-    G_au8Time[0] = 0b00001101;
-    G_au8Time[1] = 0b10010101;
-    G_au8Time[2] = 0b00110000;
+    G_au8Time0 = 0b01001101;
+    G_au8Time1 = 0b10010101;
+    G_au8Time2 = 0b00110000;
 
-    G_au8AlarmTime[0] = 0b00101011;
-    G_au8AlarmTime[1] = 0b00000000;
-    G_au8AlarmTime[2] = 0b00000000;
+    G_au8AlarmTime0 = 0b00101011;
+    G_au8AlarmTime1 = 0b00000000;
+    G_au8AlarmTime2 = 0b00000000;
 
     G_u8AlarmFlag = 0;
 
 
 }
-# 110 "user_app.c"
+# 114 "user_app.c"
 void UserAppRun(void)
 {
-    if(G_au8Time[2] == 0x90)
+    if(G_au8Time2 == 0x90)
     {
-        if((G_au8Time[1] & 0x0F) == 0x05)
+        if((G_au8Time1 & 0x0F) == 0x05)
         {
-            if(G_au8Time[1] == 0x95)
+            if(G_au8Time1 == 0x95)
             {
-                if((G_au8Time[0] & 0x07) == 0b00000101 )
+                if((G_au8Time0 & 0x07) == 0b00000101 )
                 {
-                    if(G_au8Time[0] > 0x80)
+                    if(G_au8Time0 > 0x80)
                     {
-                        if(G_au8Time[0] == 0b11001101)
+                        if(G_au8Time0 == 0b11001101)
                         {
-                            G_au8Time[0] = 0b00001000;
+                            G_au8Time0 = 0b00001000;
                         }
                         else
                         {
-                            G_au8Time[0] += 0x08;
+                            G_au8Time0 += 0x08;
                         }
                     }
                     else
                     {
-                        if(G_au8Time[0] == 0x4D)
+                        if(G_au8Time0 == 0x4D)
                         {
-                            G_au8Time[0] = 0x80;
+                            G_au8Time0 = 0x80;
                         }
                         else
                         {
-                            G_au8Time[0] += 0x08;
+                            G_au8Time0 += 0x08;
                         }
                     }
-                    G_au8Time[0] &= 0xF8;
+                    G_au8Time0 &= 0xF8;
                 }
                 else
                 {
-                    G_au8Time[0] += 0x01;
+                    G_au8Time0 += 0x01;
                 }
-                G_au8Time[1] = 0x00;
+                G_au8Time1 = 0x00;
             }
             else
             {
-                G_au8Time[1] = (G_au8Time[1] & 0xF0) + 0x10;
+                G_au8Time1 = (G_au8Time1 & 0xF0) + 0x10;
             }
         }
         else
         {
-            G_au8Time[1] += 0x01;
+            G_au8Time1 += 0x01;
         }
-        G_au8Time[2] = 0x00;
+        G_au8Time2 = 0x00;
     }
     else
     {
-        G_au8Time[2] += 0x10;
+        G_au8Time2 += 0x10;
     }
 
 
@@ -27399,7 +27403,7 @@ void UserAppRun(void)
 
     LATA ^=0x40;
 }
-# 190 "user_app.c"
+# 194 "user_app.c"
 void TimeXusInitialize(void)
 {
     OSCCON3bits.SOSCPWR = 0;
@@ -27424,13 +27428,13 @@ void TimeXusInitialize(void)
     T0CON0 |= 0x80;
 
 }
-# 231 "user_app.c"
+# 235 "user_app.c"
 void TimeXus(void)
 {
 
 
 }
-# 254 "user_app.c"
+# 258 "user_app.c"
 void SegmentDecoderIntialize(void)
 {
     NVMADR = 380000;

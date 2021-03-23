@@ -31,8 +31,12 @@ All Global variable names shall start with "G_<type>UserApp1"
 ***********************************************************************************************************************/
 /* New variables */
 volatile u8 G_u8UserAppFlags;                             /*!< @brief Global state flags */
-u8 G_au8Time[] = {0,0,0};
-u8 G_au8AlarmTime[] = {0,0,0};
+u8 G_au8Time0;
+u8 G_au8Time1;
+u8 G_au8Time2;
+u8 G_au8AlarmTime0;
+u8 G_au8AlarmTime1;
+u8 G_au8AlarmTime2;
 u8 G_u8AlarmFlag;
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -81,13 +85,13 @@ void UserAppInitialize(void)
     LATA = 0x40; //Setting RA6 latch to digital high, and RA0-5,7 latches low
     
     //Set up initial time here 1:59:53
-    G_au8Time[0] = 0b00001101; //Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
-    G_au8Time[1] = 0b10010101; //Time[1]: (4-bits) minutes | (4-bits) 10's of seconds
-    G_au8Time[2] = 0b00110000; //Time[2]: (4-bits) seconds | (4-bits) NULL
+    G_au8Time0 = 0b01001101; //Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
+    G_au8Time1 = 0b10010101; //Time[1]: (4-bits) minutes | (4-bits) 10's of seconds
+    G_au8Time2 = 0b00110000; //Time[2]: (4-bits) seconds | (4-bits) NULL
     
-    G_au8AlarmTime[0] = 0b00101011; //set up alarm time here
-    G_au8AlarmTime[1] = 0b00000000;
-    G_au8AlarmTime[2] = 0b00000000;
+    G_au8AlarmTime0 = 0b00101011; //set up alarm time here
+    G_au8AlarmTime1 = 0b00000000;
+    G_au8AlarmTime2 = 0b00000000;
     
     G_u8AlarmFlag = 0;
 
@@ -109,61 +113,61 @@ Promises:
 
 void UserAppRun(void)
 {
-    if(G_au8Time[2] == 0x90) //Is seconds = 9?
+    if(G_au8Time2 == 0x90) //Is seconds = 9?
     {
-        if((G_au8Time[1] & 0x0F) == 0x05) //Is seconds = 59?
+        if((G_au8Time1 & 0x0F) == 0x05) //Is seconds = 59?
         {
-            if(G_au8Time[1] == 0x95) //Is minutes 9.59?
+            if(G_au8Time1 == 0x95) //Is minutes 9.59?
             {
-                if((G_au8Time[0] & 0x07) == 0b00000101 ) //Is minutes 59.59?
+                if((G_au8Time0 & 0x07) == 0b00000101 ) //Is minutes 59.59?
                 {
-                    if(G_au8Time[0] > 0x80)  //is it (10-12):59.59?, (different cases of time switching)
+                    if(G_au8Time0 > 0x80)  //is it (10-12):59.59?, (different cases of time switching)
                     {
-                        if(G_au8Time[0] == 0b11001101)    //is it 12:59.59 ?
+                        if(G_au8Time0 == 0b11001101)    //is it 12:59.59 ?
                         {
-                            G_au8Time[0] = 0b00001000; //Setting time to 01:00.00
+                            G_au8Time0 = 0b00001000; //Setting time to 01:00.00
                         }
                         else
                         {
-                            G_au8Time[0] += 0x08; //incrementing hours
+                            G_au8Time0 += 0x08; //incrementing hours
                         }
                     }
                     else
                     {
-                        if(G_au8Time[0] == 0x4D) //is it 9:59.59?
+                        if(G_au8Time0 == 0x4D) //is it 9:59.59?
                         {
-                            G_au8Time[0] = 0x80; //Setting time to 10:00.00
+                            G_au8Time0 = 0x80; //Setting time to 10:00.00
                         }
                         else
                         {
-                            G_au8Time[0] += 0x08; //incrementing hours
+                            G_au8Time0 += 0x08; //incrementing hours
                         }
                     }
-                    G_au8Time[0] &= 0xF8;    //setting 10's of minutes to 00
+                    G_au8Time0 &= 0xF8;    //setting 10's of minutes to 00
                 }
                 else
                 {
-                    G_au8Time[0] += 0x01;    //increment 10's of minutes
+                    G_au8Time0 += 0x01;    //increment 10's of minutes
                 }
-                G_au8Time[1] = 0x00;    //Set minutes and 10's seconds to zero
+                G_au8Time1 = 0x00;    //Set minutes and 10's seconds to zero
             }
             else
             {
-                G_au8Time[1] = (G_au8Time[1] & 0xF0) + 0x10;  //increment minutes and set 10's seconds to 0
+                G_au8Time1 = (G_au8Time1 & 0xF0) + 0x10;  //increment minutes and set 10's seconds to 0
             }
         }
         else
         {
-            G_au8Time[1] += 0x01;  //increment tens of seconds
+            G_au8Time1 += 0x01;  //increment tens of seconds
         }
-        G_au8Time[2] = 0x00;   //set seconds to zero
+        G_au8Time2 = 0x00;   //set seconds to zero
     }
     else
     {
-        G_au8Time[2] += 0x10; //increment seconds
+        G_au8Time2 += 0x10; //increment seconds
     }
     
-    /*if(((G_au8Time[0] == G_au8AlarmTime[0]) && (G_au8Time[1] == G_au8AlarmTime[1])) && (G_au8Time[2] == G_au8AlarmTime[2]))
+    /*if(((G_au8Time0 == G_au8AlarmTime0) && (G_au8Time1 == G_au8AlarmTime1)) && (G_au8Time2 == G_au8AlarmTime2))
     {
         G_u8AlarmFlag = 1;  //used for possible alarm system
     }*/

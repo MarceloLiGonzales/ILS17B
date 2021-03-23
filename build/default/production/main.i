@@ -27318,10 +27318,14 @@ u8 G_u8TimeFlag = 0x00;
 
 
 
-extern u8 G_au8Time[];
-extern u8 G_au8AlarmTime[];
+extern u8 G_au8Time0;
+extern u8 G_au8Time1;
+extern u8 G_au8Time2;
+extern u8 G_au8AlarmTime0;
+extern u8 G_au8AlarmTime1;
+extern u8 G_au8AlarmTime2;
 extern u8 G_u8AlarmFlag;
-# 47 "main.c"
+# 51 "main.c"
 void main(void)
 {
     G_u32SystemFlags |= (u32)0x80000000;
@@ -27370,25 +27374,25 @@ void main(void)
         if(u8DigitCounter == 0)
         {
             LATB = 0x01;
-            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[2] >> 4) & 0x0F];
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time1 >> 4) & 0x0F];
             u8DigitCounter++;
         }
         else if(u8DigitCounter == 1)
         {
             LATB = 0x02;
-            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[1] >> 0) & 0x0F];
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 0) & 0x07];
             u8DigitCounter++;
         }
         else if(u8DigitCounter == 2)
         {
             LATB = 0x04;
-            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[1] >> 4) & 0x0F];
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 3) & 0x0F];
             u8DigitCounter++;
         }
         else
         {
             LATB = 0x08;
-            u8PORTADisplayValue = au8DisplayCode[(G_au8Time[0] >> 0) & 0x07];
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 7) & 0x01];
             u8DigitCounter = 0;
         }
         PORTA = (PORTA & 0x40) + u8PORTADisplayValue;
