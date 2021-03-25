@@ -1,6 +1,29 @@
 //Includes
 
 
+//MACROS
+#define TASK_1_STACK_SIZE 1024
+#define TASK_2_STACK_SIZE 1024
+#define TASK_3_STACK_SIZE 1024
+#define TASK_4_STACK_SIZE 1024
+#define TASK_5_STACK_SIZE 1024
+
+#define TASK_1_PRIORITY 1
+#define TASK_2_PRIORITY 1
+#define TASK_3_PRIORITY 1
+#define TASK_4_PRIORITY 1
+#define TASK_5_PRIORITY 1
+
+#define TASK_1_CORE 0
+#define TASK_2_CORE 0
+#define TASK_3_CORE 0
+#define TASK_4_CORE 0
+#define TASK_5_CORE 0
+
+
+//Initialize
+void generalSetup(void);
+
 //Global variables
 
 
@@ -14,32 +37,14 @@ static TaskHandle_t task5Handle = NULL;
 //Pins
 
 
-void setup() 
-  // Scan for Wifi, prompt for User to input (?)
-  wifiSetup();
+void setup() {
 
-
-  //Read SD card (could be concurrent due to dualcore?)
-  SDCardSetup();
-
-
-  //Connect to WebServer
-  webServerSetup();
-
-
-  //Set local time
-  localTimeSetup();
-
-
-  //Set Alarm interrupts
-  AlarmSetup();
-
-  //etc
-
+  //Functions called once upon start up
+  generalSetup();
 
   //Start tasks
   //Start Task 1
-    xTaskCreatePinnedToCore(
+  xTaskCreatePinnedToCore(
     Task1,
     "Task 1 name",
     TASK_1_STACK_SIZE,
@@ -49,7 +54,7 @@ void setup()
     TASK_1_CORE);
 
   //Start task 2
-    xTaskCreatePinnedToCore(
+  xTaskCreatePinnedToCore(
     Task2,
     "Task 2 name",
     TASK_2_STACK_SIZE,
@@ -59,7 +64,7 @@ void setup()
     TASK_2_CORE);
 
    //Start update LCD task
-    xTaskCreatePinnedToCore(
+  xTaskCreatePinnedToCore(
     Task3,
     "Task 3 name",
     TASK_3_STACK_SIZE,
@@ -69,7 +74,7 @@ void setup()
     TASK_3_CORE);
 
    //Start Task 4
-    xTaskCreatePinnedToCore(
+   xTaskCreatePinnedToCore(
     Task4,
     "Task 4 name",
     TASK_4_STACK_SIZE,
@@ -79,7 +84,7 @@ void setup()
     TASK_4_CORE);
 
    //Start Task 5
-    xTaskCreatePinnedToCore(
+   xTaskCreatePinnedToCore(
     Task5,
     "Task 5 name",
     TASK_5_STACK_SIZE,
@@ -92,5 +97,5 @@ void setup()
 }
 
 void loop() {
-  vTask
+
 }
