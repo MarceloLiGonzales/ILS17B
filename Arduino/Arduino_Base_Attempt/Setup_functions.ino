@@ -1,4 +1,5 @@
 //These could single time tasks to make it more efficient, one core could wait for wifi input while the other core reads SD card (if that works that way)
+
 void generalSetup(void){
   // Scan for Wifi, prompt for User to input (?)
   wifiSetup();

@@ -2691,8 +2691,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;encm369_pic18.c: 81:     SPI1CON0 = 0b00000000;
 [e = _SPI1CON0 -> -> 0 `i `uc ]
 "82
-[; ;encm369_pic18.c: 82:     SPI1CON1 = 0b00000100;
-[e = _SPI1CON1 -> -> 4 `i `uc ]
+[; ;encm369_pic18.c: 82:     SPI1CON1 = 0b01000100;
+[e = _SPI1CON1 -> -> 68 `i `uc ]
 "83
 [; ;encm369_pic18.c: 83:     SPI1CON2 = 0b00000001;
 [e = _SPI1CON2 -> -> 1 `i `uc ]

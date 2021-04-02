@@ -60,6 +60,8 @@ Type Definitions
 void INTERRUPTInitialize(void);
 void __interrupt(irq(IRQ_TMR0), low_priority) TMR0_ISR(void);
 
+void SPIInitialize(void);
+
 void ClockSetup(void);
 void GpioSetup(void);
 

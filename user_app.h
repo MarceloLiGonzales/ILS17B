@@ -29,6 +29,7 @@ void UserAppRun(void);
 void TimeXusInitialize(void);
 void TimeXus(void);
 void SegmentDecoderIntialize(void);
+u8 SPI1exchangeByte(u8 data);
 
 
 /*------------------------------------------------------------------------------------------------------------------*/

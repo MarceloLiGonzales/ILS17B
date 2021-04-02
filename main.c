@@ -16,6 +16,9 @@ volatile u32 G_u32SystemTime1s  = 0;     /*!< @brief Global system time incremen
 volatile u32 G_u32SystemFlags   = 0;     /*!< @brief Global system flags */
 
 u8 G_u8TimeFlag = 0x00;
+u8 G_u8receivedData = 0x05;
+u8 G_u8writeData = 0x10;
+u8 G_u8SPIFlag = 0;
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 /* External global variables defined in other files (must indicate which file they are defined in) */
@@ -56,6 +59,7 @@ void main(void)
   ClockSetup();
   SysTickSetup();
   GpioSetup();
+  SPIInitialize();
   INTERRUPTInitialize();
   
       
@@ -90,7 +94,7 @@ void main(void)
     //HEARTBEAT_OFF();
     //SystemSleep();
     //PORTA &= 0; //you get to pay with a much wider, though dimmer, range of brightnesses
-    if(u8TimeCounter == 150)//increase value to increase brightness (to an extent) and decrease/remove to decrease (since it updates really fast think PWM)
+    if(u8TimeCounter == 0)//increase value to increase brightness (to an extent) and decrease/remove to decrease (since it updates really fast think PWM)
     {
         PORTA &= 0x40;
         u8TimeCounter = 0;
@@ -109,13 +113,13 @@ void main(void)
         else if(u8DigitCounter == 2)
         {
             LATB = 0x04;
-            u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 3) & 0x0F];    //Print mins
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 3) & 0x0F];    //Print Hours
             u8DigitCounter++;
         }
         else
         {
             LATB = 0x08;
-            u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 7) & 0x01];    //Print 10s of mins
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 7) & 0x01];    //Print 10s of Hours
             u8DigitCounter = 0;
         }
         PORTA = (PORTA & 0x40) + u8PORTADisplayValue;   //Setting PORTA based 
@@ -124,7 +128,6 @@ void main(void)
     {
         u8TimeCounter++;
     }
-    
     //HEARTBEAT_ON();
   }
 } /* end main() */

@@ -49,26 +49,26 @@
 [v _UserAppRun UserAppRun `(v  1 e 1 0 ]
 "194
 [v _TimeXusInitialize TimeXusInitialize `(v  1 e 1 0 ]
-[s S346 . 1 `uc 1 GO 1 0 :1:0 
+[s S347 . 1 `uc 1 GO 1 0 :1:0 
 ]
 "534 C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h
-[s S348 . 1 `uc 1 NOT_DONE 1 0 :1:0 
+[s S349 . 1 `uc 1 NOT_DONE 1 0 :1:0 
 ]
-[s S350 . 1 `uc 1 nDONE 1 0 :1:0 
+[s S351 . 1 `uc 1 nDONE 1 0 :1:0 
 ]
-[s S352 . 1 `uc 1 NVMGO 1 0 :1:0 
+[s S353 . 1 `uc 1 NVMGO 1 0 :1:0 
 ]
-[u S354 . 1 `S346 1 . 1 0 `S348 1 . 1 0 `S350 1 . 1 0 `S352 1 . 1 0 ]
-[v _NVMCON0bits NVMCON0bits `VES354  1 e 1 @64 ]
-[s S330 . 1 `uc 1 CMD 1 0 :3:0 
+[u S355 . 1 `S347 1 . 1 0 `S349 1 . 1 0 `S351 1 . 1 0 `S353 1 . 1 0 ]
+[v _NVMCON0bits NVMCON0bits `VES355  1 e 1 @64 ]
+[s S331 . 1 `uc 1 CMD 1 0 :3:0 
 `uc 1 . 1 0 :4:3 
 `uc 1 WRERR 1 0 :1:7 
 ]
 "574
-[s S334 . 1 `uc 1 NVMCMD 1 0 :3:0 
+[s S335 . 1 `uc 1 NVMCMD 1 0 :3:0 
 ]
-[u S336 . 1 `S330 1 . 1 0 `S334 1 . 1 0 ]
-[v _NVMCON1bits NVMCON1bits `VES336  1 e 1 @65 ]
+[u S337 . 1 `S331 1 . 1 0 `S335 1 . 1 0 ]
+[v _NVMCON1bits NVMCON1bits `VES337  1 e 1 @65 ]
 "594
 [v _NVMLOCK NVMLOCK `VEuc  1 e 1 @66 ]
 "615
@@ -96,7 +96,7 @@
 [v _SPI1CON1 SPI1CON1 `VEuc  1 e 1 @133 ]
 "3694
 [v _SPI1CON2 SPI1CON2 `VEuc  1 e 1 @134 ]
-[s S266 . 1 `uc 1 . 1 0 :3:0 
+[s S267 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 NOSCR 1 0 :1:3 
 `uc 1 ORDY 1 0 :1:4 
 `uc 1 . 1 0 :1:5 
@@ -104,9 +104,9 @@
 `uc 1 CSWHOLD 1 0 :1:7 
 ]
 "5366
-[u S273 . 1 `S266 1 . 1 0 ]
-[v _OSCCON3bits OSCCON3bits `VES273  1 e 1 @175 ]
-[s S304 . 1 `uc 1 PLLR 1 0 :1:0 
+[u S274 . 1 `S267 1 . 1 0 ]
+[v _OSCCON3bits OSCCON3bits `VES274  1 e 1 @175 ]
+[s S305 . 1 `uc 1 PLLR 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 ADOR 1 0 :1:2 
 `uc 1 SOR 1 0 :1:3 
@@ -116,9 +116,9 @@
 `uc 1 EXTOR 1 0 :1:7 
 ]
 "5561
-[u S313 . 1 `S304 1 . 1 0 ]
-[v _OSCSTATbits OSCSTATbits `VES313  1 e 1 @178 ]
-[s S283 . 1 `uc 1 PLLEN 1 0 :1:0 
+[u S314 . 1 `S305 1 . 1 0 ]
+[v _OSCSTATbits OSCSTATbits `VES314  1 e 1 @178 ]
+[s S284 . 1 `uc 1 PLLEN 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 ADOEN 1 0 :1:2 
 `uc 1 SOSCEN 1 0 :1:3 
@@ -128,8 +128,8 @@
 `uc 1 EXTOEN 1 0 :1:7 
 ]
 "5668
-[u S292 . 1 `S283 1 . 1 0 ]
-[v _OSCENbits OSCENbits `VES292  1 e 1 @179 ]
+[u S293 . 1 `S284 1 . 1 0 ]
+[v _OSCENbits OSCENbits `VES293  1 e 1 @179 ]
 "9933
 [v _RC7PPS RC7PPS `VEuc  1 e 1 @536 ]
 "13187
@@ -259,7 +259,7 @@
 "67
 [v main@u8TimeCounter u8TimeCounter `uc  1 s 1 u8TimeCounter ]
 [v main@F15939 F15939 `[16]uc  1 s 16 F15939 ]
-"133
+"145
 } 0
 "114 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
 [v _UserAppRun UserAppRun `(v  1 e 1 0 ]

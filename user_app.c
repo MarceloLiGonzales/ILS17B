@@ -85,9 +85,9 @@ void UserAppInitialize(void)
     LATA = 0x40; //Setting RA6 latch to digital high, and RA0-5,7 latches low
     
     //Set up initial time here 1:59:53
-    G_au8Time0 = 0b01001101; //Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
-    G_au8Time1 = 0b10010101; //Time[1]: (4-bits) minutes | (4-bits) 10's of seconds
-    G_au8Time2 = 0b00110000; //Time[2]: (4-bits) seconds | (4-bits) NULL
+    G_au8Time0 = 0b01000011; //Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
+    G_au8Time1 = 0b00000000; //Time[1]: (4-bits) minutes | (4-bits) 10's of seconds
+    G_au8Time2 = 0b00000000; //Time[2]: (4-bits) seconds | (4-bits) NULL
     
     G_au8AlarmTime0 = 0b00101011; //set up alarm time here
     G_au8AlarmTime1 = 0b00000000;
@@ -327,12 +327,20 @@ void SegmentDecoderIntialize(void)
         INTCON0bits.GIE = 1;        //Disabling interrupts while reading since busy
         NVMCON1bits.CMD = 0x00;     //Enabling writes to memory
     }
-    
-    
-    
-    
-
 } /* end SegmentDecoderIntialize() */
+
+
+u8 SPI1exchangeByte(u8 data)
+{
+ //SPI1TXB = data;
+ //while(!PIR3bits.SPI1IF) /* Wait until data is exchanged */
+ {
+     //LATA = SPI1RXB >> 4;
+ }
+ PIR3bits.SPI1IF = 0;
+
+ return SPI1RXB;
+}
 
 
 

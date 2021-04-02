@@ -39,6 +39,9 @@ extern volatile u32 G_u32SystemTime1s;         /*!< @brief From main.c */
 extern volatile u32 G_u32SystemFlags;          /*!< @brief From main.c */
 
 extern u8 G_u8TimeFlag;
+extern u8 G_au8Time0;
+extern u8 G_au8Time1;
+extern u8 G_au8Time2;
 /***********************************************************************************************************************
 Global variable definitions with scope limited to this local application.
 Variable names shall start with "Bsp_" and be declared as static.
@@ -52,6 +55,35 @@ Function Definitions
 /*--------------------------------------------------------------------------------------------------------------------*/
 /*! @protectedsection */                                                                                            
 /*--------------------------------------------------------------------------------------------------------------------*/
+
+/*!---------------------------------------------------------------------------------------------------------------------
+@fn void SPIInitialize(void)
+
+@brief Setups SPI communication module
+
+Requires:
+- NONE
+
+Promises:
+- To set up the PIC as an SPI client
+
+*/
+void SPIInitialize(void)
+{
+   SPI1CON0bits.EN = 0; //Disable SPI for set up
+    
+    SPI1SCKPPS = 0b00010100; //Map Source clock pin to RC4
+    SPI1SDIPPS = 0b00010101; //Map Data-in pin to RC5
+    SPI1SSPPS  = 0b00010110; //Map Client Select pin to RC6
+    
+    RC7PPS = 0x32; //Map Data-out pin to RC7 (unused but just in case)
+    
+    SPI1CON0 = 0b00000000;  //Set PIC as client (default)
+    SPI1CON1 = 0b00000100;  //default
+    SPI1CON2 = 0b00000001;  //Set up SPI in receiver only
+    
+    SPI1CON0bits.EN = 1; // Enable SPI
+}/* end SPIInitialize */
 
 /*!---------------------------------------------------------------------------------------------------------------------
 @fn void INTERRUPTInitialize(void)
@@ -71,16 +103,19 @@ void INTERRUPTInitialize(void)
     IPR3bits.TMR0IP = 0;    //Setting TMR0 interrupt priority to low default high
     
     PIR3bits.TMR0IF = 0;    //Clearing the TMR0IF flag
+    PIR3bits.SPI1RXIF = 0;  //Clearing the SPI1RXI flag
     
     PIE3bits.TMR0IE = 1;    //Enabling TMR0 interrupt ability
+    PIE3bits.SPI1RXIE = 1;  //Enable SPI receive interrupt ability
     
     INTCON0bits.GIEH = 1;   //Enabling high-priority unmasked interrupts
     INTCON0bits.GIEL = 1;   //Enabling low-priority unmasked interrupts
     
 }/* end INTERRUPTInitialize */
 
-
 /*!---------------------------------------------------------------------------------------------------------------------
+ * 
+ * 
 @fn void __interrupt(irq(IRQ_TMR0), low_priority) TMR0_ISR(void)
 
 @brief Setups interrupts and interrupt priority
@@ -104,6 +139,42 @@ void __interrupt(irq(IRQ_TMR0), low_priority) TMR0_ISR(void)
     
     T0CON0 |= 0x80; //Enabling timer
     G_u8TimeFlag = 0xFF;
+}/* end __interrupt */
+
+/*!---------------------------------------------------------------------------------------------------------------------
+ * 
+ * 
+@fn void __interrupt(irq(IRQ_TMR0), low_priority) TMR0_ISR(void)
+
+@brief Setups interrupts and interrupt priority
+
+Requires:
+- To be called via Vector Table from an interrupt event
+
+Promises:
+- To respond to the interrupt
+
+*/
+void __interrupt(irq(IRQ_SPI1RX), high_priority) SPI1RX_ISR(void)  //Could have used transfer counter interrupt instead, probably will implement it in the future
+{
+    static u8Counter = 0;
+    PIR3bits.SPI1RXIF = 0;  //Clearing the SPI1RXI flag
+    
+    if(u8Counter == 0)
+    {
+        G_au8Time0 = SPI1RXB;
+        u8Counter++;
+    }
+    else if(u8Counter == 1)
+    {
+        G_au8Time1 = SPI1RXB;
+        u8Counter++;
+    }
+    else
+    {
+        G_au8Time2 = SPI1RXB;
+        u8Counter = 0;
+    }
 }/* end __interrupt */
 
 
@@ -148,6 +219,10 @@ void GpioSetup(void)
     ANSELB = 0x00; //Setting up RB0-7 as digital IO
     TRISB = 0x00; //Setting RB0-7 to be outputs
     LATB  = 0x00; //Setting RB0-7 to be default off/low
+    
+    ANSELC = 0x00; //Setting up RC0-7 as digital IO
+    TRISC = 0x70; //Setting RC0-3,7 to be outputs, RC4-6 as inputs
+    LATC  = 0x00; //Setting RC0-7 to be default off/low
 } /* end GpioSetup() */
 
 

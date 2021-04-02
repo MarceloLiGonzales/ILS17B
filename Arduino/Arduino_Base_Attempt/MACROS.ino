@@ -1,3 +1,5 @@
+//Cant have macros in another .ino file, im sure .h files work but im too lazy to add that today
+
 #define TASK_1_STACK_SIZE 1024
 #define TASK_2_STACK_SIZE 1024
 #define TASK_3_STACK_SIZE 1024

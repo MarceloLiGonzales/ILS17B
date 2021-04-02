@@ -27277,6 +27277,8 @@ typedef enum {ACTIVE_LOW = 0, ACTIVE_HIGH = 1} GpioActiveType;
 void INTERRUPTInitialize(void);
 void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void);
 
+void SPIInitialize(void);
+
 void ClockSetup(void);
 void GpioSetup(void);
 
@@ -27295,6 +27297,7 @@ void UserAppRun(void);
 void TimeXusInitialize(void);
 void TimeXus(void);
 void SegmentDecoderIntialize(void);
+u8 SPI1exchangeByte(u8 data);
 # 106 "./configuration.h" 2
 # 24 "encm369_pic18.c" 2
 # 37 "encm369_pic18.c"
@@ -27303,21 +27306,43 @@ extern volatile u32 G_u32SystemTime1s;
 extern volatile u32 G_u32SystemFlags;
 
 extern u8 G_u8TimeFlag;
-# 68 "encm369_pic18.c"
+extern u8 G_au8Time0;
+extern u8 G_au8Time1;
+extern u8 G_au8Time2;
+# 71 "encm369_pic18.c"
+void SPIInitialize(void)
+{
+   SPI1CON0bits.EN = 0;
+
+    SPI1SCKPPS = 0b00010100;
+    SPI1SDIPPS = 0b00010101;
+    SPI1SSPPS = 0b00010110;
+
+    RC7PPS = 0x32;
+
+    SPI1CON0 = 0b00000000;
+    SPI1CON1 = 0b00000100;
+    SPI1CON2 = 0b00000001;
+
+    SPI1CON0bits.EN = 1;
+}
+# 100 "encm369_pic18.c"
 void INTERRUPTInitialize(void)
 {
     INTCON0bits.IPEN = 1;
     IPR3bits.TMR0IP = 0;
 
     PIR3bits.TMR0IF = 0;
+    PIR3bits.SPI1RXIF = 0;
 
     PIE3bits.TMR0IE = 1;
+    PIE3bits.SPI1RXIE = 1;
 
     INTCON0bits.GIEH = 1;
     INTCON0bits.GIEL = 1;
 
 }
-# 95 "encm369_pic18.c"
+# 130 "encm369_pic18.c"
 void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void)
 {
     PIR3bits.TMR0IF = 0;
@@ -27331,12 +27356,34 @@ void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void)
     T0CON0 |= 0x80;
     G_u8TimeFlag = 0xFF;
 }
-# 123 "encm369_pic18.c"
+# 158 "encm369_pic18.c"
+void __attribute__((picinterrupt(("irq(24), high_priority")))) SPI1RX_ISR(void)
+{
+    static u8Counter = 0;
+    PIR3bits.SPI1RXIF = 0;
+
+    if(u8Counter == 0)
+    {
+        G_au8Time0 = SPI1RXB;
+        u8Counter++;
+    }
+    else if(u8Counter == 1)
+    {
+        G_au8Time1 = SPI1RXB;
+        u8Counter++;
+    }
+    else
+    {
+        G_au8Time2 = SPI1RXB;
+        u8Counter = 0;
+    }
+}
+# 194 "encm369_pic18.c"
 void ClockSetup(void)
 {
 
 }
-# 142 "encm369_pic18.c"
+# 213 "encm369_pic18.c"
 void GpioSetup(void)
 {
     ANSELA = 0x00;
@@ -27346,15 +27393,19 @@ void GpioSetup(void)
     ANSELB = 0x00;
     TRISB = 0x00;
     LATB = 0x00;
+
+    ANSELC = 0x00;
+    TRISC = 0x70;
+    LATC = 0x00;
 }
-# 166 "encm369_pic18.c"
+# 241 "encm369_pic18.c"
 void SysTickSetup(void)
 {
   G_u32SystemTime1ms = 0;
   G_u32SystemTime1s = 0;
 
 }
-# 188 "encm369_pic18.c"
+# 263 "encm369_pic18.c"
 void SystemSleep(void)
 {
 
