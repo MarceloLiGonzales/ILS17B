@@ -25,14 +25,14 @@ text6 CODE 0 48A 48A 14 1
 text7 CODE 0 3DC 3DC 28 1
 text8 CODE 0 49E 49E 2 1
 text9 CODE 0 46C 46C 1E 1
-nvCOMRAM COMRAM 1 551 551 2 1
+nvCOMRAM COMRAM 1 54F 54F 4 1
 text10 CODE 0 2FC 2FC 4E 1
 idataCOMRAM CODE 0 404 404 24 1
-cstackCOMRAM COMRAM 1 53D 53D 14 1
+cstackCOMRAM COMRAM 1 53B 53B 14 1
 dataCOMRAM COMRAM 1 501 501 24 1
-bssCOMRAM COMRAM 1 525 525 18 1
+bssCOMRAM COMRAM 1 525 525 16 1
 config CONFIG 4 300000 300000 A 1
-$C:\Users\marce\AppData\Local\Temp\sh44.o
+$C:\Users\marce\AppData\Local\Temp\skak.o
 idloc IDLOC 5 200000 200000 20 1
 init CODE 0 102 102 4 1
 reset_vec CODE 0 0 0 4 1
@@ -246,39 +246,39 @@ $dist/default/production\ILS17B.production.o
 220 text0 CODE >125:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
 228 text0 CODE >126:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
 22C text0 CODE >129:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
-34A cinit CODE >5217:C:\Users\marce\AppData\Local\Temp\sh44.s
-34A cinit CODE >5219:C:\Users\marce\AppData\Local\Temp\sh44.s
-34A cinit CODE >5222:C:\Users\marce\AppData\Local\Temp\sh44.s
-34A cinit CODE >5299:C:\Users\marce\AppData\Local\Temp\sh44.s
-34C cinit CODE >5300:C:\Users\marce\AppData\Local\Temp\sh44.s
-34E cinit CODE >5301:C:\Users\marce\AppData\Local\Temp\sh44.s
-350 cinit CODE >5302:C:\Users\marce\AppData\Local\Temp\sh44.s
-352 cinit CODE >5303:C:\Users\marce\AppData\Local\Temp\sh44.s
-354 cinit CODE >5304:C:\Users\marce\AppData\Local\Temp\sh44.s
-356 cinit CODE >5305:C:\Users\marce\AppData\Local\Temp\sh44.s
-35A cinit CODE >5306:C:\Users\marce\AppData\Local\Temp\sh44.s
-35E cinit CODE >5307:C:\Users\marce\AppData\Local\Temp\sh44.s
-35E cinit CODE >5308:C:\Users\marce\AppData\Local\Temp\sh44.s
-360 cinit CODE >5309:C:\Users\marce\AppData\Local\Temp\sh44.s
-364 cinit CODE >5310:C:\Users\marce\AppData\Local\Temp\sh44.s
-366 cinit CODE >5311:C:\Users\marce\AppData\Local\Temp\sh44.s
-368 cinit CODE >5312:C:\Users\marce\AppData\Local\Temp\sh44.s
-36A cinit CODE >5316:C:\Users\marce\AppData\Local\Temp\sh44.s
-36E cinit CODE >5317:C:\Users\marce\AppData\Local\Temp\sh44.s
-370 cinit CODE >5318:C:\Users\marce\AppData\Local\Temp\sh44.s
-370 cinit CODE >5319:C:\Users\marce\AppData\Local\Temp\sh44.s
-372 cinit CODE >5320:C:\Users\marce\AppData\Local\Temp\sh44.s
-374 cinit CODE >5321:C:\Users\marce\AppData\Local\Temp\sh44.s
-376 cinit CODE >5329:C:\Users\marce\AppData\Local\Temp\sh44.s
-378 cinit CODE >5330:C:\Users\marce\AppData\Local\Temp\sh44.s
-37A cinit CODE >5331:C:\Users\marce\AppData\Local\Temp\sh44.s
-37C cinit CODE >5332:C:\Users\marce\AppData\Local\Temp\sh44.s
-37E cinit CODE >5333:C:\Users\marce\AppData\Local\Temp\sh44.s
-380 cinit CODE >5334:C:\Users\marce\AppData\Local\Temp\sh44.s
-382 cinit CODE >5335:C:\Users\marce\AppData\Local\Temp\sh44.s
-384 cinit CODE >5341:C:\Users\marce\AppData\Local\Temp\sh44.s
-384 cinit CODE >5343:C:\Users\marce\AppData\Local\Temp\sh44.s
-386 cinit CODE >5344:C:\Users\marce\AppData\Local\Temp\sh44.s
+34A cinit CODE >5223:C:\Users\marce\AppData\Local\Temp\skak.s
+34A cinit CODE >5225:C:\Users\marce\AppData\Local\Temp\skak.s
+34A cinit CODE >5228:C:\Users\marce\AppData\Local\Temp\skak.s
+34A cinit CODE >5299:C:\Users\marce\AppData\Local\Temp\skak.s
+34C cinit CODE >5300:C:\Users\marce\AppData\Local\Temp\skak.s
+34E cinit CODE >5301:C:\Users\marce\AppData\Local\Temp\skak.s
+350 cinit CODE >5302:C:\Users\marce\AppData\Local\Temp\skak.s
+352 cinit CODE >5303:C:\Users\marce\AppData\Local\Temp\skak.s
+354 cinit CODE >5304:C:\Users\marce\AppData\Local\Temp\skak.s
+356 cinit CODE >5305:C:\Users\marce\AppData\Local\Temp\skak.s
+35A cinit CODE >5306:C:\Users\marce\AppData\Local\Temp\skak.s
+35E cinit CODE >5307:C:\Users\marce\AppData\Local\Temp\skak.s
+35E cinit CODE >5308:C:\Users\marce\AppData\Local\Temp\skak.s
+360 cinit CODE >5309:C:\Users\marce\AppData\Local\Temp\skak.s
+364 cinit CODE >5310:C:\Users\marce\AppData\Local\Temp\skak.s
+366 cinit CODE >5311:C:\Users\marce\AppData\Local\Temp\skak.s
+368 cinit CODE >5312:C:\Users\marce\AppData\Local\Temp\skak.s
+36A cinit CODE >5316:C:\Users\marce\AppData\Local\Temp\skak.s
+36E cinit CODE >5317:C:\Users\marce\AppData\Local\Temp\skak.s
+370 cinit CODE >5318:C:\Users\marce\AppData\Local\Temp\skak.s
+370 cinit CODE >5319:C:\Users\marce\AppData\Local\Temp\skak.s
+372 cinit CODE >5320:C:\Users\marce\AppData\Local\Temp\skak.s
+374 cinit CODE >5321:C:\Users\marce\AppData\Local\Temp\skak.s
+376 cinit CODE >5329:C:\Users\marce\AppData\Local\Temp\skak.s
+378 cinit CODE >5330:C:\Users\marce\AppData\Local\Temp\skak.s
+37A cinit CODE >5331:C:\Users\marce\AppData\Local\Temp\skak.s
+37C cinit CODE >5332:C:\Users\marce\AppData\Local\Temp\skak.s
+37E cinit CODE >5333:C:\Users\marce\AppData\Local\Temp\skak.s
+380 cinit CODE >5334:C:\Users\marce\AppData\Local\Temp\skak.s
+382 cinit CODE >5335:C:\Users\marce\AppData\Local\Temp\skak.s
+384 cinit CODE >5341:C:\Users\marce\AppData\Local\Temp\skak.s
+384 cinit CODE >5343:C:\Users\marce\AppData\Local\Temp\skak.s
+386 cinit CODE >5344:C:\Users\marce\AppData\Local\Temp\skak.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -299,33 +299,33 @@ __Hspace_1 553 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Hspace_2 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Hspace_4 60000A 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\ILS17B.production.o
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\marce\AppData\Local\Temp\sh44.o
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\marce\AppData\Local\Temp\skak.o
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\ILS17B.production.o
 _OSCENbits B3 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Lsmallconst 0 0 SMALLCONST 0 smallconst dist/default/production\ILS17B.production.o
 _LATA 4BE 0 ABS 0 - dist/default/production\ILS17B.production.o
 _LATB 4BF 0 ABS 0 - dist/default/production\ILS17B.production.o
 _LATC 4C0 0 ABS 0 - dist/default/production\ILS17B.production.o
-___sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\sh44.o
+___sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\skak.o
 _main 106 0 CODE 0 text0 dist/default/production\ILS17B.production.o
 _G_u8writeData 523 0 COMRAM 1 dataCOMRAM dist/default/production\ILS17B.production.o
-start 102 0 CODE 0 init C:\Users\marce\AppData\Local\Temp\sh44.o
+start 102 0 CODE 0 init C:\Users\marce\AppData\Local\Temp\skak.o
 _SPIInitialize 3B4 0 CODE 0 text5 dist/default/production\ILS17B.production.o
 __size_of_main 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\ILS17B.production.o
 __Hpowerup 0 0 CODE 0 powerup dist/default/production\ILS17B.production.o
-main@u8PORTADisplayValue 550 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
+main@u8PORTADisplayValue 54E 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
 __LnvCOMRAM 0 0 ABS 0 nvCOMRAM dist/default/production\ILS17B.production.o
 __HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\ILS17B.production.o
 __end_of_SPI1RX_ISR 34A 0 CODE 0 text10 dist/default/production\ILS17B.production.o
-__accesstop 560 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\sh44.o
-intlevel0 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\sh44.o
-intlevel1 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\sh44.o
-intlevel2 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\sh44.o
-intlevel3 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\sh44.o
+__accesstop 560 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\skak.o
+intlevel0 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\skak.o
+intlevel1 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\skak.o
+intlevel2 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\skak.o
+intlevel3 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\skak.o
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\ILS17B.production.o
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\ILS17B.production.o
-_G_au8AlarmTime0 551 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
+_G_au8AlarmTime0 54F 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
 _G_au8AlarmTime1 535 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 _G_au8AlarmTime2 534 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 __Hifardata 0 0 CODE 0 ifardata dist/default/production\ILS17B.production.o
@@ -339,8 +339,8 @@ _ANSELA 400 0 ABS 0 - dist/default/production\ILS17B.production.o
 _ANSELB 408 0 ABS 0 - dist/default/production\ILS17B.production.o
 _ANSELC 410 0 ABS 0 - dist/default/production\ILS17B.production.o
 _G_u32SystemTime1s 529 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\sh44.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\sh44.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\skak.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\skak.o
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\ILS17B.production.o
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\ILS17B.production.o
 __Hmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\ILS17B.production.o
@@ -363,7 +363,7 @@ _T0CON0 31A 0 ABS 0 - dist/default/production\ILS17B.production.o
 _T0CON1 31B 0 ABS 0 - dist/default/production\ILS17B.production.o
 _IPR3bits 365 0 ABS 0 - dist/default/production\ILS17B.production.o
 SegmentDecoderIntialize@F15941 501 0 COMRAM 1 dataCOMRAM dist/default/production\ILS17B.production.o
-_G_u8TimeFlag 53C 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+_G_u8TimeFlag 53A 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 __Hbank5 0 0 ABS 0 bank5 dist/default/production\ILS17B.production.o
 __Hbank6 0 0 ABS 0 bank6 dist/default/production\ILS17B.production.o
 __Hbank7 0 0 ABS 0 bank7 dist/default/production\ILS17B.production.o
@@ -419,7 +419,7 @@ __Hbank36 0 0 ABS 0 bank36 dist/default/production\ILS17B.production.o
 __Hbank37 0 0 ABS 0 bank37 dist/default/production\ILS17B.production.o
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\ILS17B.production.o
 __Hbigram 0 0 ABS 0 bigram dist/default/production\ILS17B.production.o
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\marce\AppData\Local\Temp\sh44.o
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\marce\AppData\Local\Temp\skak.o
 main@F15939 513 0 COMRAM 1 dataCOMRAM dist/default/production\ILS17B.production.o
 __Hcomram 0 0 ABS 0 comram dist/default/production\ILS17B.production.o
 __Hconfig 30000A 0 CONFIG 4 config dist/default/production\ILS17B.production.o
@@ -478,7 +478,7 @@ _SysTickSetup 44A 0 CODE 0 text4 dist/default/production\ILS17B.production.o
 IVTBASEH 45E 0 ABS 0 - dist/default/production\ILS17B.production.o
 IVTBASEL 45D 0 ABS 0 - dist/default/production\ILS17B.production.o
 IVTBASEU 45F 0 ABS 0 - dist/default/production\ILS17B.production.o
-__pnvCOMRAM 551 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
+__pnvCOMRAM 54F 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
 _SPI1CON0 84 0 ABS 0 - dist/default/production\ILS17B.production.o
 _SPI1CON1 85 0 ABS 0 - dist/default/production\ILS17B.production.o
 _SPI1CON2 86 0 ABS 0 - dist/default/production\ILS17B.production.o
@@ -497,7 +497,7 @@ __size_of_SysTickSetup 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 _PIE3bits 4A1 0 ABS 0 - dist/default/production\ILS17B.production.o
 _TMR0_ISR 46C 0 CODE 0 text9 dist/default/production\ILS17B.production.o
 __ptext10 2FC 0 CODE 0 text10 dist/default/production\ILS17B.production.o
-main@au8DisplayCode 540 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
+main@au8DisplayCode 53E 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
 __Lbank10 0 0 ABS 0 bank10 dist/default/production\ILS17B.production.o
 __Lbank11 0 0 ABS 0 bank11 dist/default/production\ILS17B.production.o
 __Lbank12 0 0 ABS 0 bank12 dist/default/production\ILS17B.production.o
@@ -539,8 +539,8 @@ __end_of_SysTickSetup 46C 0 CODE 0 text4 dist/default/production\ILS17B.producti
 _UserAppInitialize 428 0 CODE 0 text2 dist/default/production\ILS17B.production.o
 __Lfarbss 0 0 FARRAM 0 farbss dist/default/production\ILS17B.production.o
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\ILS17B.production.o
-stackhi 25FF 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\sh44.o
-stacklo 560 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\sh44.o
+stackhi 25FF 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\skak.o
+stacklo 560 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\skak.o
 __Lirdata 0 0 CODE 0 irdata dist/default/production\ILS17B.production.o
 __Livt0x8 8 0 CODE 0 ivt0x8 dist/default/production\ILS17B.production.o
 __Lspace_0 0 0 ABS 0 - dist/default/production\ILS17B.production.o
@@ -573,7 +573,7 @@ __ptext9 46C 0 CODE 0 text9 dist/default/production\ILS17B.production.o
 _OSCCON3bits AF 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Lstruct 0 0 COMRAM 1 struct dist/default/production\ILS17B.production.o
 __Ltext10 0 0 ABS 0 text10 dist/default/production\ILS17B.production.o
-__ramtop 2600 0 RAM 0 ramtop C:\Users\marce\AppData\Local\Temp\sh44.o
+__ramtop 2600 0 RAM 0 ramtop C:\Users\marce\AppData\Local\Temp\skak.o
 __Lpowerup 0 0 CODE 0 powerup dist/default/production\ILS17B.production.o
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\ILS17B.production.o
 main@u8DigitCounter 538 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
@@ -587,7 +587,7 @@ _NVMCON0bits 40 0 ABS 0 - dist/default/production\ILS17B.production.o
 _NVMCON1bits 41 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Lclrtext 0 0 ABS 0 clrtext dist/default/production\ILS17B.production.o
 _SPI1RXB 80 0 ABS 0 - dist/default/production\ILS17B.production.o
-__pcstackCOMRAM 53D 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
+__pcstackCOMRAM 53B 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
 __end_of_main 236 0 CODE 0 text0 dist/default/production\ILS17B.production.o
 _PORTA 4CE 0 ABS 0 - dist/default/production\ILS17B.production.o
 _TMR0H 319 0 ABS 0 - dist/default/production\ILS17B.production.o
@@ -616,8 +616,8 @@ __Lifardata 0 0 CODE 0 ifardata dist/default/production\ILS17B.production.o
 _GpioSetup 3DC 0 CODE 0 text7 dist/default/production\ILS17B.production.o
 __Hintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\ILS17B.production.o
 _G_au8Time0 552 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
-_G_au8Time1 53B 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
-_G_au8Time2 53A 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+_G_au8Time1 551 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
+_G_au8Time2 550 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
 _SPI1RX_ISR 2FC 0 CODE 0 text10 dist/default/production\ILS17B.production.o
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.

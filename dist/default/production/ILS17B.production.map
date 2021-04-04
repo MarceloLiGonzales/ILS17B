@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2_31\pic\dat\en_msgs.txt \
   -pivt0x8=08h -cn -h+dist/default/production\ILS17B.production.sym \
   --cmf=dist/default/production\ILS17B.production.cmf -z -Q18F27Q43 \
-  -oC:\Users\marce\AppData\Local\Temp\sh44.2 --defsym=__MPLAB_BUILD=1 \
+  -oC:\Users\marce\AppData\Local\Temp\skak.2 --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/ILS17B.production.map -E1 -ver=XC8 Compiler \
   --acfsm=1493 -ASTACK=0560h-025FFh -pstack=STACK -ACODE=00h-01FFFFh \
   -ACONST=00h-01FFFFh -ASMALLCONST=02600h-026FFhx474 \
@@ -31,7 +31,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\marce\AppData\Local\Temp\sh44.o \
+  C:\Users\marce\AppData\Local\Temp\skak.o \
   dist/default/production\ILS17B.production.o 
 
 Object code version is 3.11
@@ -41,7 +41,7 @@ Machine type is 18F27Q43
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\marce\AppData\Local\Temp\sh44.o
+C:\Users\marce\AppData\Local\Temp\skak.o
                 idloc                            200000   200000       20        0       5
                 config                           300000   300000        A        0       4
                 init                                102      102        4        4       0
@@ -61,11 +61,11 @@ dist/default/production\ILS17B.production.o
                 text2                               428      428       22        4       0
                 text1                               236      236       C6        4       0
                 text0                               106      106      130        4       0
-                cstackCOMRAM                        53D      53D       14      501       1
+                cstackCOMRAM                        53B      53B       14      501       1
                 dataCOMRAM                          501      501       24      501       1
-                bssCOMRAM                           525      525       18      501       1
+                bssCOMRAM                           525      525       16      501       1
                 cinit                               34A      34A       40        4       0
-                nvCOMRAM                            551      551        2      501       1
+                nvCOMRAM                            54F      54F        4      501       1
                 idataCOMRAM                         404      404       24        4       0
 
 TOTAL           Name                               Link     Load   Length     Space
@@ -96,10 +96,10 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   MEDIUMCONST    
 
         CLASS   COMRAM         
-                cstackCOMRAM                        53D      53D       14         1
+                cstackCOMRAM                        53B      53B       14         1
                 dataCOMRAM                          501      501       24         1
-                bssCOMRAM                           525      525       18         1
-                nvCOMRAM                            551      551        2         1
+                bssCOMRAM                           525      525       16         1
+                nvCOMRAM                            54F      54F        4         1
 
         CLASS   ABS1           
 
@@ -256,18 +256,18 @@ _ANSELA                        (abs)        000400
 _ANSELB                        (abs)        000408
 _ANSELC                        (abs)        000410
 _ClockSetup                    text8        00049E
-_G_au8AlarmTime0               nvCOMRAM     000551
+_G_au8AlarmTime0               nvCOMRAM     00054F
 _G_au8AlarmTime1               bssCOMRAM    000535
 _G_au8AlarmTime2               bssCOMRAM    000534
 _G_au8Time0                    nvCOMRAM     000552
-_G_au8Time1                    bssCOMRAM    00053B
-_G_au8Time2                    bssCOMRAM    00053A
+_G_au8Time1                    nvCOMRAM     000551
+_G_au8Time2                    nvCOMRAM     000550
 _G_u32SystemFlags              bssCOMRAM    000525
 _G_u32SystemTime1ms            bssCOMRAM    00052D
 _G_u32SystemTime1s             bssCOMRAM    000529
 _G_u8AlarmFlag                 bssCOMRAM    000533
 _G_u8SPIFlag                   bssCOMRAM    000539
-_G_u8TimeFlag                  bssCOMRAM    00053C
+_G_u8TimeFlag                  bssCOMRAM    00053A
 _G_u8UserAppFlags              bssCOMRAM    000536
 _G_u8receivedData              dataCOMRAM   000524
 _G_u8writeData                 dataCOMRAM   000523
@@ -529,11 +529,11 @@ __initialization               cinit        00034A
 __mediumconst                  mediumconst  000000
 __pbssCOMRAM                   bssCOMRAM    000525
 __pcinit                       cinit        00034A
-__pcstackCOMRAM                cstackCOMRAM 00053D
+__pcstackCOMRAM                cstackCOMRAM 00053B
 __pdataCOMRAM                  dataCOMRAM   000501
 __pidataCOMRAM                 idataCOMRAM  000404
 __pivt0x8                      ivt0x8       000008
-__pnvCOMRAM                    nvCOMRAM     000551
+__pnvCOMRAM                    nvCOMRAM     00054F
 __ptext0                       text0        000106
 __ptext1                       text1        000236
 __ptext10                      text10       0002FC
@@ -567,9 +567,9 @@ intlevel3                      text         000000
 ivt0x8_base                    ivt0x8       000008
 ivt0x8_undefint                ivt0x8       000100
 main@F15939                    dataCOMRAM   000513
-main@au8DisplayCode            cstackCOMRAM 000540
+main@au8DisplayCode            cstackCOMRAM 00053E
 main@u8DigitCounter            bssCOMRAM    000538
-main@u8PORTADisplayValue       cstackCOMRAM 000550
+main@u8PORTADisplayValue       cstackCOMRAM 00054E
 main@u8TimeCounter             bssCOMRAM    000537
 stackhi                        (abs)        0025FF
 stacklo                        (abs)        000560

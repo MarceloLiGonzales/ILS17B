@@ -52,7 +52,7 @@ _IPR3bits 365 0 ABS 0
 __Hintsave_regs 0 0 BIGRAM 1
 __Lintsave_regs 0 0 BIGRAM 1
 _ANSELA 400 0 ABS 0
-_G_u8TimeFlag 53C 0 COMRAM 1
+_G_u8TimeFlag 53A 0 COMRAM 1
 _ANSELB 408 0 ABS 0
 _ANSELC 410 0 ABS 0
 __Hbigbss 0 0 BIGRAM 1
@@ -80,11 +80,11 @@ __HnvFARRAM 0 0 FARRAM 0
 __LnvFARRAM 0 0 FARRAM 0
 __HnvCOMRAM 0 0 ABS 0
 __LnvCOMRAM 0 0 ABS 0
-_G_au8Time1 53B 0 COMRAM 1
-__pnvCOMRAM 551 0 COMRAM 1
+_G_au8Time1 551 0 COMRAM 1
+__pnvCOMRAM 54F 0 COMRAM 1
 __size_of_UserAppInitialize 0 0 ABS 0
 _SysTickSetup 44A 0 CODE 0
-_G_au8Time2 53A 0 COMRAM 1
+_G_au8Time2 550 0 COMRAM 1
 __Hdata 0 0 ABS 0
 __Ldata 0 0 ABS 0
 stackhi 25FF 0 ABS 0
@@ -114,7 +114,7 @@ __end_of_TimeXusInitialize 3B4 0 CODE 0
 __Hifardata 0 0 CODE 0
 __Lifardata 0 0 CODE 0
 _GpioSetup 3DC 0 CODE 0
-main@u8PORTADisplayValue 550 0 COMRAM 1
+main@u8PORTADisplayValue 54E 0 COMRAM 1
 _G_au8AlarmTime1 535 0 COMRAM 1
 __Hbank5 0 0 ABS 0
 __Lbank5 0 0 ABS 0
@@ -201,7 +201,7 @@ __HcstackCOMRAM 0 0 ABS 0
 __Lspace_0 0 0 ABS 0
 __LcstackCOMRAM 0 0 ABS 0
 _G_u8writeData 523 0 COMRAM 1
-__pcstackCOMRAM 53D 0 COMRAM 1
+__pcstackCOMRAM 53B 0 COMRAM 1
 __Hspace_1 553 0 ABS 0
 __Lspace_1 0 0 ABS 0
 __size_of_TimeXusInitialize 0 0 ABS 0
@@ -290,7 +290,7 @@ __Lbank19 0 0 ABS 0
 __Hbank29 0 0 ABS 0
 __Lbank29 0 0 ABS 0
 ___inthi_sp 0 0 STACK 2
-_G_au8AlarmTime0 551 0 COMRAM 1
+_G_au8AlarmTime0 54F 0 COMRAM 1
 __size_of_ClockSetup 0 0 ABS 0
 ___intlo_sp 0 0 STACK 2
 _SPI1SSPPS 26C 0 ABS 0
@@ -322,7 +322,7 @@ _SPIInitialize 3B4 0 CODE 0
 __pdataCOMRAM 501 0 COMRAM 1
 _G_u8UserAppFlags 536 0 COMRAM 1
 start_initialization 34A 0 CODE 0
-main@au8DisplayCode 540 0 COMRAM 1
+main@au8DisplayCode 53E 0 COMRAM 1
 _INTERRUPTInitialize 48A 0 CODE 0
 __initialization 34A 0 CODE 0
 __activetblptr 0 0 ABS 0
@@ -333,10 +333,10 @@ dataCOMRAM 501 552 COMRAM 501 1
 %locals
 dist/default/production\ILS17B.production.o
 C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h
-C:\Users\marce\AppData\Local\Temp\sh44.s
-5217 34A 0 CODE 0
-5219 34A 0 CODE 0
-5222 34A 0 CODE 0
+C:\Users\marce\AppData\Local\Temp\skak.s
+5223 34A 0 CODE 0
+5225 34A 0 CODE 0
+5228 34A 0 CODE 0
 5299 34A 0 CODE 0
 5300 34C 0 CODE 0
 5301 34E 0 CODE 0

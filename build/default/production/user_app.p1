@@ -2677,14 +2677,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;user_app.c: 85:     LATA = 0x40;
 [e = _LATA -> -> 64 `i `uc ]
 "88
-[; ;user_app.c: 88:     G_au8Time0 = 0b01000011;
-[e = _G_au8Time0 -> -> 67 `i `uc ]
+[; ;user_app.c: 88:     G_au8Time0 = 0b10010101;
+[e = _G_au8Time0 -> -> 149 `i `uc ]
 "89
-[; ;user_app.c: 89:     G_au8Time1 = 0b00000000;
-[e = _G_au8Time1 -> -> 0 `i `uc ]
+[; ;user_app.c: 89:     G_au8Time1 = 0b10010101;
+[e = _G_au8Time1 -> -> 149 `i `uc ]
 "90
-[; ;user_app.c: 90:     G_au8Time2 = 0b00000000;
-[e = _G_au8Time2 -> -> 0 `i `uc ]
+[; ;user_app.c: 90:     G_au8Time2 = 0b10000000;
+[e = _G_au8Time2 -> -> 128 `i `uc ]
 "92
 [; ;user_app.c: 92:     G_au8AlarmTime0 = 0b00101011;
 [e = _G_au8AlarmTime0 -> -> 43 `i `uc ]
@@ -2740,8 +2740,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;user_app.c: 125:                     {
 {
 "126
-[; ;user_app.c: 126:                         if(G_au8Time0 == 0b11001101)
-[e $ ! == -> _G_au8Time0 `i -> 205 `i 2279  ]
+[; ;user_app.c: 126:                         if(G_au8Time0 == 0b10010101)
+[e $ ! == -> _G_au8Time0 `i -> 149 `i 2279  ]
 "127
 [; ;user_app.c: 127:                         {
 {

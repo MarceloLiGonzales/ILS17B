@@ -27329,9 +27329,9 @@ void UserAppInitialize(void)
     LATA = 0x40;
 
 
-    G_au8Time0 = 0b01000011;
-    G_au8Time1 = 0b00000000;
-    G_au8Time2 = 0b00000000;
+    G_au8Time0 = 0b10010101;
+    G_au8Time1 = 0b10010101;
+    G_au8Time2 = 0b10000000;
 
     G_au8AlarmTime0 = 0b00101011;
     G_au8AlarmTime1 = 0b00000000;
@@ -27354,7 +27354,7 @@ void UserAppRun(void)
                 {
                     if(G_au8Time0 > 0x80)
                     {
-                        if(G_au8Time0 == 0b11001101)
+                        if(G_au8Time0 == 0b10010101)
                         {
                             G_au8Time0 = 0b00001000;
                         }
