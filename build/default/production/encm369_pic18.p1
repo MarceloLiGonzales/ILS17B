@@ -35,7 +35,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3694
 [; ;C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 3694: extern volatile unsigned char SPI1CON2 __attribute__((address(0x086)));
 [v _SPI1CON2 `Vuc ~T0 @X0 0 e@134 ]
-"46370
+"3409
+[; ;C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 3409: extern volatile unsigned char SPI1TXB __attribute__((address(0x081)));
+[v _SPI1TXB `Vuc ~T0 @X0 0 e@129 ]
+"42 encm369_pic18.c
+[; ;encm369_pic18.c: 42: extern u8 G_au8Time0;
+[v _G_au8Time0 `uc ~T0 @X0 0 e ]
+"46370 C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h
 [; ;C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 46370:     struct {
 [s S2177 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S2177 . INT0EDG INT1EDG INT2EDG . IPEN GIEL GIE ]
@@ -98,9 +104,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;encm369_pic18.c: 41: extern u8 G_u8TimeFlag;
 [v _G_u8TimeFlag `uc ~T0 @X0 0 e ]
 [t T3 __interrupt irq ( 24 ) high_priority ]
-"42
-[; ;encm369_pic18.c: 42: extern u8 G_au8Time0;
-[v _G_au8Time0 `uc ~T0 @X0 0 e ]
 "3339 C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h
 [; ;C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 3339: extern volatile unsigned char SPI1RXB __attribute__((address(0x080)));
 [v _SPI1RXB `Vuc ~T0 @X0 0 e@128 ]
@@ -2694,232 +2697,259 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;encm369_pic18.c: 82:     SPI1CON1 = 0b00000100;
 [e = _SPI1CON1 -> -> 4 `i `uc ]
 "83
-[; ;encm369_pic18.c: 83:     SPI1CON2 = 0b00000001;
-[e = _SPI1CON2 -> -> 1 `i `uc ]
+[; ;encm369_pic18.c: 83:     SPI1CON2 = 0b00000011;
+[e = _SPI1CON2 -> -> 3 `i `uc ]
 "85
 [; ;encm369_pic18.c: 85:     SPI1CON0bits.EN = 1;
 [e = . . _SPI1CON0bits 0 4 -> -> 1 `i `uc ]
-"86
-[; ;encm369_pic18.c: 86: }
+"87
+[; ;encm369_pic18.c: 87:     SPI1TXB = G_au8Time0;
+[e = _SPI1TXB _G_au8Time0 ]
+"88
+[; ;encm369_pic18.c: 88: }
 [e :UE 2272 ]
 }
-"100
-[; ;encm369_pic18.c: 100: void INTERRUPTInitialize(void)
+"102
+[; ;encm369_pic18.c: 102: void INTERRUPTInitialize(void)
 [v _INTERRUPTInitialize `(v ~T0 @X0 1 ef ]
-"101
-[; ;encm369_pic18.c: 101: {
+"103
+[; ;encm369_pic18.c: 103: {
 {
 [e :U _INTERRUPTInitialize ]
 [f ]
-"102
-[; ;encm369_pic18.c: 102:     INTCON0bits.IPEN = 1;
+"104
+[; ;encm369_pic18.c: 104:     INTCON0bits.IPEN = 1;
 [e = . . _INTCON0bits 0 4 -> -> 1 `i `uc ]
-"103
-[; ;encm369_pic18.c: 103:     IPR3bits.TMR0IP = 0;
-[e = . . _IPR3bits 0 7 -> -> 0 `i `uc ]
 "105
-[; ;encm369_pic18.c: 105:     PIR3bits.TMR0IF = 0;
+[; ;encm369_pic18.c: 105:     IPR3bits.TMR0IP = 0;
+[e = . . _IPR3bits 0 7 -> -> 0 `i `uc ]
+"107
+[; ;encm369_pic18.c: 107:     PIR3bits.TMR0IF = 0;
 [e = . . _PIR3bits 0 7 -> -> 0 `i `uc ]
-"106
-[; ;encm369_pic18.c: 106:     PIR3bits.SPI1RXIF = 0;
-[e = . . _PIR3bits 0 0 -> -> 0 `i `uc ]
 "108
-[; ;encm369_pic18.c: 108:     PIE3bits.TMR0IE = 1;
+[; ;encm369_pic18.c: 108:     PIR3bits.SPI1RXIF = 0;
+[e = . . _PIR3bits 0 0 -> -> 0 `i `uc ]
+"110
+[; ;encm369_pic18.c: 110:     PIE3bits.TMR0IE = 1;
 [e = . . _PIE3bits 0 7 -> -> 1 `i `uc ]
-"109
-[; ;encm369_pic18.c: 109:     PIE3bits.SPI1RXIE = 1;
-[e = . . _PIE3bits 0 0 -> -> 1 `i `uc ]
 "111
-[; ;encm369_pic18.c: 111:     INTCON0bits.GIEH = 1;
+[; ;encm369_pic18.c: 111:     PIE3bits.SPI1RXIE = 1;
+[e = . . _PIE3bits 0 0 -> -> 1 `i `uc ]
+"113
+[; ;encm369_pic18.c: 113:     INTCON0bits.GIEH = 1;
 [e = . . _INTCON0bits 1 1 -> -> 1 `i `uc ]
-"112
-[; ;encm369_pic18.c: 112:     INTCON0bits.GIEL = 1;
-[e = . . _INTCON0bits 0 5 -> -> 1 `i `uc ]
 "114
-[; ;encm369_pic18.c: 114: }
+[; ;encm369_pic18.c: 114:     INTCON0bits.GIEL = 1;
+[e = . . _INTCON0bits 0 5 -> -> 1 `i `uc ]
+"116
+[; ;encm369_pic18.c: 116: }
 [e :UE 2273 ]
 }
 [v $root$_TMR0_ISR `(v ~T0 @X0 0 e ]
-"130
-[; ;encm369_pic18.c: 130: void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void)
+"132
+[; ;encm369_pic18.c: 132: void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void)
 [v _TMR0_ISR `(v ~T2 @X0 1 ef ]
-"131
-[; ;encm369_pic18.c: 131: {
+"133
+[; ;encm369_pic18.c: 133: {
 {
 [e :U _TMR0_ISR ]
 [f ]
-"132
-[; ;encm369_pic18.c: 132:     PIR3bits.TMR0IF = 0;
+"134
+[; ;encm369_pic18.c: 134:     PIR3bits.TMR0IF = 0;
 [e = . . _PIR3bits 0 7 -> -> 0 `i `uc ]
-"133
-[; ;encm369_pic18.c: 133:     T0CON0 &= 0x7F;
-[e =& _T0CON0 -> -> 127 `i `Vuc ]
 "135
-[; ;encm369_pic18.c: 135:     TMR0H = (0xFFFF - 0x0001) >> 8;
+[; ;encm369_pic18.c: 135:     T0CON0 &= 0x7F;
+[e =& _T0CON0 -> -> 127 `i `Vuc ]
+"137
+[; ;encm369_pic18.c: 137:     TMR0H = (0xFFFF - 0x0001) >> 8;
 [e = _TMR0H -> >> - -> 65535 `ui -> -> 1 `i `ui -> 8 `i `uc ]
-"138
-[; ;encm369_pic18.c: 138:     TMR0L = (0xFFFF - 0x0001) & 0x00FF;
-[e = _TMR0L -> & - -> 65535 `ui -> -> 1 `i `ui -> -> 255 `i `ui `uc ]
 "140
-[; ;encm369_pic18.c: 140:     T0CON0 |= 0x80;
-[e =| _T0CON0 -> -> 128 `i `Vuc ]
-"141
-[; ;encm369_pic18.c: 141:     G_u8TimeFlag = 0xFF;
-[e = _G_u8TimeFlag -> -> 255 `i `uc ]
+[; ;encm369_pic18.c: 140:     TMR0L = (0xFFFF - 0x0001) & 0x00FF;
+[e = _TMR0L -> & - -> 65535 `ui -> -> 1 `i `ui -> -> 255 `i `ui `uc ]
 "142
-[; ;encm369_pic18.c: 142: }
+[; ;encm369_pic18.c: 142:     T0CON0 |= 0x80;
+[e =| _T0CON0 -> -> 128 `i `Vuc ]
+"143
+[; ;encm369_pic18.c: 143:     G_u8TimeFlag = 0xFF;
+[e = _G_u8TimeFlag -> -> 255 `i `uc ]
+"144
+[; ;encm369_pic18.c: 144: }
 [e :UE 2274 ]
 }
 [v $root$_SPI1RX_ISR `(v ~T0 @X0 0 e ]
-"158
-[; ;encm369_pic18.c: 158: void __attribute__((picinterrupt(("irq(24), high_priority")))) SPI1RX_ISR(void)
+"160
+[; ;encm369_pic18.c: 160: void __attribute__((picinterrupt(("irq(24), high_priority")))) SPI1RX_ISR(void)
 [v _SPI1RX_ISR `(v ~T3 @X0 1 ef ]
-"159
-[; ;encm369_pic18.c: 159: {
+"161
+[; ;encm369_pic18.c: 161: {
 {
 [e :U _SPI1RX_ISR ]
 [f ]
-"160
-[; ;encm369_pic18.c: 160:     static u8Counter = 0;
-[v F15933 `i ~T0 @X0 1 s u8Counter ]
+"162
+[; ;encm369_pic18.c: 162:     static u8 u8Counter = 0;
+[v F15933 `uc ~T0 @X0 1 s u8Counter ]
 [i F15933
--> 0 `i
+-> -> 0 `i `uc
 ]
-"161
-[; ;encm369_pic18.c: 161:     PIR3bits.SPI1RXIF = 0;
-[e = . . _PIR3bits 0 0 -> -> 0 `i `uc ]
 "163
-[; ;encm369_pic18.c: 163:     if(u8Counter == 0)
-[e $ ! == F15933 -> 0 `i 2276  ]
+[; ;encm369_pic18.c: 163:     static u8 u8Start = 1;
+[v F15934 `uc ~T0 @X0 1 s u8Start ]
+[i F15934
+-> -> 1 `i `uc
+]
 "164
-[; ;encm369_pic18.c: 164:     {
-{
+[; ;encm369_pic18.c: 164:     static u8 u8Past = 0;
+[v F15935 `uc ~T0 @X0 1 s u8Past ]
+[i F15935
+-> -> 0 `i `uc
+]
 "165
-[; ;encm369_pic18.c: 165:         G_au8Time0 = SPI1RXB;
+[; ;encm369_pic18.c: 165:     PIR3bits.SPI1RXIF = 0;
+[e = . . _PIR3bits 0 0 -> -> 0 `i `uc ]
+"168
+[; ;encm369_pic18.c: 168:     {
+{
+"169
+[; ;encm369_pic18.c: 169:         if(u8Counter == 0)
+[e $ ! == -> F15933 `i -> 0 `i 2276  ]
+"170
+[; ;encm369_pic18.c: 170:         {
+{
+"171
+[; ;encm369_pic18.c: 171:             G_au8Time0 = SPI1RXB;
 [e = _G_au8Time0 _SPI1RXB ]
-"166
-[; ;encm369_pic18.c: 166:         u8Counter++;
-[e ++ F15933 -> 1 `i ]
-"167
-[; ;encm369_pic18.c: 167:     }
+"173
+[; ;encm369_pic18.c: 173:             u8Counter++;
+[e ++ F15933 -> -> 1 `i `uc ]
+"175
+[; ;encm369_pic18.c: 175:             u8Past = 1;
+[e = F15935 -> -> 1 `i `uc ]
+"176
+[; ;encm369_pic18.c: 176:         }
 }
 [e $U 2277  ]
-"168
-[; ;encm369_pic18.c: 168:     else if(u8Counter == 1)
+"177
+[; ;encm369_pic18.c: 177:         else if(u8Counter == 1)
 [e :U 2276 ]
-[e $ ! == F15933 -> 1 `i 2278  ]
-"169
-[; ;encm369_pic18.c: 169:     {
+[e $ ! == -> F15933 `i -> 1 `i 2278  ]
+"178
+[; ;encm369_pic18.c: 178:         {
 {
-"170
-[; ;encm369_pic18.c: 170:         G_au8Time1 = SPI1RXB;
+"179
+[; ;encm369_pic18.c: 179:             G_au8Time1 = SPI1RXB;
 [e = _G_au8Time1 _SPI1RXB ]
-"171
-[; ;encm369_pic18.c: 171:         u8Counter++;
-[e ++ F15933 -> 1 `i ]
-"172
-[; ;encm369_pic18.c: 172:     }
+"181
+[; ;encm369_pic18.c: 181:             u8Counter++;
+[e ++ F15933 -> -> 1 `i `uc ]
+"183
+[; ;encm369_pic18.c: 183:         }
 }
 [e $U 2279  ]
-"173
-[; ;encm369_pic18.c: 173:     else
+"184
+[; ;encm369_pic18.c: 184:         else
 [e :U 2278 ]
-"174
-[; ;encm369_pic18.c: 174:     {
+"185
+[; ;encm369_pic18.c: 185:         {
 {
-"175
-[; ;encm369_pic18.c: 175:         G_au8Time2 = SPI1RXB;
+"186
+[; ;encm369_pic18.c: 186:             G_au8Time2 = SPI1RXB;
 [e = _G_au8Time2 _SPI1RXB ]
-"176
-[; ;encm369_pic18.c: 176:         u8Counter = 0;
-[e = F15933 -> 0 `i ]
-"177
-[; ;encm369_pic18.c: 177:     }
+"188
+[; ;encm369_pic18.c: 188:             u8Counter = 0;
+[e = F15933 -> -> 0 `i `uc ]
+"190
+[; ;encm369_pic18.c: 190:             u8Past = 0;
+[e = F15935 -> -> 0 `i `uc ]
+"191
+[; ;encm369_pic18.c: 191:         }
 }
 [e :U 2279 ]
 [e :U 2277 ]
-"178
-[; ;encm369_pic18.c: 178: }
+"192
+[; ;encm369_pic18.c: 192:     }
+}
+"193
+[; ;encm369_pic18.c: 193: }
 [e :UE 2275 ]
 }
-"194
-[; ;encm369_pic18.c: 194: void ClockSetup(void)
+"209
+[; ;encm369_pic18.c: 209: void ClockSetup(void)
 [v _ClockSetup `(v ~T0 @X0 1 ef ]
-"195
-[; ;encm369_pic18.c: 195: {
+"210
+[; ;encm369_pic18.c: 210: {
 {
 [e :U _ClockSetup ]
 [f ]
-"197
-[; ;encm369_pic18.c: 197: }
+"212
+[; ;encm369_pic18.c: 212: }
 [e :UE 2280 ]
 }
-"213
-[; ;encm369_pic18.c: 213: void GpioSetup(void)
+"228
+[; ;encm369_pic18.c: 228: void GpioSetup(void)
 [v _GpioSetup `(v ~T0 @X0 1 ef ]
-"214
-[; ;encm369_pic18.c: 214: {
+"229
+[; ;encm369_pic18.c: 229: {
 {
 [e :U _GpioSetup ]
 [f ]
-"215
-[; ;encm369_pic18.c: 215:     ANSELA = 0x00;
+"230
+[; ;encm369_pic18.c: 230:     ANSELA = 0x00;
 [e = _ANSELA -> -> 0 `i `uc ]
-"216
-[; ;encm369_pic18.c: 216:     TRISA = 0x00;
+"231
+[; ;encm369_pic18.c: 231:     TRISA = 0x00;
 [e = _TRISA -> -> 0 `i `uc ]
-"217
-[; ;encm369_pic18.c: 217:     LATA = 0x00;
+"232
+[; ;encm369_pic18.c: 232:     LATA = 0x00;
 [e = _LATA -> -> 0 `i `uc ]
-"219
-[; ;encm369_pic18.c: 219:     ANSELB = 0x00;
+"234
+[; ;encm369_pic18.c: 234:     ANSELB = 0x00;
 [e = _ANSELB -> -> 0 `i `uc ]
-"220
-[; ;encm369_pic18.c: 220:     TRISB = 0x00;
+"235
+[; ;encm369_pic18.c: 235:     TRISB = 0x00;
 [e = _TRISB -> -> 0 `i `uc ]
-"221
-[; ;encm369_pic18.c: 221:     LATB = 0x00;
+"236
+[; ;encm369_pic18.c: 236:     LATB = 0x00;
 [e = _LATB -> -> 0 `i `uc ]
-"223
-[; ;encm369_pic18.c: 223:     ANSELC = 0x00;
+"238
+[; ;encm369_pic18.c: 238:     ANSELC = 0x00;
 [e = _ANSELC -> -> 0 `i `uc ]
-"224
-[; ;encm369_pic18.c: 224:     TRISC = 0x70;
+"239
+[; ;encm369_pic18.c: 239:     TRISC = 0x70;
 [e = _TRISC -> -> 112 `i `uc ]
-"225
-[; ;encm369_pic18.c: 225:     LATC = 0x00;
+"240
+[; ;encm369_pic18.c: 240:     LATC = 0x00;
 [e = _LATC -> -> 0 `i `uc ]
-"226
-[; ;encm369_pic18.c: 226: }
+"241
+[; ;encm369_pic18.c: 241: }
 [e :UE 2281 ]
 }
-"241
-[; ;encm369_pic18.c: 241: void SysTickSetup(void)
+"256
+[; ;encm369_pic18.c: 256: void SysTickSetup(void)
 [v _SysTickSetup `(v ~T0 @X0 1 ef ]
-"242
-[; ;encm369_pic18.c: 242: {
+"257
+[; ;encm369_pic18.c: 257: {
 {
 [e :U _SysTickSetup ]
 [f ]
-"243
-[; ;encm369_pic18.c: 243:   G_u32SystemTime1ms = 0;
+"258
+[; ;encm369_pic18.c: 258:   G_u32SystemTime1ms = 0;
 [e = _G_u32SystemTime1ms -> -> -> 0 `i `l `ul ]
-"244
-[; ;encm369_pic18.c: 244:   G_u32SystemTime1s = 0;
+"259
+[; ;encm369_pic18.c: 259:   G_u32SystemTime1s = 0;
 [e = _G_u32SystemTime1s -> -> -> 0 `i `l `ul ]
-"246
-[; ;encm369_pic18.c: 246: }
+"261
+[; ;encm369_pic18.c: 261: }
 [e :UE 2282 ]
 }
-"263
-[; ;encm369_pic18.c: 263: void SystemSleep(void)
+"278
+[; ;encm369_pic18.c: 278: void SystemSleep(void)
 [v _SystemSleep `(v ~T0 @X0 1 ef ]
-"264
-[; ;encm369_pic18.c: 264: {
+"279
+[; ;encm369_pic18.c: 279: {
 {
 [e :U _SystemSleep ]
 [f ]
-"266
-[; ;encm369_pic18.c: 266: }
+"281
+[; ;encm369_pic18.c: 281: }
 [e :UE 2283 ]
 }

@@ -27308,9 +27308,9 @@ u8 SPI1exchangeByte(u8 data);
 
 
 volatile u8 G_u8UserAppFlags;
-u8 G_au8Time0;
-u8 G_au8Time1;
-u8 G_au8Time2;
+u8 G_au8Time0 = 0b10010101;
+u8 G_au8Time1 = 0b10010101;
+u8 G_au8Time2 = 0b10000000;
 u8 G_au8AlarmTime0;
 u8 G_au8AlarmTime1;
 u8 G_au8AlarmTime2;
@@ -27329,19 +27329,17 @@ void UserAppInitialize(void)
     LATA = 0x40;
 
 
-    G_au8Time0 = 0b01000011;
-    G_au8Time1 = 0b00000000;
-    G_au8Time2 = 0b00000000;
+    G_au8Time0 = 0b10010101;
+    G_au8Time1 = 0b10010101;
+    G_au8Time2 = 0b10000000;
 
     G_au8AlarmTime0 = 0b00101011;
     G_au8AlarmTime1 = 0b00000000;
     G_au8AlarmTime2 = 0b00000000;
 
     G_u8AlarmFlag = 0;
-
-
 }
-# 114 "user_app.c"
+# 112 "user_app.c"
 void UserAppRun(void)
 {
     if(G_au8Time2 == 0x90)
@@ -27354,7 +27352,7 @@ void UserAppRun(void)
                 {
                     if(G_au8Time0 > 0x80)
                     {
-                        if(G_au8Time0 == 0b11001101)
+                        if(G_au8Time0 == 0b10010101)
                         {
                             G_au8Time0 = 0b00001000;
                         }
@@ -27406,7 +27404,7 @@ void UserAppRun(void)
 
     LATA ^=0x40;
 }
-# 194 "user_app.c"
+# 192 "user_app.c"
 void TimeXusInitialize(void)
 {
     OSCCON3bits.SOSCPWR = 0;
@@ -27431,13 +27429,13 @@ void TimeXusInitialize(void)
     T0CON0 |= 0x80;
 
 }
-# 235 "user_app.c"
+# 233 "user_app.c"
 void TimeXus(void)
 {
 
 
 }
-# 258 "user_app.c"
+# 256 "user_app.c"
 void SegmentDecoderIntialize(void)
 {
     NVMADR = 380000;
@@ -27510,17 +27508,4 @@ void SegmentDecoderIntialize(void)
         INTCON0bits.GIE = 1;
         NVMCON1bits.CMD = 0x00;
     }
-}
-
-
-u8 SPI1exchangeByte(u8 data)
-{
-
-
- {
-
- }
- PIR3bits.SPI1IF = 0;
-
- return SPI1RXB;
 }

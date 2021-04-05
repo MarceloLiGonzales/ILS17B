@@ -27382,25 +27382,25 @@ void main(void)
         if(u8DigitCounter == 0)
         {
             LATB = 0x01;
-            u8PORTADisplayValue = au8DisplayCode[(G_au8Time2 >> 4) & 0x0F];
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time1 >> 4) & 0x0F];
             u8DigitCounter++;
         }
         else if(u8DigitCounter == 1)
         {
             LATB = 0x02;
-            u8PORTADisplayValue = au8DisplayCode[(G_au8Time1 >> 0) & 0x07];
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 0) & 0x07];
             u8DigitCounter++;
         }
         else if(u8DigitCounter == 2)
         {
             LATB = 0x04;
-            u8PORTADisplayValue = au8DisplayCode[(G_au8Time1 >> 4) & 0x0F];
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 3) & 0x0F];
             u8DigitCounter++;
         }
         else
         {
             LATB = 0x08;
-            u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 0) & 0x07];
+            u8PORTADisplayValue = au8DisplayCode[(G_au8Time0 >> 7) & 0x01];
             u8DigitCounter = 0;
         }
         PORTA = (PORTA & 0x40) + u8PORTADisplayValue;
@@ -27409,6 +27409,6 @@ void main(void)
     {
         u8TimeCounter++;
     }
-# 144 "main.c"
+
   }
 }

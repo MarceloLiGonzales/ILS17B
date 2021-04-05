@@ -31,9 +31,9 @@ All Global variable names shall start with "G_<type>UserApp1"
 ***********************************************************************************************************************/
 /* New variables */
 volatile u8 G_u8UserAppFlags;                             /*!< @brief Global state flags */
-u8 G_au8Time0;
-u8 G_au8Time1;
-u8 G_au8Time2;
+u8 G_au8Time0 = 0b10010101; //Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
+u8 G_au8Time1 = 0b10010101; //Time[1]: (4-bits) minutes | (4-bits) 10's of seconds
+u8 G_au8Time2 = 0b10000000; //Time[2]: (4-bits) seconds | (4-bits) NULL
 u8 G_au8AlarmTime0;
 u8 G_au8AlarmTime1;
 u8 G_au8AlarmTime2;
@@ -94,8 +94,6 @@ void UserAppInitialize(void)
     G_au8AlarmTime2 = 0b00000000;
     
     G_u8AlarmFlag = 0;
-
-
 } /* end UserAppInitialize() */
 
   
@@ -328,21 +326,6 @@ void SegmentDecoderIntialize(void)
         NVMCON1bits.CMD = 0x00;     //Enabling writes to memory
     }
 } /* end SegmentDecoderIntialize() */
-
-
-u8 SPI1exchangeByte(u8 data)
-{
- //SPI1TXB = data;
- //while(!PIR3bits.SPI1IF) /* Wait until data is exchanged */
- {
-     //LATA = SPI1RXB >> 4;
- }
- PIR3bits.SPI1IF = 0;
-
- return SPI1RXB;
-}
-
-
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 /*! @privatesection */                                                                                            

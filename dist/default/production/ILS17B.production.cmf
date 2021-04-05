@@ -17,22 +17,22 @@ cinit CODE 0 34A 34A 40 1
 idloc IDLOC 5 200000 200000 20 1
 text0 CODE 0 106 106 130 1
 text1 CODE 0 236 236 C6 1
-text2 CODE 0 428 428 22 1
-text3 CODE 0 38A 38A 2A 1
-text4 CODE 0 44A 44A 22 1
-text5 CODE 0 3B4 3B4 28 1
-text6 CODE 0 48A 48A 14 1
-text7 CODE 0 3DC 3DC 28 1
-text8 CODE 0 49E 49E 2 1
-text9 CODE 0 46C 46C 1E 1
-nvCOMRAM COMRAM 1 54F 54F 4 1
+text2 CODE 0 432 432 22 1
+text3 CODE 0 3B8 3B8 2A 1
+text4 CODE 0 454 454 22 1
+text5 CODE 0 38A 38A 2E 1
+text6 CODE 0 496 496 14 1
+text7 CODE 0 40A 40A 28 1
+text8 CODE 0 4AA 4AA 2 1
+text9 CODE 0 478 478 1E 1
+nvCOMRAM COMRAM 1 553 553 1 1
 text10 CODE 0 2FC 2FC 4E 1
-idataCOMRAM CODE 0 404 404 24 1
-cstackCOMRAM COMRAM 1 53B 53B 14 1
-dataCOMRAM COMRAM 1 501 501 24 1
-bssCOMRAM COMRAM 1 525 525 16 1
+idataCOMRAM CODE 0 3E2 3E2 28 1
+cstackCOMRAM COMRAM 1 53F 53F 14 1
+dataCOMRAM COMRAM 1 501 501 28 1
+bssCOMRAM COMRAM 1 529 529 16 1
 config CONFIG 4 300000 300000 A 1
-$C:\Users\marce\AppData\Local\Temp\skak.o
+$C:\Users\marce\AppData\Local\Temp\sks0.o
 idloc IDLOC 5 200000 200000 20 1
 init CODE 0 102 102 4 1
 reset_vec CODE 0 0 0 4 1
@@ -51,11 +51,13 @@ BANK7 700-7FF 1
 BANK8 800-8FF 1
 BANK9 900-9FF 1
 CONST 4-7 1
-CONST 4A0-1FFFF 1
+CONST 476-477 1
+CONST 4AC-1FFFF 1
 STACK 560-25FF 1
 SMALLCONST 2600-1FFFF 1
 CODE 4-7 1
-CODE 4A0-1FFFF 1
+CODE 476-477 1
+CODE 4AC-1FFFF 1
 BANK10 A00-AFF 1
 BANK11 B00-BFF 1
 BANK12 C00-CFF 1
@@ -84,8 +86,8 @@ BANK34 2200-22FF 1
 BANK35 2300-23FF 1
 BANK36 2400-24FF 1
 BANK37 2500-25FF 1
-BIGRAM 553-25FF 1
-COMRAM 553-55F 1
+BIGRAM 554-25FF 1
+COMRAM 554-55F 1
 CONFIG 30000A-300011 1
 EEDATA 380000-3803FF 1
 MEDIUMCONST 2600-FFFF 1
@@ -104,114 +106,119 @@ MEDIUMCONST 12600-1FFFF 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\ILS17B.production.o
-2FC text10 CODE >142:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-2FC text10 CODE >158:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-2FC text10 CODE >161:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-2FE text10 CODE >163:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-310 text10 CODE >165:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-316 text10 CODE >166:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-31A text10 CODE >167:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-31E text10 CODE >168:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-330 text10 CODE >170:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-33A text10 CODE >173:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-33A text10 CODE >175:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-340 text10 CODE >176:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-348 text10 CODE >178:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-46C text9 CODE >130:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-46C text9 CODE >197:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-472 text9 CODE >132:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-474 text9 CODE >133:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-478 text9 CODE >135:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-47A text9 CODE >138:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-47E text9 CODE >140:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-480 text9 CODE >141:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-482 text9 CODE >142:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-49E text8 CODE >194:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-49E text8 CODE >197:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3DC text7 CODE >213:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3DC text7 CODE >215:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3E2 text7 CODE >216:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3E6 text7 CODE >217:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3EA text7 CODE >219:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3EE text7 CODE >220:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3F2 text7 CODE >221:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3F6 text7 CODE >223:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3FA text7 CODE >224:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3FE text7 CODE >225:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-402 text7 CODE >226:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-48A text6 CODE >100:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-48A text6 CODE >102:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-48C text6 CODE >103:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-490 text6 CODE >105:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-492 text6 CODE >106:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-494 text6 CODE >108:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-496 text6 CODE >109:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-498 text6 CODE >111:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-49A text6 CODE >112:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-49C text6 CODE >114:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3B4 text5 CODE >71:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3B4 text5 CODE >73:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3B8 text5 CODE >75:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3BE text5 CODE >76:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3C2 text5 CODE >77:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3C6 text5 CODE >79:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3CA text5 CODE >81:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3D0 text5 CODE >82:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3D4 text5 CODE >83:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3D8 text5 CODE >85:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-3DA text5 CODE >86:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-44A text4 CODE >241:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-44A text4 CODE >243:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-45A text4 CODE >244:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-46A text4 CODE >246:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
-38A text3 CODE >194:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-38A text3 CODE >196:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-38E text3 CODE >197:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-390 text3 CODE >200:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-390 text3 CODE >202:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-39E text3 CODE >203:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-3A4 text3 CODE >204:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-3A8 text3 CODE >208:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-3AA text3 CODE >210:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-3AC text3 CODE >213:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-3B0 text3 CODE >215:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-3B2 text3 CODE >217:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-428 text2 CODE >81:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-428 text2 CODE >85:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-42C text2 CODE >88:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-430 text2 CODE >89:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-434 text2 CODE >90:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-438 text2 CODE >92:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-43C text2 CODE >93:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-440 text2 CODE >94:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-444 text2 CODE >96:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-448 text2 CODE >99:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2FC text10 CODE >144:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+2FC text10 CODE >160:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+2FC text10 CODE >165:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+2FE text10 CODE >169:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+30E text10 CODE >171:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+314 text10 CODE >173:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+316 text10 CODE >175:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+31A text10 CODE >176:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+31E text10 CODE >177:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+32E text10 CODE >179:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+334 text10 CODE >181:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+336 text10 CODE >183:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+33A text10 CODE >184:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+33A text10 CODE >186:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+340 text10 CODE >188:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+344 text10 CODE >190:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+348 text10 CODE >193:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+478 text9 CODE >132:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+478 text9 CODE >212:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+47E text9 CODE >134:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+480 text9 CODE >135:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+484 text9 CODE >137:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+486 text9 CODE >140:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+48A text9 CODE >142:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+48C text9 CODE >143:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+48E text9 CODE >144:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+4AA text8 CODE >209:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+4AA text8 CODE >212:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+40A text7 CODE >228:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+40A text7 CODE >230:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+410 text7 CODE >231:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+414 text7 CODE >232:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+418 text7 CODE >234:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+41C text7 CODE >235:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+420 text7 CODE >236:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+424 text7 CODE >238:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+428 text7 CODE >239:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+42C text7 CODE >240:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+430 text7 CODE >241:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+496 text6 CODE >102:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+496 text6 CODE >104:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+498 text6 CODE >105:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+49C text6 CODE >107:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+49E text6 CODE >108:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+4A0 text6 CODE >110:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+4A2 text6 CODE >111:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+4A4 text6 CODE >113:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+4A6 text6 CODE >114:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+4A8 text6 CODE >116:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+38A text5 CODE >71:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+38A text5 CODE >73:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+38E text5 CODE >75:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+394 text5 CODE >76:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+398 text5 CODE >77:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+39C text5 CODE >79:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+3A0 text5 CODE >81:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+3A6 text5 CODE >82:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+3AA text5 CODE >83:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+3AE text5 CODE >85:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+3B0 text5 CODE >87:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+3B6 text5 CODE >88:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+454 text4 CODE >256:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+454 text4 CODE >258:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+464 text4 CODE >259:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+474 text4 CODE >261:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+3B8 text3 CODE >192:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+3B8 text3 CODE >194:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+3BC text3 CODE >195:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+3BE text3 CODE >198:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+3BE text3 CODE >200:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+3CC text3 CODE >201:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+3D2 text3 CODE >202:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+3D6 text3 CODE >206:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+3D8 text3 CODE >208:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+3DA text3 CODE >211:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+3DE text3 CODE >213:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+3E0 text3 CODE >215:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+432 text2 CODE >81:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+432 text2 CODE >85:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+436 text2 CODE >88:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+43A text2 CODE >89:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+43E text2 CODE >90:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+442 text2 CODE >92:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+446 text2 CODE >93:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+44A text2 CODE >94:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+44E text2 CODE >96:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+452 text2 CODE >97:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+236 text1 CODE >112:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
 236 text1 CODE >114:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-236 text1 CODE >116:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-248 text1 CODE >118:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-25C text1 CODE >120:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-26E text1 CODE >122:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-282 text1 CODE >124:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-292 text1 CODE >126:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2A4 text1 CODE >128:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2A8 text1 CODE >129:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2AC text1 CODE >132:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2B4 text1 CODE >137:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2C6 text1 CODE >139:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2CA text1 CODE >145:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2CA text1 CODE >146:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2CE text1 CODE >147:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2D2 text1 CODE >150:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2D4 text1 CODE >152:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2D8 text1 CODE >153:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2DC text1 CODE >156:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2E8 text1 CODE >161:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2EA text1 CODE >163:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2EE text1 CODE >164:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2F2 text1 CODE >167:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2F6 text1 CODE >168:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2F6 text1 CODE >176:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
-2FA text1 CODE >177:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+248 text1 CODE >116:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+25C text1 CODE >118:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+26E text1 CODE >120:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+282 text1 CODE >122:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+292 text1 CODE >124:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2A4 text1 CODE >126:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2A8 text1 CODE >127:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2AC text1 CODE >130:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2B4 text1 CODE >135:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2C6 text1 CODE >137:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2CA text1 CODE >143:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2CA text1 CODE >144:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2CE text1 CODE >145:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2D2 text1 CODE >148:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2D4 text1 CODE >150:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2D8 text1 CODE >151:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2DC text1 CODE >154:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2E8 text1 CODE >159:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2EA text1 CODE >161:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2EE text1 CODE >162:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2F2 text1 CODE >165:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2F6 text1 CODE >166:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2F6 text1 CODE >174:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
+2FA text1 CODE >175:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
 106 text0 CODE >54:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
 106 text0 CODE >56:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
 108 text0 CODE >59:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
@@ -246,39 +253,39 @@ $dist/default/production\ILS17B.production.o
 220 text0 CODE >125:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
 228 text0 CODE >126:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
 22C text0 CODE >129:C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
-34A cinit CODE >5223:C:\Users\marce\AppData\Local\Temp\skak.s
-34A cinit CODE >5225:C:\Users\marce\AppData\Local\Temp\skak.s
-34A cinit CODE >5228:C:\Users\marce\AppData\Local\Temp\skak.s
-34A cinit CODE >5299:C:\Users\marce\AppData\Local\Temp\skak.s
-34C cinit CODE >5300:C:\Users\marce\AppData\Local\Temp\skak.s
-34E cinit CODE >5301:C:\Users\marce\AppData\Local\Temp\skak.s
-350 cinit CODE >5302:C:\Users\marce\AppData\Local\Temp\skak.s
-352 cinit CODE >5303:C:\Users\marce\AppData\Local\Temp\skak.s
-354 cinit CODE >5304:C:\Users\marce\AppData\Local\Temp\skak.s
-356 cinit CODE >5305:C:\Users\marce\AppData\Local\Temp\skak.s
-35A cinit CODE >5306:C:\Users\marce\AppData\Local\Temp\skak.s
-35E cinit CODE >5307:C:\Users\marce\AppData\Local\Temp\skak.s
-35E cinit CODE >5308:C:\Users\marce\AppData\Local\Temp\skak.s
-360 cinit CODE >5309:C:\Users\marce\AppData\Local\Temp\skak.s
-364 cinit CODE >5310:C:\Users\marce\AppData\Local\Temp\skak.s
-366 cinit CODE >5311:C:\Users\marce\AppData\Local\Temp\skak.s
-368 cinit CODE >5312:C:\Users\marce\AppData\Local\Temp\skak.s
-36A cinit CODE >5316:C:\Users\marce\AppData\Local\Temp\skak.s
-36E cinit CODE >5317:C:\Users\marce\AppData\Local\Temp\skak.s
-370 cinit CODE >5318:C:\Users\marce\AppData\Local\Temp\skak.s
-370 cinit CODE >5319:C:\Users\marce\AppData\Local\Temp\skak.s
-372 cinit CODE >5320:C:\Users\marce\AppData\Local\Temp\skak.s
-374 cinit CODE >5321:C:\Users\marce\AppData\Local\Temp\skak.s
-376 cinit CODE >5329:C:\Users\marce\AppData\Local\Temp\skak.s
-378 cinit CODE >5330:C:\Users\marce\AppData\Local\Temp\skak.s
-37A cinit CODE >5331:C:\Users\marce\AppData\Local\Temp\skak.s
-37C cinit CODE >5332:C:\Users\marce\AppData\Local\Temp\skak.s
-37E cinit CODE >5333:C:\Users\marce\AppData\Local\Temp\skak.s
-380 cinit CODE >5334:C:\Users\marce\AppData\Local\Temp\skak.s
-382 cinit CODE >5335:C:\Users\marce\AppData\Local\Temp\skak.s
-384 cinit CODE >5341:C:\Users\marce\AppData\Local\Temp\skak.s
-384 cinit CODE >5343:C:\Users\marce\AppData\Local\Temp\skak.s
-386 cinit CODE >5344:C:\Users\marce\AppData\Local\Temp\skak.s
+34A cinit CODE >5235:C:\Users\marce\AppData\Local\Temp\sks0.s
+34A cinit CODE >5237:C:\Users\marce\AppData\Local\Temp\sks0.s
+34A cinit CODE >5240:C:\Users\marce\AppData\Local\Temp\sks0.s
+34A cinit CODE >5336:C:\Users\marce\AppData\Local\Temp\sks0.s
+34C cinit CODE >5337:C:\Users\marce\AppData\Local\Temp\sks0.s
+34E cinit CODE >5338:C:\Users\marce\AppData\Local\Temp\sks0.s
+350 cinit CODE >5339:C:\Users\marce\AppData\Local\Temp\sks0.s
+352 cinit CODE >5340:C:\Users\marce\AppData\Local\Temp\sks0.s
+354 cinit CODE >5341:C:\Users\marce\AppData\Local\Temp\sks0.s
+356 cinit CODE >5342:C:\Users\marce\AppData\Local\Temp\sks0.s
+35A cinit CODE >5343:C:\Users\marce\AppData\Local\Temp\sks0.s
+35E cinit CODE >5344:C:\Users\marce\AppData\Local\Temp\sks0.s
+35E cinit CODE >5345:C:\Users\marce\AppData\Local\Temp\sks0.s
+360 cinit CODE >5346:C:\Users\marce\AppData\Local\Temp\sks0.s
+364 cinit CODE >5347:C:\Users\marce\AppData\Local\Temp\sks0.s
+366 cinit CODE >5348:C:\Users\marce\AppData\Local\Temp\sks0.s
+368 cinit CODE >5349:C:\Users\marce\AppData\Local\Temp\sks0.s
+36A cinit CODE >5353:C:\Users\marce\AppData\Local\Temp\sks0.s
+36E cinit CODE >5354:C:\Users\marce\AppData\Local\Temp\sks0.s
+370 cinit CODE >5355:C:\Users\marce\AppData\Local\Temp\sks0.s
+370 cinit CODE >5356:C:\Users\marce\AppData\Local\Temp\sks0.s
+372 cinit CODE >5357:C:\Users\marce\AppData\Local\Temp\sks0.s
+374 cinit CODE >5358:C:\Users\marce\AppData\Local\Temp\sks0.s
+376 cinit CODE >5366:C:\Users\marce\AppData\Local\Temp\sks0.s
+378 cinit CODE >5367:C:\Users\marce\AppData\Local\Temp\sks0.s
+37A cinit CODE >5368:C:\Users\marce\AppData\Local\Temp\sks0.s
+37C cinit CODE >5369:C:\Users\marce\AppData\Local\Temp\sks0.s
+37E cinit CODE >5370:C:\Users\marce\AppData\Local\Temp\sks0.s
+380 cinit CODE >5371:C:\Users\marce\AppData\Local\Temp\sks0.s
+382 cinit CODE >5372:C:\Users\marce\AppData\Local\Temp\sks0.s
+384 cinit CODE >5378:C:\Users\marce\AppData\Local\Temp\sks0.s
+384 cinit CODE >5380:C:\Users\marce\AppData\Local\Temp\sks0.s
+386 cinit CODE >5381:C:\Users\marce\AppData\Local\Temp\sks0.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -295,52 +302,52 @@ _SPI1SCKPPS 26A 0 ABS 0 - dist/default/production\ILS17B.production.o
 _SPI1SDIPPS 26B 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Lmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\ILS17B.production.o
 __Hspace_0 2600 0 ABS 0 - dist/default/production\ILS17B.production.o
-__Hspace_1 553 0 ABS 0 - dist/default/production\ILS17B.production.o
+__Hspace_1 554 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Hspace_2 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Hspace_4 60000A 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\ILS17B.production.o
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\marce\AppData\Local\Temp\skak.o
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\marce\AppData\Local\Temp\sks0.o
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\ILS17B.production.o
 _OSCENbits B3 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Lsmallconst 0 0 SMALLCONST 0 smallconst dist/default/production\ILS17B.production.o
 _LATA 4BE 0 ABS 0 - dist/default/production\ILS17B.production.o
 _LATB 4BF 0 ABS 0 - dist/default/production\ILS17B.production.o
 _LATC 4C0 0 ABS 0 - dist/default/production\ILS17B.production.o
-___sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\skak.o
+___sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\sks0.o
 _main 106 0 CODE 0 text0 dist/default/production\ILS17B.production.o
 _G_u8writeData 523 0 COMRAM 1 dataCOMRAM dist/default/production\ILS17B.production.o
-start 102 0 CODE 0 init C:\Users\marce\AppData\Local\Temp\skak.o
-_SPIInitialize 3B4 0 CODE 0 text5 dist/default/production\ILS17B.production.o
+start 102 0 CODE 0 init C:\Users\marce\AppData\Local\Temp\sks0.o
+_SPIInitialize 38A 0 CODE 0 text5 dist/default/production\ILS17B.production.o
 __size_of_main 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\ILS17B.production.o
 __Hpowerup 0 0 CODE 0 powerup dist/default/production\ILS17B.production.o
-main@u8PORTADisplayValue 54E 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
+main@u8PORTADisplayValue 552 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
 __LnvCOMRAM 0 0 ABS 0 nvCOMRAM dist/default/production\ILS17B.production.o
 __HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\ILS17B.production.o
 __end_of_SPI1RX_ISR 34A 0 CODE 0 text10 dist/default/production\ILS17B.production.o
-__accesstop 560 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\skak.o
-intlevel0 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\skak.o
-intlevel1 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\skak.o
-intlevel2 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\skak.o
-intlevel3 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\skak.o
+__accesstop 560 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\sks0.o
+intlevel0 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\sks0.o
+intlevel1 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\sks0.o
+intlevel2 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\sks0.o
+intlevel3 0 0 CODE 0 text C:\Users\marce\AppData\Local\Temp\sks0.o
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\ILS17B.production.o
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\ILS17B.production.o
-_G_au8AlarmTime0 54F 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
-_G_au8AlarmTime1 535 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
-_G_au8AlarmTime2 534 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+_G_au8AlarmTime0 553 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
+_G_au8AlarmTime1 537 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+_G_au8AlarmTime2 536 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 __Hifardata 0 0 CODE 0 ifardata dist/default/production\ILS17B.production.o
-__end_of_TimeXusInitialize 3B4 0 CODE 0 text3 dist/default/production\ILS17B.production.o
+__end_of_TimeXusInitialize 3E2 0 CODE 0 text3 dist/default/production\ILS17B.production.o
 __Hclrtext 0 0 ABS 0 clrtext dist/default/production\ILS17B.production.o
-__pidataCOMRAM 404 0 CODE 0 idataCOMRAM dist/default/production\ILS17B.production.o
+__pidataCOMRAM 3E2 0 CODE 0 idataCOMRAM dist/default/production\ILS17B.production.o
 ivt0x8_base 8 0 CODE 0 ivt0x8 dist/default/production\ILS17B.production.o
 _SPI1CON0bits 84 0 ABS 0 - dist/default/production\ILS17B.production.o
 _UserAppRun 236 0 CODE 0 text1 dist/default/production\ILS17B.production.o
 _ANSELA 400 0 ABS 0 - dist/default/production\ILS17B.production.o
 _ANSELB 408 0 ABS 0 - dist/default/production\ILS17B.production.o
 _ANSELC 410 0 ABS 0 - dist/default/production\ILS17B.production.o
-_G_u32SystemTime1s 529 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\skak.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\skak.o
+_G_u32SystemTime1s 52D 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\sks0.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\marce\AppData\Local\Temp\sks0.o
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\ILS17B.production.o
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\ILS17B.production.o
 __Hmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\ILS17B.production.o
@@ -349,21 +356,21 @@ __size_of_ClockSetup 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __size_of_SPIInitialize 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __LidataCOMRAM 0 0 ABS 0 idataCOMRAM dist/default/production\ILS17B.production.o
 __HnvCOMRAM 0 0 ABS 0 nvCOMRAM dist/default/production\ILS17B.production.o
-_G_u32SystemFlags 525 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+_G_u32SystemFlags 529 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 _INTCON0bits 4D6 0 ABS 0 - dist/default/production\ILS17B.production.o
 _NVMADR 43 0 ABS 0 - dist/default/production\ILS17B.production.o
 start_initialization 34A 0 CODE 0 cinit dist/default/production\ILS17B.production.o
 __HnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\ILS17B.production.o
 __end_of_UserAppRun 2FC 0 CODE 0 text1 dist/default/production\ILS17B.production.o
-__end_of_SPIInitialize 3DC 0 CODE 0 text5 dist/default/production\ILS17B.production.o
+__end_of_SPIInitialize 3B8 0 CODE 0 text5 dist/default/production\ILS17B.production.o
 ___rparam_used 1 0 ABS 0 - dist/default/production\ILS17B.production.o
 _RC7PPS 218 0 ABS 0 - dist/default/production\ILS17B.production.o
-_TimeXusInitialize 38A 0 CODE 0 text3 dist/default/production\ILS17B.production.o
+_TimeXusInitialize 3B8 0 CODE 0 text3 dist/default/production\ILS17B.production.o
 _T0CON0 31A 0 ABS 0 - dist/default/production\ILS17B.production.o
 _T0CON1 31B 0 ABS 0 - dist/default/production\ILS17B.production.o
 _IPR3bits 365 0 ABS 0 - dist/default/production\ILS17B.production.o
 SegmentDecoderIntialize@F15941 501 0 COMRAM 1 dataCOMRAM dist/default/production\ILS17B.production.o
-_G_u8TimeFlag 53A 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+_G_u8TimeFlag 53E 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 __Hbank5 0 0 ABS 0 bank5 dist/default/production\ILS17B.production.o
 __Hbank6 0 0 ABS 0 bank6 dist/default/production\ILS17B.production.o
 __Hbank7 0 0 ABS 0 bank7 dist/default/production\ILS17B.production.o
@@ -419,7 +426,7 @@ __Hbank36 0 0 ABS 0 bank36 dist/default/production\ILS17B.production.o
 __Hbank37 0 0 ABS 0 bank37 dist/default/production\ILS17B.production.o
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\ILS17B.production.o
 __Hbigram 0 0 ABS 0 bigram dist/default/production\ILS17B.production.o
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\marce\AppData\Local\Temp\skak.o
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\marce\AppData\Local\Temp\sks0.o
 main@F15939 513 0 COMRAM 1 dataCOMRAM dist/default/production\ILS17B.production.o
 __Hcomram 0 0 ABS 0 comram dist/default/production\ILS17B.production.o
 __Hconfig 30000A 0 CONFIG 4 config dist/default/production\ILS17B.production.o
@@ -433,7 +440,7 @@ __Lcinit 0 0 ABS 0 cinit dist/default/production\ILS17B.production.o
 __Lconst 0 0 CONST 0 const dist/default/production\ILS17B.production.o
 __Lidata 0 0 CODE 0 idata dist/default/production\ILS17B.production.o
 __Lidloc 0 0 IDLOC 5 idloc dist/default/production\ILS17B.production.o
-_G_u32SystemTime1ms 52D 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+_G_u32SystemTime1ms 531 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 __Lnvbit 0 0 COMRAM 1 nvbit dist/default/production\ILS17B.production.o
 __Lparam 0 0 COMRAM 1 rparam dist/default/production\ILS17B.production.o
 __Lrdata 0 0 COMRAM 1 rdata dist/default/production\ILS17B.production.o
@@ -449,6 +456,7 @@ __Ltext7 0 0 ABS 0 text7 dist/default/production\ILS17B.production.o
 __Ltext8 0 0 ABS 0 text8 dist/default/production\ILS17B.production.o
 __Ltext9 0 0 ABS 0 text9 dist/default/production\ILS17B.production.o
 __Hfarbss 0 0 FARRAM 0 farbss dist/default/production\ILS17B.production.o
+SPI1RX_ISR@u8Past 53C 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 __Habs1 0 0 ABS 0 abs1 dist/default/production\ILS17B.production.o
 __Hdata 0 0 ABS 0 data dist/default/production\ILS17B.production.o
 __Hinit 106 0 CODE 0 init dist/default/production\ILS17B.production.o
@@ -463,31 +471,31 @@ __Lrbit 0 0 COMRAM 1 rbit dist/default/production\ILS17B.production.o
 __Lrbss 0 0 COMRAM 1 rbss dist/default/production\ILS17B.production.o
 __Ltemp 0 0 COMRAM 1 temp dist/default/production\ILS17B.production.o
 __Ltext 0 0 ABS 0 text dist/default/production\ILS17B.production.o
-__end_of_UserAppInitialize 44A 0 CODE 0 text2 dist/default/production\ILS17B.production.o
-SPI1RX_ISR@u8Counter 531 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+__end_of_UserAppInitialize 454 0 CODE 0 text2 dist/default/production\ILS17B.production.o
+SPI1RX_ISR@u8Counter 53D 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 __HcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\ILS17B.production.o
 __Hirdata 0 0 CODE 0 irdata dist/default/production\ILS17B.production.o
-__S0 4A0 0 ABS 0 - dist/default/production\ILS17B.production.o
-__S1 553 0 ABS 0 - dist/default/production\ILS17B.production.o
+__S0 4AC 0 ABS 0 - dist/default/production\ILS17B.production.o
+__S1 554 0 ABS 0 - dist/default/production\ILS17B.production.o
 __S2 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __S4 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __S5 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Hivt0x8 102 0 CODE 0 ivt0x8 dist/default/production\ILS17B.production.o
 __size_of_TMR0_ISR 0 0 ABS 0 - dist/default/production\ILS17B.production.o
-_SysTickSetup 44A 0 CODE 0 text4 dist/default/production\ILS17B.production.o
+_SysTickSetup 454 0 CODE 0 text4 dist/default/production\ILS17B.production.o
 IVTBASEH 45E 0 ABS 0 - dist/default/production\ILS17B.production.o
 IVTBASEL 45D 0 ABS 0 - dist/default/production\ILS17B.production.o
 IVTBASEU 45F 0 ABS 0 - dist/default/production\ILS17B.production.o
-__pnvCOMRAM 54F 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
+__pnvCOMRAM 553 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
 _SPI1CON0 84 0 ABS 0 - dist/default/production\ILS17B.production.o
 _SPI1CON1 85 0 ABS 0 - dist/default/production\ILS17B.production.o
 _SPI1CON2 86 0 ABS 0 - dist/default/production\ILS17B.production.o
 __pivt0x8 8 0 CODE 0 ivt0x8 dist/default/production\ILS17B.production.o
-_INTERRUPTInitialize 48A 0 CODE 0 text6 dist/default/production\ILS17B.production.o
+_INTERRUPTInitialize 496 0 CODE 0 text6 dist/default/production\ILS17B.production.o
 __HidataCOMRAM 0 0 ABS 0 idataCOMRAM dist/default/production\ILS17B.production.o
 __Lbigdata 0 0 BIGRAM 1 bigdata dist/default/production\ILS17B.production.o
 __Hnvrram 0 0 COMRAM 1 nvrram dist/default/production\ILS17B.production.o
-_G_u8AlarmFlag 533 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+_G_u8AlarmFlag 535 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 __Hramtop 2600 0 RAM 0 ramtop dist/default/production\ILS17B.production.o
 __Hrparam 0 0 COMRAM 1 rparam dist/default/production\ILS17B.production.o
 __activetblptr 0 0 ABS 0 - dist/default/production\ILS17B.production.o
@@ -495,9 +503,9 @@ __Hstruct 0 0 COMRAM 1 struct dist/default/production\ILS17B.production.o
 __Htext10 0 0 ABS 0 text10 dist/default/production\ILS17B.production.o
 __size_of_SysTickSetup 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 _PIE3bits 4A1 0 ABS 0 - dist/default/production\ILS17B.production.o
-_TMR0_ISR 46C 0 CODE 0 text9 dist/default/production\ILS17B.production.o
+_TMR0_ISR 478 0 CODE 0 text9 dist/default/production\ILS17B.production.o
 __ptext10 2FC 0 CODE 0 text10 dist/default/production\ILS17B.production.o
-main@au8DisplayCode 53E 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
+main@au8DisplayCode 542 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
 __Lbank10 0 0 ABS 0 bank10 dist/default/production\ILS17B.production.o
 __Lbank11 0 0 ABS 0 bank11 dist/default/production\ILS17B.production.o
 __Lbank12 0 0 ABS 0 bank12 dist/default/production\ILS17B.production.o
@@ -528,56 +536,56 @@ __Lbank36 0 0 ABS 0 bank36 dist/default/production\ILS17B.production.o
 __Lbank37 0 0 ABS 0 bank37 dist/default/production\ILS17B.production.o
 __Lbigbss 0 0 BIGRAM 1 bigbss dist/default/production\ILS17B.production.o
 __Lbigram 0 0 ABS 0 bigram dist/default/production\ILS17B.production.o
-_G_u8SPIFlag 539 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+_G_u8SPIFlag 53B 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 __Lcomram 0 0 ABS 0 comram dist/default/production\ILS17B.production.o
 __Lconfig 0 0 CONFIG 4 config dist/default/production\ILS17B.production.o
 __size_of_UserAppRun 0 0 ABS 0 - dist/default/production\ILS17B.production.o
-__end_of_TMR0_ISR 48A 0 CODE 0 text9 dist/default/production\ILS17B.production.o
+__end_of_TMR0_ISR 496 0 CODE 0 text9 dist/default/production\ILS17B.production.o
 ivt0x8_undefint 100 0 CODE 0 ivt0x8 dist/default/production\ILS17B.production.o
 _G_u8receivedData 524 0 COMRAM 1 dataCOMRAM dist/default/production\ILS17B.production.o
-__end_of_SysTickSetup 46C 0 CODE 0 text4 dist/default/production\ILS17B.production.o
-_UserAppInitialize 428 0 CODE 0 text2 dist/default/production\ILS17B.production.o
+__end_of_SysTickSetup 476 0 CODE 0 text4 dist/default/production\ILS17B.production.o
+_UserAppInitialize 432 0 CODE 0 text2 dist/default/production\ILS17B.production.o
 __Lfarbss 0 0 FARRAM 0 farbss dist/default/production\ILS17B.production.o
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\ILS17B.production.o
-stackhi 25FF 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\skak.o
-stacklo 560 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\skak.o
+stackhi 25FF 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\sks0.o
+stacklo 560 0 ABS 0 - C:\Users\marce\AppData\Local\Temp\sks0.o
 __Lirdata 0 0 CODE 0 irdata dist/default/production\ILS17B.production.o
 __Livt0x8 8 0 CODE 0 ivt0x8 dist/default/production\ILS17B.production.o
 __Lspace_0 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Lspace_1 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Lspace_2 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Lspace_4 0 0 ABS 0 - dist/default/production\ILS17B.production.o
-__pbssCOMRAM 525 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
-_G_u8UserAppFlags 536 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+__pbssCOMRAM 529 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+_G_u8UserAppFlags 538 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 _PIR3bits 4B1 0 ABS 0 - dist/default/production\ILS17B.production.o
-__end_of_INTERRUPTInitialize 49E 0 CODE 0 text6 dist/default/production\ILS17B.production.o
+__end_of_INTERRUPTInitialize 4AA 0 CODE 0 text6 dist/default/production\ILS17B.production.o
 __LcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\ILS17B.production.o
 _SPI1SSPPS 26C 0 ABS 0 - dist/default/production\ILS17B.production.o
 end_of_initialization 384 0 CODE 0 cinit dist/default/production\ILS17B.production.o
 __Lnvrram 0 0 COMRAM 1 nvrram dist/default/production\ILS17B.production.o
 __Hreset_vec 4 0 CODE 0 reset_vec dist/default/production\ILS17B.production.o
-main@u8TimeCounter 537 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+main@u8TimeCounter 539 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
 __Lramtop 2600 0 RAM 0 ramtop dist/default/production\ILS17B.production.o
 __Lrparam 0 0 COMRAM 1 rparam dist/default/production\ILS17B.production.o
 __pcinit 34A 0 CODE 0 cinit dist/default/production\ILS17B.production.o
 __ptext0 106 0 CODE 0 text0 dist/default/production\ILS17B.production.o
 __ptext1 236 0 CODE 0 text1 dist/default/production\ILS17B.production.o
-__ptext2 428 0 CODE 0 text2 dist/default/production\ILS17B.production.o
-__ptext3 38A 0 CODE 0 text3 dist/default/production\ILS17B.production.o
-__ptext4 44A 0 CODE 0 text4 dist/default/production\ILS17B.production.o
-__ptext5 3B4 0 CODE 0 text5 dist/default/production\ILS17B.production.o
-__ptext6 48A 0 CODE 0 text6 dist/default/production\ILS17B.production.o
-__ptext7 3DC 0 CODE 0 text7 dist/default/production\ILS17B.production.o
-__ptext8 49E 0 CODE 0 text8 dist/default/production\ILS17B.production.o
-__ptext9 46C 0 CODE 0 text9 dist/default/production\ILS17B.production.o
+__ptext2 432 0 CODE 0 text2 dist/default/production\ILS17B.production.o
+__ptext3 3B8 0 CODE 0 text3 dist/default/production\ILS17B.production.o
+__ptext4 454 0 CODE 0 text4 dist/default/production\ILS17B.production.o
+__ptext5 38A 0 CODE 0 text5 dist/default/production\ILS17B.production.o
+__ptext6 496 0 CODE 0 text6 dist/default/production\ILS17B.production.o
+__ptext7 40A 0 CODE 0 text7 dist/default/production\ILS17B.production.o
+__ptext8 4AA 0 CODE 0 text8 dist/default/production\ILS17B.production.o
+__ptext9 478 0 CODE 0 text9 dist/default/production\ILS17B.production.o
 _OSCCON3bits AF 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Lstruct 0 0 COMRAM 1 struct dist/default/production\ILS17B.production.o
 __Ltext10 0 0 ABS 0 text10 dist/default/production\ILS17B.production.o
-__ramtop 2600 0 RAM 0 ramtop C:\Users\marce\AppData\Local\Temp\skak.o
+__ramtop 2600 0 RAM 0 ramtop C:\Users\marce\AppData\Local\Temp\sks0.o
 __Lpowerup 0 0 CODE 0 powerup dist/default/production\ILS17B.production.o
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\ILS17B.production.o
-main@u8DigitCounter 538 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
-_ClockSetup 49E 0 CODE 0 text8 dist/default/production\ILS17B.production.o
+main@u8DigitCounter 53A 0 COMRAM 1 bssCOMRAM dist/default/production\ILS17B.production.o
+_ClockSetup 4AA 0 CODE 0 text8 dist/default/production\ILS17B.production.o
 __Lreset_vec 0 0 CODE 0 reset_vec dist/default/production\ILS17B.production.o
 ___param_bank 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Hbigdata 0 0 BIGRAM 1 bigdata dist/default/production\ILS17B.production.o
@@ -587,7 +595,8 @@ _NVMCON0bits 40 0 ABS 0 - dist/default/production\ILS17B.production.o
 _NVMCON1bits 41 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Lclrtext 0 0 ABS 0 clrtext dist/default/production\ILS17B.production.o
 _SPI1RXB 80 0 ABS 0 - dist/default/production\ILS17B.production.o
-__pcstackCOMRAM 53B 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
+_SPI1TXB 81 0 ABS 0 - dist/default/production\ILS17B.production.o
+__pcstackCOMRAM 53F 0 COMRAM 1 cstackCOMRAM dist/default/production\ILS17B.production.o
 __end_of_main 236 0 CODE 0 text0 dist/default/production\ILS17B.production.o
 _PORTA 4CE 0 ABS 0 - dist/default/production\ILS17B.production.o
 _TMR0H 319 0 ABS 0 - dist/default/production\ILS17B.production.o
@@ -603,21 +612,21 @@ __LRAM 1 0 ABS 0 - dist/default/production\ILS17B.production.o
 __Lbss 0 0 RAM 1 bss dist/default/production\ILS17B.production.o
 __Lram 0 0 ABS 0 ram dist/default/production\ILS17B.production.o
 __Lsfr 0 0 ABS 0 sfr dist/default/production\ILS17B.production.o
-__end_of_GpioSetup 404 0 CODE 0 text7 dist/default/production\ILS17B.production.o
+__end_of_GpioSetup 432 0 CODE 0 text7 dist/default/production\ILS17B.production.o
 __size_of_TimeXusInitialize 0 0 ABS 0 - dist/default/production\ILS17B.production.o
 _OSCSTATbits B2 0 ABS 0 - dist/default/production\ILS17B.production.o
 __size_of_GpioSetup 0 0 ABS 0 - dist/default/production\ILS17B.production.o
-__end_of_ClockSetup 4A0 0 CODE 0 text8 dist/default/production\ILS17B.production.o
+__end_of_ClockSetup 4AC 0 CODE 0 text8 dist/default/production\ILS17B.production.o
 __initialization 34A 0 CODE 0 cinit dist/default/production\ILS17B.production.o
 __pdataCOMRAM 501 0 COMRAM 1 dataCOMRAM dist/default/production\ILS17B.production.o
 __Hfardata 0 0 FARRAM 0 fardata dist/default/production\ILS17B.production.o
 __Hsmallconst 0 0 SMALLCONST 0 smallconst dist/default/production\ILS17B.production.o
 __Lifardata 0 0 CODE 0 ifardata dist/default/production\ILS17B.production.o
-_GpioSetup 3DC 0 CODE 0 text7 dist/default/production\ILS17B.production.o
+_GpioSetup 40A 0 CODE 0 text7 dist/default/production\ILS17B.production.o
 __Hintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\ILS17B.production.o
-_G_au8Time0 552 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
-_G_au8Time1 551 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
-_G_au8Time2 550 0 COMRAM 1 nvCOMRAM dist/default/production\ILS17B.production.o
+_G_au8Time0 528 0 COMRAM 1 dataCOMRAM dist/default/production\ILS17B.production.o
+_G_au8Time1 527 0 COMRAM 1 dataCOMRAM dist/default/production\ILS17B.production.o
+_G_au8Time2 526 0 COMRAM 1 dataCOMRAM dist/default/production\ILS17B.production.o
 _SPI1RX_ISR 2FC 0 CODE 0 text10 dist/default/production\ILS17B.production.o
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
@@ -643,9 +652,10 @@ _SPI1RX_ISR 2FC 0 CODE 0 text10 dist/default/production\ILS17B.production.o
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-ivt0x8 0 8 8 498 1
+ivt0x8 0 8 8 46E 1
+text9 0 478 478 34 1
 reset_vec 0 0 0 4 1
-dataCOMRAM 1 501 501 52 1
+dataCOMRAM 1 501 501 53 1
 # %NOTES Section
 # This section contains data of all the note-psects.  The beginning of the section
 # is indicated by %NOTES. The first line indicates the name and decimal
