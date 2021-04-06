@@ -29,17 +29,17 @@
 [v ___omul __omul `(uo  1 e 8 0 ]
 "71 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
 [v _SPIInitialize SPIInitialize `(v  1 e 1 0 ]
-"102
+"104
 [v _INTERRUPTInitialize INTERRUPTInitialize `(v  1 e 1 0 ]
-"132
+"134
 [v _TMR0_ISR TMR0_ISR `IIL(v  1 e 1 0 ]
-"160
+"162
 [v _SPI1RX_ISR SPI1RX_ISR `IIH(v  1 e 1 0 ]
-"209
+"211
 [v _ClockSetup ClockSetup `(v  1 e 1 0 ]
-"228
+"230
 [v _GpioSetup GpioSetup `(v  1 e 1 0 ]
-"256
+"258
 [v _SysTickSetup SysTickSetup `(v  1 e 1 0 ]
 "54 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
 [v _main main `(v  1 e 1 0 ]
@@ -148,7 +148,7 @@
 [v _T0CON0 T0CON0 `VEuc  1 e 1 @794 ]
 "22725
 [v _T0CON1 T0CON1 `VEuc  1 e 1 @795 ]
-[s S87 . 1 `uc 1 SPI1RXIP 1 0 :1:0 
+[s S86 . 1 `uc 1 SPI1RXIP 1 0 :1:0 
 `uc 1 SPI1TXIP 1 0 :1:1 
 `uc 1 SPI1IP 1 0 :1:2 
 `uc 1 TMR2IP 1 0 :1:3 
@@ -158,15 +158,15 @@
 `uc 1 TMR0IP 1 0 :1:7 
 ]
 "30104
-[u S96 . 1 `S87 1 . 1 0 ]
-[v _IPR3bits IPR3bits `VES96  1 e 1 @869 ]
+[u S95 . 1 `S86 1 . 1 0 ]
+[v _IPR3bits IPR3bits `VES95  1 e 1 @869 ]
 "37918
 [v _ANSELA ANSELA `VEuc  1 e 1 @1024 ]
 "38414
 [v _ANSELB ANSELB `VEuc  1 e 1 @1032 ]
 "38910
 [v _ANSELC ANSELC `VEuc  1 e 1 @1040 ]
-[s S129 . 1 `uc 1 SPI1RXIE 1 0 :1:0 
+[s S128 . 1 `uc 1 SPI1RXIE 1 0 :1:0 
 `uc 1 SPI1TXIE 1 0 :1:1 
 `uc 1 SPI1IE 1 0 :1:2 
 `uc 1 TMR2IE 1 0 :1:3 
@@ -176,11 +176,11 @@
 `uc 1 TMR0IE 1 0 :1:7 
 ]
 "44013
-[u S138 . 1 `S129 1 . 1 0 ]
+[u S137 . 1 `S128 1 . 1 0 ]
 "44013
 "44013
-[v _PIE3bits PIE3bits `VES138  1 e 1 @1185 ]
-[s S108 . 1 `uc 1 SPI1RXIF 1 0 :1:0 
+[v _PIE3bits PIE3bits `VES137  1 e 1 @1185 ]
+[s S107 . 1 `uc 1 SPI1RXIF 1 0 :1:0 
 `uc 1 SPI1TXIF 1 0 :1:1 
 `uc 1 SPI1IF 1 0 :1:2 
 `uc 1 TMR2IF 1 0 :1:3 
@@ -190,10 +190,10 @@
 `uc 1 TMR0IF 1 0 :1:7 
 ]
 "44887
-[u S117 . 1 `S108 1 . 1 0 ]
+[u S116 . 1 `S107 1 . 1 0 ]
 "44887
 "44887
-[v _PIR3bits PIR3bits `VES117  1 e 1 @1201 ]
+[v _PIR3bits PIR3bits `VES116  1 e 1 @1201 ]
 "45585
 [v _LATA LATA `VEuc  1 e 1 @1214 ]
 "45647
@@ -208,7 +208,7 @@
 [v _TRISC TRISC `VEuc  1 e 1 @1224 ]
 "46095
 [v _PORTA PORTA `VEuc  1 e 1 @1230 ]
-[s S61 . 1 `uc 1 INT0EDG 1 0 :1:0 
+[s S60 . 1 `uc 1 INT0EDG 1 0 :1:0 
 `uc 1 INT1EDG 1 0 :1:1 
 `uc 1 INT2EDG 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
@@ -217,14 +217,14 @@
 `uc 1 GIE 1 0 :1:7 
 ]
 "46384
-[s S69 . 1 `uc 1 . 1 0 :7:0 
+[s S68 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 GIEH 1 0 :1:7 
 ]
 "46384
-[u S72 . 1 `S61 1 . 1 0 `S69 1 . 1 0 ]
+[u S71 . 1 `S60 1 . 1 0 `S68 1 . 1 0 ]
 "46384
 "46384
-[v _INTCON0bits INTCON0bits `VES72  1 e 1 @1238 ]
+[v _INTCON0bits INTCON0bits `VES71  1 e 1 @1238 ]
 "14 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\main.c
 [v _G_u32SystemTime1ms G_u32SystemTime1ms `VEul  1 e 4 0 ]
 "15
@@ -260,7 +260,7 @@
 [v main@u8DigitCounter u8DigitCounter `uc  1 s 1 u8DigitCounter ]
 "67
 [v main@u8TimeCounter u8TimeCounter `uc  1 s 1 u8TimeCounter ]
-[v main@F15939 F15939 `[16]uc  1 s 16 F15939 ]
+[v main@F15937 F15937 `[16]uc  1 s 16 F15937 ]
 "133
 } 0
 "112 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\user_app.c
@@ -278,42 +278,42 @@
 {
 "215
 } 0
-"256 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
+"258 C:\Users\marce\OneDrive\Documents\GitHub\ILS17B\encm369_pic18.c
 [v _SysTickSetup SysTickSetup `(v  1 e 1 0 ]
 {
-"261
+"263
 } 0
 "71
 [v _SPIInitialize SPIInitialize `(v  1 e 1 0 ]
 {
-"88
+"90
 } 0
-"102
+"104
 [v _INTERRUPTInitialize INTERRUPTInitialize `(v  1 e 1 0 ]
 {
-"116
+"118
 } 0
-"228
+"230
 [v _GpioSetup GpioSetup `(v  1 e 1 0 ]
 {
-"241
+"243
 } 0
-"209
+"211
 [v _ClockSetup ClockSetup `(v  1 e 1 0 ]
 {
-"212
+"214
 } 0
-"132
+"134
 [v _TMR0_ISR TMR0_ISR `IIL(v  1 e 1 0 ]
 {
-"144
+"146
 } 0
-"160
+"162
 [v _SPI1RX_ISR SPI1RX_ISR `IIH(v  1 e 1 0 ]
 {
-"162
-[v SPI1RX_ISR@u8Counter u8Counter `uc  1 s 1 u8Counter ]
 "164
-[v SPI1RX_ISR@u8Past u8Past `uc  1 s 1 u8Past ]
-"193
+[v SPI1RX_ISR@u8Counter u8Counter `uc  1 s 1 u8Counter ]
+"166
+[v SPI1RX_ISR@u8received u8received `uc  1 s 1 u8received ]
+"195
 } 0

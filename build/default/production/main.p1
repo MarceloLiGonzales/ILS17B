@@ -2628,18 +2628,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _INTERRUPTInitialize ..  ]
 "66
 [; ;main.c: 66:   static u8 u8DigitCounter = 0;
-[v F15937 `uc ~T0 @X0 1 s u8DigitCounter ]
-[i F15937
+[v F15935 `uc ~T0 @X0 1 s u8DigitCounter ]
+[i F15935
 -> -> 0 `i `uc
 ]
 "67
 [; ;main.c: 67:   static u8 u8TimeCounter = 0;
-[v F15938 `uc ~T0 @X0 1 s u8TimeCounter ]
-[i F15938
+[v F15936 `uc ~T0 @X0 1 s u8TimeCounter ]
+[i F15936
 -> -> 0 `i `uc
 ]
-[v F15939 `uc ~T0 @X0 -> 16 `i s ]
-[i F15939
+[v F15937 `uc ~T0 @X0 -> 16 `i s ]
+[i F15937
 :U ..
 "70
 [; ;main.c: 70:   u8 au8DisplayCode [16] = {0b00111111, 0b00000110, 0b10011011, 0b10001111, 0b10100110, 0b10101101, 0b10111101, 0b00000111,
@@ -2662,7 +2662,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _au8DisplayCode `uc ~T0 @X0 -> 16 `i a ]
-[e = _au8DisplayCode F15939 ]
+[e = _au8DisplayCode F15937 ]
 "72
 [; ;main.c: 72:   u8 u8PORTADisplayValue = 0x00;
 [v _u8PORTADisplayValue `uc ~T0 @X0 1 a ]
@@ -2697,7 +2697,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 2276 ]
 "97
 [; ;main.c: 97:     if(u8TimeCounter == 0)
-[e $ ! == -> F15938 `i -> 0 `i 2277  ]
+[e $ ! == -> F15936 `i -> 0 `i 2277  ]
 "98
 [; ;main.c: 98:     {
 {
@@ -2706,10 +2706,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e =& _PORTA -> -> 64 `i `Vuc ]
 "100
 [; ;main.c: 100:         u8TimeCounter = 0;
-[e = F15938 -> -> 0 `i `uc ]
+[e = F15936 -> -> 0 `i `uc ]
 "101
 [; ;main.c: 101:         if(u8DigitCounter == 0)
-[e $ ! == -> F15937 `i -> 0 `i 2278  ]
+[e $ ! == -> F15935 `i -> 0 `i 2278  ]
 "102
 [; ;main.c: 102:         {
 {
@@ -2721,7 +2721,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time1 `i -> 4 `i -> 15 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
 "105
 [; ;main.c: 105:             u8DigitCounter++;
-[e ++ F15937 -> -> 1 `i `uc ]
+[e ++ F15935 -> -> 1 `i `uc ]
 "106
 [; ;main.c: 106:         }
 }
@@ -2729,7 +2729,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "107
 [; ;main.c: 107:         else if(u8DigitCounter == 1)
 [e :U 2278 ]
-[e $ ! == -> F15937 `i -> 1 `i 2280  ]
+[e $ ! == -> F15935 `i -> 1 `i 2280  ]
 "108
 [; ;main.c: 108:         {
 {
@@ -2741,7 +2741,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time0 `i -> 0 `i -> 7 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
 "111
 [; ;main.c: 111:             u8DigitCounter++;
-[e ++ F15937 -> -> 1 `i `uc ]
+[e ++ F15935 -> -> 1 `i `uc ]
 "112
 [; ;main.c: 112:         }
 }
@@ -2749,7 +2749,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "113
 [; ;main.c: 113:         else if(u8DigitCounter == 2)
 [e :U 2280 ]
-[e $ ! == -> F15937 `i -> 2 `i 2282  ]
+[e $ ! == -> F15935 `i -> 2 `i 2282  ]
 "114
 [; ;main.c: 114:         {
 {
@@ -2761,7 +2761,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time0 `i -> 3 `i -> 15 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
 "117
 [; ;main.c: 117:             u8DigitCounter++;
-[e ++ F15937 -> -> 1 `i `uc ]
+[e ++ F15935 -> -> 1 `i `uc ]
 "118
 [; ;main.c: 118:         }
 }
@@ -2780,7 +2780,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _u8PORTADisplayValue *U + &U _au8DisplayCode * -> -> & >> -> _G_au8Time0 `i -> 7 `i -> 1 `i `ui `ux -> -> # *U &U _au8DisplayCode `ui `ux ]
 "123
 [; ;main.c: 123:             u8DigitCounter = 0;
-[e = F15937 -> -> 0 `i `uc ]
+[e = F15935 -> -> 0 `i `uc ]
 "124
 [; ;main.c: 124:         }
 }
@@ -2802,7 +2802,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "129
 [; ;main.c: 129:         u8TimeCounter++;
-[e ++ F15938 -> -> 1 `i `uc ]
+[e ++ F15936 -> -> 1 `i `uc ]
 "130
 [; ;main.c: 130:     }
 }

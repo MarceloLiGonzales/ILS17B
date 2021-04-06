@@ -84,7 +84,9 @@ void SPIInitialize(void)
     
     SPI1CON0bits.EN = 1; // Enable SPI
     
-    SPI1TXB = G_au8Time0;
+    SPI1TXB = 1;
+    SPI1TXB = 2;
+    SPI1TXB = 3;
 }/* end SPIInitialize */
 
 /*!---------------------------------------------------------------------------------------------------------------------
@@ -161,34 +163,34 @@ void __interrupt(irq(IRQ_SPI1RX), high_priority) SPI1RX_ISR(void)  //Could have 
 {
     static u8 u8Counter = 0;
     static u8 u8Start = 1;
-    static u8 u8Past = 0;
+    static u8 u8received = 0;
     PIR3bits.SPI1RXIF = 0;  //Clearing the SPI1RXI flag
     
-    //if((u8Start == SPI1RXB) || u8Past)
+    u8received = SPI1RXB;
+    
+    if(u8Counter == 0)
     {
-        if(u8Counter == 0)
+        if(u8received > 0x0F)
         {
-            G_au8Time0 = SPI1RXB;
-            //SPI1RXB;
+            G_au8Time0 = u8received;
             u8Counter++;
-            //SPI1TXB = G_au8Time1;
-            u8Past = 1;
-        }
-        else if(u8Counter == 1)
-        {
-            G_au8Time1 = SPI1RXB;
-            //SPI1RXB;
-            u8Counter++;
-            //SPI1TXB = G_au8Time2;
         }
         else
         {
-            G_au8Time2 = SPI1RXB;
-            //SPI1RXB;
-            u8Counter = 0;
-            //SPI1TXB = G_au8Time0;
-            u8Past = 0;
+            SPI1TXB = 1;
+            SPI1TXB = 2;
+            SPI1TXB = 3;
         }
+    }
+    else if(u8Counter == 1)
+    {
+        G_au8Time1 = u8received;
+        u8Counter++;
+    }
+    else
+    {
+        G_au8Time2 = u8received;
+        u8Counter = 0;
     }
 }/* end __interrupt */
 

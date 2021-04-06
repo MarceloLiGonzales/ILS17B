@@ -3037,8 +3037,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;user_app.c: 291:         u8 u8ArrayIndex = 0;
 [v _u8ArrayIndex `uc ~T0 @X0 1 a ]
 [e = _u8ArrayIndex -> -> 0 `i `uc ]
-[v F15941 `us ~T0 @X0 -> 9 `i s ]
-[i F15941
+[v F15939 `us ~T0 @X0 -> 9 `i s ]
+[i F15939
 :U ..
 "293
 [; ;user_app.c: 293:         u16 au16DecodingValues[] = {0x3F06, 0x5B4F, 0x666D, 0x7D07,
@@ -3054,7 +3054,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _au16DecodingValues `us ~T0 @X0 -> 9 `i a ]
-[e = _au16DecodingValues F15941 ]
+[e = _au16DecodingValues F15939 ]
 "297
 [; ;user_app.c: 297:         u8 u8Offset = (u8) ((0x380000 & ((128 * 2) - 1)) / 2);
 [v _u8Offset `uc ~T0 @X0 1 a ]

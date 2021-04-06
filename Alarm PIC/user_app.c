@@ -33,7 +33,7 @@ All Global variable names shall start with "G_<type>UserApp1"
 volatile u8 G_u8UserAppFlags;                  /*!< @brief Global state flags */
 volatile u8 G_u8UserAppTimePeriodHi;           /*!< @brief Global saved Timer1 high count for ISR */
 volatile u8 G_u8UserAppTimePeriodLo;           /*!< @brief Global saved Timer1 low count for ISR */
-volatile u8 G_u8UserAppAlarmFlag = 0;               /*!< @brief Global saved alarm flag from SPI */
+volatile u8 G_u8UserAppAlarmFlag = 1;               /*!< @brief Global saved alarm flag from SPI */
 u8 G_au8UserAppsinTable[] = 
 {
 0x80,0x83,0x86,0x89,0x8c,0x8f,0x92,0x95,0x98,0x9b,0x9e,0xa2,0xa5,0xa7,0xaa,0xad,
