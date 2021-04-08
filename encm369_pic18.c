@@ -83,10 +83,6 @@ void SPIInitialize(void)
     SPI1CON2 = 0b00000011;  //Set up SPI in receiver and transmission mode
     
     SPI1CON0bits.EN = 1; // Enable SPI
-    
-    SPI1TXB = 1;
-    SPI1TXB = 2;
-    SPI1TXB = 3;
 }/* end SPIInitialize */
 
 /*!---------------------------------------------------------------------------------------------------------------------
@@ -162,24 +158,20 @@ Promises:
 void __interrupt(irq(IRQ_SPI1RX), high_priority) SPI1RX_ISR(void)  //Could have used transfer counter interrupt instead, probably will implement it in the future
 {
     static u8 u8Counter = 0;
-    static u8 u8Start = 1;
     static u8 u8received = 0;
-    PIR3bits.SPI1RXIF = 0;  //Clearing the SPI1RXI flag
     
-    u8received = SPI1RXB;
+    u8received = SPI1RXB;               //Read from receive buffer
     
-    if(u8Counter == 0)
+    if(u8Counter == 0)                  //Send Time0 first, then Time1, then Time2
     {
-        if(u8received > 0x0F)
+        if((u8received & 0b00000111) == 0x00)
         {
             G_au8Time0 = u8received;
             u8Counter++;
         }
-        else
+        else if(u8received == 1)        //First Time request from ESP32
         {
-            SPI1TXB = 1;
-            SPI1TXB = 2;
-            SPI1TXB = 3;
+            SPI1TXB = G_au8Time0;       //send Time2 into transfer buffer for ESP32 request
         }
     }
     else if(u8Counter == 1)
@@ -192,6 +184,8 @@ void __interrupt(irq(IRQ_SPI1RX), high_priority) SPI1RX_ISR(void)  //Could have 
         G_au8Time2 = u8received;
         u8Counter = 0;
     }
+    
+    PIR3bits.SPI1RXIF = 0;  //Clearing the SPI1RXI flag
 }/* end __interrupt */
 
 

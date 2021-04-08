@@ -27297,7 +27297,6 @@ void UserAppRun(void);
 void TimeXusInitialize(void);
 void TimeXus(void);
 void SegmentDecoderIntialize(void);
-u8 SPI1exchangeByte(u8 data);
 # 106 "./configuration.h" 2
 # 26 "user_app.c" 2
 
@@ -27337,9 +27336,13 @@ void UserAppInitialize(void)
     G_au8AlarmTime1 = 0b00000000;
     G_au8AlarmTime2 = 0b00000000;
 
+    SPI1TXB = 1;
+    SPI1TXB = 2;
+    SPI1TXB = 3;
+
     G_u8AlarmFlag = 0;
 }
-# 112 "user_app.c"
+# 116 "user_app.c"
 void UserAppRun(void)
 {
     if(G_au8Time2 == 0x90)
@@ -27396,6 +27399,10 @@ void UserAppRun(void)
         G_au8Time2 += 0x10;
     }
 
+    SPI1TXB = 1;
+    SPI1TXB = 2;
+    SPI1TXB = 3;
+
 
 
 
@@ -27404,7 +27411,7 @@ void UserAppRun(void)
 
     LATA ^=0x40;
 }
-# 192 "user_app.c"
+# 200 "user_app.c"
 void TimeXusInitialize(void)
 {
     OSCCON3bits.SOSCPWR = 0;
@@ -27429,13 +27436,13 @@ void TimeXusInitialize(void)
     T0CON0 |= 0x80;
 
 }
-# 233 "user_app.c"
+# 241 "user_app.c"
 void TimeXus(void)
 {
 
 
 }
-# 256 "user_app.c"
+# 264 "user_app.c"
 void SegmentDecoderIntialize(void)
 {
     NVMADR = 380000;

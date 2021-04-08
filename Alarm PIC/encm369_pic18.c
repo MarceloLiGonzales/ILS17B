@@ -126,7 +126,7 @@ TRISB = 0x00; //Setting RB0-7 to be outputs
 LATB  = 0x00; //Setting RB0-7 to be default off/low
     
 ANSELC = 0x00; //Setting up RC0-7 as digital IO
-TRISC = 0x70; //Setting RC0-3,7 to be outputs, RC4-6 as inputs
+TRISC = 0xF0; //Setting RC0-3,7 to be outputs, RC4-6 as inputs
 LATC  = 0x00; //Setting RC0-7 to be default off/low
    
   /* Configure DAC1 for Vdd and Vss references, on, and RA2 output. */

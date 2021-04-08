@@ -2624,11 +2624,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;user_app.c: 35: volatile u8 G_u8UserAppTimePeriodLo;
 [v _G_u8UserAppTimePeriodLo `Vuc ~T0 @X0 1 e ]
 "36
-[; ;user_app.c: 36: volatile u8 G_u8UserAppAlarmFlag = 1;
+[; ;user_app.c: 36: volatile u8 G_u8UserAppAlarmFlag;
 [v _G_u8UserAppAlarmFlag `Vuc ~T0 @X0 1 e ]
-[i _G_u8UserAppAlarmFlag
--> -> 1 `i `uc
-]
 "37
 [; ;user_app.c: 37: u8 G_au8UserAppsinTable[] =
 [v _G_au8UserAppsinTable `uc ~T0 @X0 -> 256 `i e ]

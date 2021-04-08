@@ -59,8 +59,8 @@ void main(void)
   ClockSetup();
   SysTickSetup();
   GpioSetup();
-  SPIInitialize();
   INTERRUPTInitialize();
+  SPIInitialize();
   
       
   static u8 u8DigitCounter = 0;  //Setting digit display, digits 1-4

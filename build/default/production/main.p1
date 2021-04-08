@@ -9,12 +9,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "66
 [; ;./encm369_pic18.h: 66: void GpioSetup(void);
 [v _GpioSetup `(v ~T0 @X0 0 ef ]
-"63
-[; ;./encm369_pic18.h: 63: void SPIInitialize(void);
-[v _SPIInitialize `(v ~T0 @X0 0 ef ]
 "60
 [; ;./encm369_pic18.h: 60: void INTERRUPTInitialize(void);
 [v _INTERRUPTInitialize `(v ~T0 @X0 0 ef ]
+"63
+[; ;./encm369_pic18.h: 63: void SPIInitialize(void);
+[v _SPIInitialize `(v ~T0 @X0 0 ef ]
 "27 ./user_app.h
 [; ;./user_app.h: 27: void UserAppInitialize(void);
 [v _UserAppInitialize `(v ~T0 @X0 0 ef ]
@@ -2621,11 +2621,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 61:   GpioSetup();
 [e ( _GpioSetup ..  ]
 "62
-[; ;main.c: 62:   SPIInitialize();
-[e ( _SPIInitialize ..  ]
-"63
-[; ;main.c: 63:   INTERRUPTInitialize();
+[; ;main.c: 62:   INTERRUPTInitialize();
 [e ( _INTERRUPTInitialize ..  ]
+"63
+[; ;main.c: 63:   SPIInitialize();
+[e ( _SPIInitialize ..  ]
 "66
 [; ;main.c: 66:   static u8 u8DigitCounter = 0;
 [v F15935 `uc ~T0 @X0 1 s u8DigitCounter ]

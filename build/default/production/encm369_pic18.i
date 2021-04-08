@@ -27324,12 +27324,8 @@ void SPIInitialize(void)
     SPI1CON2 = 0b00000011;
 
     SPI1CON0bits.EN = 1;
-
-    SPI1TXB = 1;
-    SPI1TXB = 2;
-    SPI1TXB = 3;
 }
-# 104 "encm369_pic18.c"
+# 100 "encm369_pic18.c"
 void INTERRUPTInitialize(void)
 {
     INTCON0bits.IPEN = 1;
@@ -27345,7 +27341,7 @@ void INTERRUPTInitialize(void)
     INTCON0bits.GIEL = 1;
 
 }
-# 134 "encm369_pic18.c"
+# 130 "encm369_pic18.c"
 void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void)
 {
     PIR3bits.TMR0IF = 0;
@@ -27359,13 +27355,11 @@ void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void)
     T0CON0 |= 0x80;
     G_u8TimeFlag = 0xFF;
 }
-# 162 "encm369_pic18.c"
+# 158 "encm369_pic18.c"
 void __attribute__((picinterrupt(("irq(24), high_priority")))) SPI1RX_ISR(void)
 {
     static u8 u8Counter = 0;
-    static u8 u8Start = 1;
     static u8 u8received = 0;
-    PIR3bits.SPI1RXIF = 0;
 
     u8received = SPI1RXB;
 
@@ -27376,11 +27370,9 @@ void __attribute__((picinterrupt(("irq(24), high_priority")))) SPI1RX_ISR(void)
             G_au8Time0 = u8received;
             u8Counter++;
         }
-        else
+        else if(u8received == 1)
         {
-            SPI1TXB = 1;
-            SPI1TXB = 2;
-            SPI1TXB = 3;
+            SPI1TXB = G_au8Time0;
         }
     }
     else if(u8Counter == 1)
@@ -27393,13 +27385,15 @@ void __attribute__((picinterrupt(("irq(24), high_priority")))) SPI1RX_ISR(void)
         G_au8Time2 = u8received;
         u8Counter = 0;
     }
+
+    PIR3bits.SPI1RXIF = 0;
 }
-# 211 "encm369_pic18.c"
+# 205 "encm369_pic18.c"
 void ClockSetup(void)
 {
 
 }
-# 230 "encm369_pic18.c"
+# 224 "encm369_pic18.c"
 void GpioSetup(void)
 {
     ANSELA = 0x00;
@@ -27414,14 +27408,14 @@ void GpioSetup(void)
     TRISC = 0x70;
     LATC = 0x00;
 }
-# 258 "encm369_pic18.c"
+# 252 "encm369_pic18.c"
 void SysTickSetup(void)
 {
   G_u32SystemTime1ms = 0;
   G_u32SystemTime1s = 0;
 
 }
-# 280 "encm369_pic18.c"
+# 274 "encm369_pic18.c"
 void SystemSleep(void)
 {
 

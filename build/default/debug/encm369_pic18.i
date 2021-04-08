@@ -27297,7 +27297,6 @@ void UserAppRun(void);
 void TimeXusInitialize(void);
 void TimeXus(void);
 void SegmentDecoderIntialize(void);
-u8 SPI1exchangeByte(u8 data);
 # 106 "./configuration.h" 2
 # 24 "encm369_pic18.c" 2
 # 37 "encm369_pic18.c"
@@ -27325,10 +27324,8 @@ void SPIInitialize(void)
     SPI1CON2 = 0b00000011;
 
     SPI1CON0bits.EN = 1;
-
-    SPI1TXB = G_au8Time0;
 }
-# 102 "encm369_pic18.c"
+# 100 "encm369_pic18.c"
 void INTERRUPTInitialize(void)
 {
     INTCON0bits.IPEN = 1;
@@ -27344,7 +27341,7 @@ void INTERRUPTInitialize(void)
     INTCON0bits.GIEL = 1;
 
 }
-# 132 "encm369_pic18.c"
+# 130 "encm369_pic18.c"
 void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void)
 {
     PIR3bits.TMR0IF = 0;
@@ -27358,47 +27355,50 @@ void __attribute__((picinterrupt(("irq(31), low_priority")))) TMR0_ISR(void)
     T0CON0 |= 0x80;
     G_u8TimeFlag = 0xFF;
 }
-# 160 "encm369_pic18.c"
+# 158 "encm369_pic18.c"
 void __attribute__((picinterrupt(("irq(24), high_priority")))) SPI1RX_ISR(void)
 {
     static u8 u8Counter = 0;
     static u8 u8Start = 1;
-    static u8 u8Past = 0;
+    static u8 u8received = 0;
     PIR3bits.SPI1RXIF = 0;
 
+    u8received = SPI1RXB;
 
+    if(u8Counter == 0)
     {
-        if(u8Counter == 0)
+        if(u8received > 0x0F)
         {
-            G_au8Time0 = SPI1RXB;
-
+            G_au8Time0 = u8received;
             u8Counter++;
-
-            u8Past = 1;
-        }
-        else if(u8Counter == 1)
-        {
-            G_au8Time1 = SPI1RXB;
-
-            u8Counter++;
-
+            SPI1TXB = 1;
         }
         else
         {
-            G_au8Time2 = SPI1RXB;
-
-            u8Counter = 0;
-
-            u8Past = 0;
+            SPI1TXB = 1;
+            SPI1TXB = 2;
+            SPI1TXB = 3;
         }
     }
+    else if(u8Counter == 1)
+    {
+        G_au8Time1 = u8received;
+        u8Counter++;
+        SPI1TXB = 2;
+    }
+    else
+    {
+        G_au8Time2 = u8received;
+        u8Counter = 0;
+        SPI1TXB = 3;
+    }
 }
-# 209 "encm369_pic18.c"
+# 210 "encm369_pic18.c"
 void ClockSetup(void)
 {
 
 }
-# 228 "encm369_pic18.c"
+# 229 "encm369_pic18.c"
 void GpioSetup(void)
 {
     ANSELA = 0x00;
@@ -27413,14 +27413,14 @@ void GpioSetup(void)
     TRISC = 0x70;
     LATC = 0x00;
 }
-# 256 "encm369_pic18.c"
+# 257 "encm369_pic18.c"
 void SysTickSetup(void)
 {
   G_u32SystemTime1ms = 0;
   G_u32SystemTime1s = 0;
 
 }
-# 278 "encm369_pic18.c"
+# 279 "encm369_pic18.c"
 void SystemSleep(void)
 {
 

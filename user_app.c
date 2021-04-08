@@ -31,9 +31,9 @@ All Global variable names shall start with "G_<type>UserApp1"
 ***********************************************************************************************************************/
 /* New variables */
 volatile u8 G_u8UserAppFlags;                             /*!< @brief Global state flags */
-u8 G_au8Time0 = 0b10010101; //Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
-u8 G_au8Time1 = 0b10010101; //Time[1]: (4-bits) minutes | (4-bits) 10's of seconds
-u8 G_au8Time2 = 0b10000000; //Time[2]: (4-bits) seconds | (4-bits) NULL
+u8 G_au8Time0;
+u8 G_au8Time1;
+u8 G_au8Time2;
 u8 G_au8AlarmTime0;
 u8 G_au8AlarmTime1;
 u8 G_au8AlarmTime2;
@@ -85,11 +85,11 @@ void UserAppInitialize(void)
     LATA = 0x40; //Setting RA6 latch to digital high, and RA0-5,7 latches low
     
     //Set up initial time here 1:59:53
-    G_au8Time0 = 0b10010101; //Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
+    G_au8Time0 = 0b10010011; //Time[0]: (1-bit) 10's of hours | (4-bits) hours | (3-bits) 10's of minutes
     G_au8Time1 = 0b10010101; //Time[1]: (4-bits) minutes | (4-bits) 10's of seconds
-    G_au8Time2 = 0b10000000; //Time[2]: (4-bits) seconds | (4-bits) NULL
+    G_au8Time2 = 0b01010000; //Time[2]: (4-bits) seconds | (1-bit) pm | (1-bit) NULL | (2-bits) SPI code (0)
     
-    G_au8AlarmTime0 = 0b00101011; //set up alarm time here
+    G_au8AlarmTime0 = 0b00101011; //set up alarm time here (unused)
     G_au8AlarmTime1 = 0b00000000;
     G_au8AlarmTime2 = 0b00000000;
     
@@ -111,7 +111,7 @@ Promises:
 
 void UserAppRun(void)
 {
-    if(G_au8Time2 == 0x90) //Is seconds = 9?
+    if((G_au8Time2 & 0xF0) == 0x90) //Is seconds = 9?
     {
         if((G_au8Time1 & 0x0F) == 0x05) //Is seconds = 59?
         {
@@ -127,6 +127,10 @@ void UserAppRun(void)
                         }
                         else
                         {
+                            if(G_au8Time0 == 0b10001101)    //is it 11:59.59 ?
+                            {
+                                G_au8Time2 ^= 0b00001000;  // switch from am to pm or viceversa
+                            }
                             G_au8Time0 += 0x08; //incrementing hours
                         }
                     }
@@ -158,12 +162,21 @@ void UserAppRun(void)
         {
             G_au8Time1 += 0x01;  //increment tens of seconds
         }
-        G_au8Time2 = 0x00;   //set seconds to zero
+        G_au8Time2 &= 0x0F;   //set seconds to zero
     }
     else
     {
         G_au8Time2 += 0x10; //increment seconds
     }
+    
+    if((G_au8Time2 & 0b00001000) == 0b00001000)     //LED to check pm vs am flag works
+    {
+        LATCbits.LATC3 ^= 1;
+    }
+    
+    SPI1STATUSbits.CLRBF = 1;   //update Transfer buffer for ESP32 Time request (Buffer only has a capacity of 2)
+    SPI1TXB = G_au8Time2;
+    SPI1TXB = G_au8Time1;
     
     /*if(((G_au8Time0 == G_au8AlarmTime0) && (G_au8Time1 == G_au8AlarmTime1)) && (G_au8Time2 == G_au8AlarmTime2))
     {

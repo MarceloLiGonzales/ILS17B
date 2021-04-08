@@ -27366,7 +27366,7 @@ void UserAppRun(void);
 volatile u8 G_u8UserAppFlags;
 volatile u8 G_u8UserAppTimePeriodHi;
 volatile u8 G_u8UserAppTimePeriodLo;
-volatile u8 G_u8UserAppAlarmFlag = 1;
+volatile u8 G_u8UserAppAlarmFlag;
 u8 G_au8UserAppsinTable[] =
 {
 0x80,0x83,0x86,0x89,0x8c,0x8f,0x92,0x95,0x98,0x9b,0x9e,0xa2,0xa5,0xa7,0xaa,0xad,

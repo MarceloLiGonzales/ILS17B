@@ -27307,9 +27307,9 @@ void SegmentDecoderIntialize(void);
 
 
 volatile u8 G_u8UserAppFlags;
-u8 G_au8Time0 = 0b10010101;
-u8 G_au8Time1 = 0b10010101;
-u8 G_au8Time2 = 0b10000000;
+u8 G_au8Time0;
+u8 G_au8Time1;
+u8 G_au8Time2;
 u8 G_au8AlarmTime0;
 u8 G_au8AlarmTime1;
 u8 G_au8AlarmTime2;
@@ -27328,9 +27328,9 @@ void UserAppInitialize(void)
     LATA = 0x40;
 
 
-    G_au8Time0 = 0b10010101;
+    G_au8Time0 = 0b10010011;
     G_au8Time1 = 0b10010101;
-    G_au8Time2 = 0b10000000;
+    G_au8Time2 = 0b01010000;
 
     G_au8AlarmTime0 = 0b00101011;
     G_au8AlarmTime1 = 0b00000000;
@@ -27341,7 +27341,7 @@ void UserAppInitialize(void)
 # 112 "user_app.c"
 void UserAppRun(void)
 {
-    if(G_au8Time2 == 0x90)
+    if((G_au8Time2 & 0xF0) == 0x90)
     {
         if((G_au8Time1 & 0x0F) == 0x05)
         {
@@ -27357,6 +27357,10 @@ void UserAppRun(void)
                         }
                         else
                         {
+                            if(G_au8Time0 == 0b10001101)
+                            {
+                                G_au8Time2 ^= 0b00001000;
+                            }
                             G_au8Time0 += 0x08;
                         }
                     }
@@ -27388,12 +27392,20 @@ void UserAppRun(void)
         {
             G_au8Time1 += 0x01;
         }
-        G_au8Time2 = 0x00;
+        G_au8Time2 &= 0x0F;
     }
     else
     {
         G_au8Time2 += 0x10;
     }
+
+    if((G_au8Time2 & 0b00001000) == 0b00001000){
+        LATCbits.LATC3 ^= 1;
+    }
+
+    SPI1STATUSbits.CLRBF = 1;
+    SPI1TXB = G_au8Time2;
+    SPI1TXB = G_au8Time1;
 
 
 
@@ -27403,7 +27415,7 @@ void UserAppRun(void)
 
     LATA ^=0x40;
 }
-# 192 "user_app.c"
+# 204 "user_app.c"
 void TimeXusInitialize(void)
 {
     OSCCON3bits.SOSCPWR = 0;
@@ -27428,13 +27440,13 @@ void TimeXusInitialize(void)
     T0CON0 |= 0x80;
 
 }
-# 233 "user_app.c"
+# 245 "user_app.c"
 void TimeXus(void)
 {
 
 
 }
-# 256 "user_app.c"
+# 268 "user_app.c"
 void SegmentDecoderIntialize(void)
 {
     NVMADR = 380000;

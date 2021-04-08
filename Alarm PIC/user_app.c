@@ -33,7 +33,7 @@ All Global variable names shall start with "G_<type>UserApp1"
 volatile u8 G_u8UserAppFlags;                  /*!< @brief Global state flags */
 volatile u8 G_u8UserAppTimePeriodHi;           /*!< @brief Global saved Timer1 high count for ISR */
 volatile u8 G_u8UserAppTimePeriodLo;           /*!< @brief Global saved Timer1 low count for ISR */
-volatile u8 G_u8UserAppAlarmFlag = 1;               /*!< @brief Global saved alarm flag from SPI */
+volatile u8 G_u8UserAppAlarmFlag;               /*!< @brief Global saved alarm flag from SPI */
 u8 G_au8UserAppsinTable[] = 
 {
 0x80,0x83,0x86,0x89,0x8c,0x8f,0x92,0x95,0x98,0x9b,0x9e,0xa2,0xa5,0xa7,0xaa,0xad,
@@ -249,7 +249,7 @@ void UserAppRun(void)
     
     if (G_u8UserAppAlarmFlag)
     {
-        if(PastAlarmFlag == 0)              //Restart the song if the alarm if its a new alarm event
+        if(PastAlarmFlag == 0)              //Restart the song if its a new alarm event
         {
             u8MusicIndex = 0;
             u8NoteSwitch = 0;
