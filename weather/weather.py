@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import requests
+from datetime import datetime
 
 # Reference weather fetch code: https://github.com/KeithGalli/GUI
 # api.openweathermap.org/data/2.5/forecast?q={city name},{country code}
@@ -13,7 +14,7 @@ def get_weather(city):
         response = requests.get(url_weather, params=params)
         weather = response.json()
         return weather
-
+  
 app = Flask(__name__)
 
 @app.route('/<place>')
@@ -23,8 +24,11 @@ def get_city(place):
      weather_information =  get_weather(place)
      environment=weather_information['weather'][0]['description']
      temp = round((weather_information['main']['temp'] - 32) * (5/9), 1)
-     
-     return render_template('weather.html', the_city=place, the_environment=environment, the_temp=temp)
+
+     utc_time = datetime.utcnow()
+     utc_string = utc_time.strftime('%Y%m%d %H%M%S ')
+
+     return render_template('weather.html', the_city=place, the_environment=environment, the_temp=temp, the_time=utc_string)
       
 if __name__ == '__main__':
         app.debug = True
